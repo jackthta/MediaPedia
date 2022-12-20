@@ -25,3 +25,6 @@ dist-ssr
 
 # Scratchpaper for my brainstorming
 brainstorm.*
+
+# Environment variable files
+env.*
