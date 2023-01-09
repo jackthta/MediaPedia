@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Avenir";
+  src: url("./assets/font/Avenir-Regular.woff2") format("woff2");
+}
+
 *,
 *::before,
 *::after {
@@ -38,7 +43,7 @@ body {
   color: var(--text-color);
   background-color: var(--bg-color);
 
-  font-family: sans-serif;
+  font-family: "Avenir", sans-serif;
 
   /* Font anti-aliasing */
   -webkit-font-smoothing: antialiased;
