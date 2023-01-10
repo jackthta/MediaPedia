@@ -38,7 +38,7 @@ body {
   color: var(--text-color);
   background-color: var(--bg-color);
 
-  font-family: "Avenir", sans-serif;
+  font-family: "Roboto", sans-serif;
 
   /* Font anti-aliasing */
   -webkit-font-smoothing: antialiased;
