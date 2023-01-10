@@ -1,0 +1,12 @@
+:root {
+  --separator-color: #eee;
+}
+
+.separator {
+  width: 100%;
+  margin: 0;
+
+  border: none {
+    top: 1px solid var(--separator-color);
+  }
+}

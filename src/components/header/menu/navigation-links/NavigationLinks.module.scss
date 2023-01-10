@@ -1,0 +1,54 @@
+@use "/src/styles/utilities/variables" as *;
+
+.desktop-navigation-links {
+  /* Don't show Desktop navigation links on Mobile | Tablet */
+  display: none;
+
+  @media (min-width: $Desktop) {
+    display: flex;
+    gap: 5rem;
+  }
+}
+
+.menu-dialog-navigation-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  flex: 1;
+}
+
+.navigation-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  font-size: 2.5rem;
+
+  svg {
+    width: 2.5rem;
+  }
+
+  @media (min-width: $Tablet) {
+    gap: 1rem;
+
+    font-size: 3rem;
+
+    svg {
+      width: 3rem;
+    }
+  }
+
+  // NOTE: Not in menu dialog
+  @media (min-width: $Desktop) {
+    display: flex;
+    gap: 0.2rem;
+
+    font-size: 1.3rem;
+
+    svg {
+      width: 1.3rem;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@use "/src/styles/utilities/variables" as *;
+
+.menu-button {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+
+
+  @media (min-width: $Tablet) {
+    width: 2rem;
+  }
+
+  @media (min-width: $Desktop) {
+    /* Don't show Mobile | Tablet menu button on Desktop */
+    display: none;
+  }
+}

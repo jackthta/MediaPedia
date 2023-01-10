@@ -1,3 +1,5 @@
+@use "./utilities/variables" as *;
+
 *,
 *::before,
 *::after {
@@ -8,6 +10,14 @@
 :root {
   --text-color: #192024;
   --bg-color: white;
+
+  // Container padding
+  --container-padding-x-sm: 1.5rem;
+  --container-padding-x-md: 3rem;
+  --container-padding-x-lg: 6rem;
+  --container-padding-y-sm: 1rem;
+  --container-padding-y-md: 1.5rem;
+  --container-padding-y-lg: 2rem;
 }
 
 html {
@@ -116,7 +126,7 @@ body {
   background-blend-mode: overlay;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: $Desktop) {
   body {
     background: url("./assets/backgrounds/light/desktop.jpeg") no-repeat
       center/cover;

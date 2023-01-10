@@ -1,0 +1,16 @@
+@use "/src/styles/utilities/variables" as *;
+
+/* Application container max width */
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding-x-sm);
+
+  @media (min-width: $Tablet) {
+    padding: 0 var(--container-padding-x-md);
+  }
+
+  @media (min-width: $Desktop) {
+    padding: 0 var(--container-padding-x-lg);
+  }
+}
