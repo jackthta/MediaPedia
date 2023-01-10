@@ -21,6 +21,7 @@ h2,
 h3,
 h4,
 p,
+menu,
 li,
 figure,
 figcaption,
@@ -51,8 +52,19 @@ img {
 
 /* Remove some <dialog> defaults */
 dialog {
+  margin: 0;
   padding: 0;
   border: none;
+}
+
+/*
+  User-agent stylesheets may have some obstructing
+  calculations for dialog max width/height.
+  Source: https://stackoverflow.com/a/75024226
+*/
+dialog:modal {
+  max-width: 100%;
+  max-height: 100vh;
 }
 
 /* Ensure form field fonts are consistent */
@@ -63,8 +75,35 @@ select {
   font: inherit;
 }
 
-/* Application container max width */
-#root {
-  max-width: 1200px;
-  margin: 0 auto;
+input,
+button {
+  padding: 0;
+
+  color: inherit;
+  background-color: inherit;
+
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Remove link underline */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+menu {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
 }
