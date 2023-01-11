@@ -11,15 +11,18 @@ const DefaultProps: Props = {
 };
 
 const SearchBar: React.FC<Props> = ({ inMenuDialog }) => {
+  const CSS_searchBar = inMenuDialog
+    ? CSS.menuDialogSearchBar
+    : CSS.homeSearchBar;
+
   return (
-    <form className={CSS.searchBar}>
+    <form className={`${CSS.searchBarBase} ${CSS_searchBar}`}>
       {inMenuDialog && <SearchSVG />}
 
       <input className={CSS.searchInput} placeholder="Search for film" />
 
-      {/* TODO: Finish when making <Home> page */}
       {!inMenuDialog && (
-        <button>
+        <button className={CSS.searchButton}>
           <SearchSVG />
         </button>
       )}

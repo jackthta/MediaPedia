@@ -1,8 +1,12 @@
 @use "/src/styles/utilities/variables" as *;
 
-/* Application container max width */
+/* Application container */
 #root {
+  display: flex;
+  flex-direction: column;
   max-width: 1200px;
+  height: 100vh;
+  max-height: 100vh;
   margin: 0 auto;
   padding: 0 var(--container-padding-x-sm);
 
