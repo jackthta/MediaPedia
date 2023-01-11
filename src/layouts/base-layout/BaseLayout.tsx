@@ -12,8 +12,6 @@ function BaseLayout({ children }: Props) {
       <Header />
 
       {children}
-
-      {/* FOOTER — only for desktop dimensions for the light/dark switch */}
     </>
   );
 }
