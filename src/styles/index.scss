@@ -85,6 +85,10 @@ select {
   font: inherit;
 }
 
+input::placeholder {
+  color: inherit;
+}
+
 input,
 button {
   padding: 0;
