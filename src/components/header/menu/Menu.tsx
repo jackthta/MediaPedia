@@ -41,7 +41,6 @@ function Menu() {
   // Sync `dialogIsOpen` state when
   // ESC is pressed from dialog.
   useEffect(() => {
-    console.log(dialogRef);
     dialogRef.current?.addEventListener("cancel", onMenuClose);
     return () => dialogRef.current?.removeEventListener("cancel", onMenuClose);
   }, []);
