@@ -9,6 +9,7 @@
 }
 
 .menu {
+  // `display` will be set by `.menu-[open | closed]` class
   flex-direction: column;
   width: 100%;
   height: 100vh;

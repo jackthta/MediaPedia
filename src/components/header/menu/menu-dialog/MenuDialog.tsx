@@ -16,6 +16,12 @@ const MenuDialog = forwardRef<HTMLDialogElement, Props>(function MenuDialog(
   { isOpen, onClose },
   ref
 ) {
+  /**
+   * NOTE: Using `display` to toggle "open" state
+   * might be better than conditionally rendering
+   * the dialog based on the `isOpen` props so that
+   * a transition can be used(?). Need to test.
+   */
   const CSS_menuState = isOpen ? CSS.menuOpen : CSS.menuClosed;
 
   return (
