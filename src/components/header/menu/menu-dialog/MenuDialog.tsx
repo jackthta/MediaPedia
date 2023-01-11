@@ -21,6 +21,12 @@ const MenuDialog = forwardRef<HTMLDialogElement, Props>(function MenuDialog(
    * might be better than conditionally rendering
    * the dialog based on the `isOpen` props so that
    * a transition can be used(?). Need to test.
+   * 
+   * Although, this way will make it so that the
+   * <dialog> DOM element will exist in the DOM 
+   * tree (not the accessibility tree, maybe
+   * because the `open` attribute isn't attached yet?)
+   * even if it's not visible.
    */
   const CSS_menuState = isOpen ? CSS.menuOpen : CSS.menuClosed;
 
