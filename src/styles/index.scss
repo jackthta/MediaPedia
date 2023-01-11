@@ -120,7 +120,7 @@ li {
 
 /* Background Image */
 body {
-  background: url("./assets/backgrounds/light/mobile–tablet.jpeg") no-repeat
+  background: url("../assets/backgrounds/light/mobile–tablet.jpeg") no-repeat
     center/cover;
   background-color: rgba(255, 255, 255, 0.8);
   background-blend-mode: overlay;
@@ -128,7 +128,7 @@ body {
 
 @media (min-width: $Desktop) {
   body {
-    background: url("./assets/backgrounds/light/desktop.jpeg") no-repeat
+    background: url("../assets/backgrounds/light/desktop.jpeg") no-repeat
       center/cover;
     background-color: rgba(255, 255, 255, 0.8);
     background-blend-mode: overlay;
