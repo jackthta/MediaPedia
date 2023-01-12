@@ -14,12 +14,12 @@ const DefaultProps: Props = {
 };
 
 const NavigationLinks: React.FC<Props> = ({ inMenuDialog }) => {
-  const CSS_navigationLink = inMenuDialog
+  const CSS_navigationLinks = inMenuDialog
     ? CSS.menuDialogNavigationLinks
     : CSS.desktopNavigationLinks;
 
   return (
-    <menu className={CSS_navigationLink}>
+    <menu className={CSS_navigationLinks}>
       <li>
         <Link className={CSS.navigationLink} to="tv-shows">
           <TvSVG />
