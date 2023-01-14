@@ -21,13 +21,13 @@ const NavigationLinks: React.FC<Props> = ({ inMenuDialog }) => {
   return (
     <menu className={CSS_navigationLinks}>
       <li>
-        <Link className={CSS.navigationLink} to="tv-shows">
+        <Link className={CSS.navigationLink} to="/tv-shows">
           <TvSVG />
           <span>TV Shows</span>
         </Link>
       </li>
       <li>
-        <Link className={CSS.navigationLink} to="movies">
+        <Link className={CSS.navigationLink} to="/movies">
           <MovieSVG />
           <span>Movies</span>
         </Link>
