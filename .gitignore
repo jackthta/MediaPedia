@@ -27,4 +27,4 @@ dist-ssr
 brainstorm.*
 
 # Environment variable files
-env.*
+.env.*
