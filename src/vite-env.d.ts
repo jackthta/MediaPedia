@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
   readonly VITE_TMDB_BASE_URL: string;
   readonly VITE_TMDB_BEARER_TOKEN: string;
+  readonly VITE_TMDB_IMAGE_BASE_URL: string;
 }
 
 interface ImportMeta {
