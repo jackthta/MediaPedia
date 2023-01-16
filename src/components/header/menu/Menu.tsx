@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 
-import { DESKTOP_BREAKPOINT } from "../../../utilities/enum";
+import { BREAKPOINT } from "../../../utilities/enum";
 
 import MenuDialog from "./menu-dialog/MenuDialog";
 import NavigationLinks from "./navigation-links/NavigationLinks";
@@ -27,12 +27,12 @@ function Menu() {
   useEffect(() => {
     const onDesktopScreenSizes = () => dialogRef.current?.open && onMenuClose();
 
-    matchMedia(`(min-width: ${DESKTOP_BREAKPOINT})`).addEventListener(
+    matchMedia(`(min-width: ${BREAKPOINT.DESKTOP})`).addEventListener(
       "change",
       onDesktopScreenSizes
     );
     return () =>
-      matchMedia(`(min-width: ${DESKTOP_BREAKPOINT})`).removeEventListener(
+      matchMedia(`(min-width: ${BREAKPOINT.DESKTOP})`).removeEventListener(
         "change",
         onDesktopScreenSizes
       );

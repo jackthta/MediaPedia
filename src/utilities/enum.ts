@@ -4,6 +4,7 @@ export enum KIND {
   TOP_RATED = "topRated",
 }
 
-// TODO: make this an enum `BREAKPOINT.TABLET, DESKTOP etc`
-export const TABLET_BREAKPOINT = "700px";
-export const DESKTOP_BREAKPOINT = "1024px";
+export enum BREAKPOINT {
+  TABLET = "700px",
+  DESKTOP = "1024px",
+}
