@@ -13,21 +13,23 @@ function TvShows() {
 
   return (
     <BaseLayout>
-      <h1 className={CSS.heading}>TV Shows</h1>
+      <main>
+        <h1 className={CSS.heading}>TV Shows</h1>
 
-      <Separator className={CSS.separator} />
+        <Separator className={CSS.separator} />
 
-      <MediaSection kind={KIND.TRENDING} />
+        <MediaSection kind={KIND.TRENDING} />
 
-      <Separator className={CSS.separator} />
+        <Separator className={CSS.separator} />
 
-      <MediaSection kind={KIND.POPULAR} />
+        <MediaSection kind={KIND.POPULAR} />
 
-      <Separator className={CSS.separator} />
+        <Separator className={CSS.separator} />
 
-      <MediaSection kind={KIND.TOP_RATED} />
+        <MediaSection kind={KIND.TOP_RATED} />
 
-      <Separator className={CSS.separator} />
+        <Separator className={CSS.separator} />
+      </main>
     </BaseLayout>
   );
 }
