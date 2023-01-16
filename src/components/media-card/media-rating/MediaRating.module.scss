@@ -1,0 +1,48 @@
+@use "../../../styles/utilities/variables" as *;
+
+.rating {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  padding: 0.05rem 0.35rem;
+
+  background-color: var(--bg-color);
+
+  border-radius: 5px;
+
+  > svg {
+    width: 0.8rem;
+
+    fill: var(--rating-star-fill);
+
+    // SVG isn't vertically aligned with rating text
+    // even though `align-items: center;`, so need to
+    // manually adjust.
+    margin-top: -0.1rem;
+
+    @media (min-width: $Tablet) {
+      width: 0.9rem;
+    }
+
+    @media (min-width: $Desktop) {
+      width: 1rem;
+    }
+  }
+
+  > span {
+    font-size: 0.8rem;
+
+    @media (min-width: $Tablet) {
+      font-size: 0.9rem;
+    }
+
+    @media (min-width: $Desktop) {
+      font-size: 1rem;
+    }
+  }
+}

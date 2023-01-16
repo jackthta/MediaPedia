@@ -18,6 +18,9 @@
   --container-padding-y-sm: 1rem;
   --container-padding-y-md: 1.5rem;
   --container-padding-y-lg: 2rem;
+
+  // Light-mode related
+  --rating-star-fill: #fec828;
 }
 
 html {
@@ -49,6 +52,8 @@ body {
   background-color: var(--bg-color);
 
   font-family: "Roboto", sans-serif;
+
+  overflow-x: hidden;
 
   /* Font anti-aliasing */
   -webkit-font-smoothing: antialiased;

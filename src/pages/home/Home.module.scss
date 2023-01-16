@@ -1,3 +1,4 @@
+@use "../../styles/utilities/mixins" as *;
 @use "../../styles/utilities/variables" as *;
 
 .main {
@@ -8,39 +9,43 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
 
-.main-heading {
-  position: absolute;
-  width: 75%;
-  top: 6rem;
-  left: 0;
+  .main-heading {
+    position: absolute;
+    width: 75%;
+    top: 6rem;
+    left: 0;
 
-  font-weight: 400;
+    font-weight: 400;
 
-  @media (min-width: $Tablet) {
-    top: 3rem;
-    left: unset;
-    width: 60%;
+    @media (min-width: $Tablet) {
+      top: 3rem;
+      left: unset;
+      width: 60%;
 
-    display: flex;
-    flex-direction: column;
+      display: flex;
+      flex-direction: column;
 
-    span + span {
-      margin-left: 6rem;
+      span + span {
+        margin-left: 6rem;
+      }
     }
+
+    @media (min-width: $Desktop) {
+      position: static;
+      width: fit-content;
+      display: block;
+      margin-bottom: 1rem;
+
+      span + span {
+        margin-left: unset;
+      }
+    }
+
+    @include useAppContainerSidePadding;
   }
 
-  @media (min-width: $Desktop) {
-    position: static;
-    width: fit-content;
-    display: block;
-    margin-bottom: 1rem;
-
-    span + span {
-      margin-left: unset;
-    }
-  }
+  @include useAppContainerSidePadding;
 }
 
 .footer {

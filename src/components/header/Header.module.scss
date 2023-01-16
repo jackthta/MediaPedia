@@ -1,36 +1,41 @@
-@use "/src/styles/utilities/variables" as *;
+@use "../../styles/utilities/mixins" as *;
+@use "../../styles/utilities/variables" as *;
 
-.navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.header {
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  padding: {
-    top: var(--container-padding-y-sm);
-    bottom: var(--container-padding-y-sm);
-  }
-
-  font-weight: 500;
-
-  @media (min-width: $Tablet) {
     padding: {
-      top: var(--container-padding-y-md);
-      bottom: var(--container-padding-y-md);
+      top: var(--container-padding-y-sm);
+      bottom: var(--container-padding-y-sm);
+    }
+
+    font-weight: 500;
+
+    @media (min-width: $Tablet) {
+      padding: {
+        top: var(--container-padding-y-md);
+        bottom: var(--container-padding-y-md);
+      }
+    }
+
+    @media (min-width: $Desktop) {
+      padding: {
+        top: var(--container-padding-y-lg);
+        bottom: var(--container-padding-y-lg);
+      }
+    }
+
+    .home-link {
+      font-size: 1.1rem;
+
+      @media (min-width: $Tablet) {
+        font-size: 1.5rem;
+      }
     }
   }
 
-  @media (min-width: $Desktop) {
-    padding: {
-      top: var(--container-padding-y-lg);
-      bottom: var(--container-padding-y-lg);
-    }
-  }
-}
-
-.home-link {
-  font-size: 1.1rem;
-
-  @media (min-width: $Tablet) {
-    font-size: 1.5rem;
-  }
+  @include useAppContainerSidePadding;
 }

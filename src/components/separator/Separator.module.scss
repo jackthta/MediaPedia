@@ -1,12 +1,29 @@
+@use "../../styles/utilities/variables" as *;
+
 :root {
   --separator-color: #eee;
 }
 
-.separator {
-  width: 100%;
-  margin: 0;
-
+.base {
   border: none {
     top: 1px solid var(--separator-color);
   }
+
+  margin: 0 auto;
+}
+
+.separator {
+  width: calc(100% - calc(var(--container-padding-x-sm) * 2));
+
+  @media (min-width: $Tablet) {
+    width: calc(100% - calc(var(--container-padding-x-md) * 2));
+  }
+
+  @media (min-width: $Desktop) {
+    width: calc(100% - calc(var(--container-padding-x-lg) * 2));
+  }
+}
+
+.menu-dialog-separator {
+  width: 100%;
 }

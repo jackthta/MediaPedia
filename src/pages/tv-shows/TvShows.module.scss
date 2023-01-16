@@ -1,0 +1,35 @@
+@use "../../styles/utilities/mixins" as *;
+@use "../../styles/utilities/variables" as *;
+
+.heading {
+  margin: var(--container-padding-y-sm) 0;
+
+  font-size: 1.3rem;
+  font-weight: 600;
+
+  @media (min-width: $Tablet) {
+    margin: var(--container-padding-y-md) 0;
+
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: $Desktop) {
+    margin: var(--container-padding-y-lg) 0;
+
+    font-size: 1.6rem;
+  }
+
+  @include useAppContainerSidePadding;
+}
+
+.separator {
+  margin-bottom: var(--container-padding-y-sm);
+
+  @media (min-width: $Tablet) {
+    margin-bottom: var(--container-padding-y-md);
+  }
+
+  @media (min-width: $Desktop) {
+    margin-bottom: var(--container-padding-y-lg);
+  }
+}

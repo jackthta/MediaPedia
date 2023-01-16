@@ -1,0 +1,63 @@
+@use "../../styles/utilities/variables" as *;
+
+.container {
+  // For `MediaRating` to hook onto
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  // This is needed or else (🏳) breaks flex-box layout
+  // https://stackoverflow.com/a/38224283
+  min-width: 0;
+
+  gap: 0.5rem;
+}
+
+.backdrop {
+  border-radius: 5px;
+}
+
+.info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  .media-name {
+    font-size: 1rem;
+    font-weight: 500;
+
+    // (🏳)
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    @media (min-width: $Tablet) {
+      font-size: 1.1rem;
+    }
+
+    @media (min-width: $Desktop) {
+      font-size: 1.2rem;
+    }
+  }
+
+  .supplemental-info {
+    display: flex;
+    gap: 0.75rem;
+
+    .debut-year {
+      color: #555;
+      font-size: 0.8rem;
+
+      @media (min-width: $Tablet) {
+        font-size: 0.9rem;
+      }
+
+      @media (min-width: $Desktop) {
+        font-size: 1rem;
+      }
+    }
+  }
+}
