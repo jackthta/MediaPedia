@@ -65,7 +65,7 @@ function MediaSection({ kind }: Props) {
       <header className={CSS.header}>
         <h2 className={CSS.heading}>{Heading}</h2>
 
-        <Link className={CSS.seeAllLink} to={`/${kind}`}>
+        <Link className={CSS.seeAllLink} to={`${kind}`}>
           <span>See all</span>
           <ChevronRightSVG />
         </Link>
