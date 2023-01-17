@@ -19,7 +19,7 @@ type Kind = {
 
 type TVShowsCache = Record<number, TvShowSpecificInformation>;
 
-type TvShowsState = {
+export type TvShowsState = {
   trending: Kind;
   popular: Kind;
   topRated: Kind;
