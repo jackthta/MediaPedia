@@ -21,7 +21,7 @@ type Props = {
 function MediaSection({ kind }: Props) {
   const shows = useSelector((state) =>
     // Only want 10 shows, don't need the whole list.
-    selectShowsByKind(state, kind).slice(10)
+    selectShowsByKind(state, kind).slice(0, 10)
   );
 
   let Heading;
