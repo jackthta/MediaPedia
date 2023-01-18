@@ -70,7 +70,7 @@ export const tvShowsSlice = createSlice({
       ),
       (state, action) => {
         const {
-          payload: { page, results: shows },
+          payload: { page, results: newShows },
         } = action;
 
         // `action.type` format: `tv-shows/${KIND}/fulfilled`
@@ -78,11 +78,24 @@ export const tvShowsSlice = createSlice({
 
         if (page === 1) {
           // Initial fetch or refresh
-          state[kind as KIND].shows = shows;
+
+          state[kind as KIND].shows = newShows;
           state[kind as KIND].lastFetch = Date.now();
         } else if (page > 1) {
           // A "new page" fetch
-          state[kind as KIND].shows.push(...shows);
+
+          // Remove any duplicate shows
+          // API, on occasion, returns the same show
+          // at (n) page's last item and (n + 1) page's
+          // first item.
+          state[kind as KIND].shows = [
+            ...new Map(
+              [...state[kind as KIND].shows, ...newShows].map((show) => [
+                show.id,
+                show,
+              ])
+            ).values(),
+          ];
         }
 
         state[kind as KIND].page += 1;
