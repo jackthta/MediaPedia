@@ -18,6 +18,12 @@
   border-radius: 5px;
 }
 
+.placeholder-backdrop {
+  aspect-ratio: 500/281;
+
+  background-color: #555;
+}
+
 .info {
   width: 100%;
   display: flex;
