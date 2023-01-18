@@ -68,19 +68,19 @@ export const tvShowsSlice = createSlice({
         fetchTvShows[KIND.POPULAR].fulfilled,
         fetchTvShows[KIND.TOP_RATED].fulfilled
       ),
-      (state, action) => {
+      (tvShows, action) => {
         const {
           payload: { page, results: newShows },
         } = action;
 
         // `action.type` format: `tv-shows/${KIND}/fulfilled`
-        const kind = action.type.split("/")[1];
+        const kind: KIND = action.type.split("/")[1];
 
         if (page === 1) {
           // Initial fetch or refresh
 
-          state[kind as KIND].shows = newShows;
-          state[kind as KIND].lastFetch = Date.now();
+          tvShows[kind].shows = newShows;
+          tvShows[kind].lastFetch = Date.now();
         } else if (page > 1) {
           // A "new page" fetch
 
@@ -88,9 +88,9 @@ export const tvShowsSlice = createSlice({
           // API, on occasion, returns the same show
           // at (n) page's last item and (n + 1) page's
           // first item.
-          state[kind as KIND].shows = [
+          tvShows[kind].shows = [
             ...new Map(
-              [...state[kind as KIND].shows, ...newShows].map((show) => [
+              [...tvShows[kind].shows, ...newShows].map((show) => [
                 show.id,
                 show,
               ])
@@ -98,7 +98,7 @@ export const tvShowsSlice = createSlice({
           ];
         }
 
-        state[kind as KIND].page += 1;
+        tvShows[kind].page += 1;
       }
     );
   },
@@ -168,8 +168,6 @@ export const fetchTvShows: Record<KIND, any> = {
   [KIND.TOP_RATED]: createAsyncFetchThunk(KIND.TOP_RATED),
 };
 
-// TODO: replace KIND type with string? or figure out a way to extract
-// all values of the KIND enum into a type to use (to stop needing to type cast `KIND` everywhere)
 export const selectShowsByKind = (state: RootState, kind: KIND) =>
   state.tvShows[kind].shows;
 

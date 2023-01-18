@@ -22,12 +22,13 @@ import TvShowsCSS from "../tv-shows/TvShows.module.scss";
 import CSS from "./TvShowsKind.module.scss";
 
 function TvShowsKind() {
-  const { kind } = useParams();
+  let { kind: _kind } = useParams();
+  const kind = _kind! as KIND;
   let controller = new AbortController();
   const dispatch = useDispatch();
 
-  const shows = useSelector((state) => selectShowsByKind(state, kind as KIND));
-  const page = useSelector((state) => selectPageByKind(state, kind as KIND));
+  const shows = useSelector((state) => selectShowsByKind(state, kind));
+  const page = useSelector((state) => selectPageByKind(state, kind));
 
   const observerOptions = {
     // Set intersection relative to
@@ -60,7 +61,7 @@ function TvShowsKind() {
       observer.unobserve(lastElement.target);
 
       // Fetch next page
-      dispatch(fetchTvShows[kind as KIND](page, controller));
+      dispatch(fetchTvShows[kind](page, controller));
     }
   }, observerOptions);
 
@@ -101,7 +102,7 @@ function TvShowsKind() {
     </Fragment>
   ));
 
-  useRefreshTvShows(kind as KIND);
+  useRefreshTvShows(kind);
 
   useEffect(() => {
     // Obtain target element to observe (i.e., last <MediaCard>)
