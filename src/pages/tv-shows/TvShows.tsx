@@ -18,15 +18,15 @@ function TvShows() {
 
         <Separator className={CSS.separator} />
 
-        <MediaSection kind={KIND.TRENDING} />
+        <MediaSection key={KIND.TRENDING} kind={KIND.TRENDING} />
 
         <Separator className={CSS.separator} />
 
-        <MediaSection kind={KIND.POPULAR} />
+        <MediaSection key={KIND.POPULAR} kind={KIND.POPULAR} />
 
         <Separator className={CSS.separator} />
 
-        <MediaSection kind={KIND.TOP_RATED} />
+        <MediaSection key={KIND.TOP_RATED} kind={KIND.TOP_RATED} />
 
         <Separator className={CSS.separator} />
       </main>

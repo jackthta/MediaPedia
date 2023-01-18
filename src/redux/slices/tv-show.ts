@@ -64,23 +64,28 @@ export const tvShowsSlice = createSlice({
     // Source: https://github.com/reduxjs/redux-toolkit/issues/429#issuecomment-810031743
     builder.addMatcher(
       isAnyOf(
-        fetchTrending.fulfilled,
-        fetchPopular.fulfilled,
-        fetchTopRated.fulfilled
+        fetchTvShows[KIND.TRENDING].fulfilled,
+        fetchTvShows[KIND.POPULAR].fulfilled,
+        fetchTvShows[KIND.TOP_RATED].fulfilled
       ),
       (state, action) => {
+        const {
+          payload: { page, results: shows },
+        } = action;
+
         // `action.type` format: `tv-shows/${KIND}/fulfilled`
         const kind = action.type.split("/")[1];
 
-        return {
-          ...state,
+        if (page === 1) {
+          // Initial fetch or refresh
+          state[kind as KIND].shows = shows;
+          state[kind as KIND].lastFetch = Date.now();
+        } else if (page > 1) {
+          // A "new page" fetch
+          state[kind as KIND].shows.push(...shows);
+        }
 
-          [kind]: {
-            shows: action.payload.results,
-            page: action.payload.page,
-            lastFetch: Date.now(),
-          } as Kind,
-        };
+        state[kind as KIND].page += 1;
       }
     );
   },
@@ -108,44 +113,55 @@ const createAsyncFetchThunk = (kind: KIND) => {
       break;
   }
 
-  return createAsyncThunk(typePrefix, async (page: number) => {
-    const { data } = await axios.get<never, AxiosResponse<TvShowFetchResponse>>(
-      endpoint,
-      {
+  return createAsyncThunk(
+    typePrefix,
+    async (page: number, controller?: AbortController) => {
+      const { data } = await axios.get<
+        never,
+        AxiosResponse<TvShowFetchResponse>
+      >(endpoint, {
         params: {
           page,
         },
-      }
-    );
+        signal: controller?.signal,
+      });
 
-    // Format rating to contain only one fractional digit
-    // (API returns rating with three fractional digits)
-    data.results = data.results.map((show) => ({
-      ...show,
-      vote_average: +show.vote_average.toFixed(1),
-    }));
-
-    // Data returned from these endpoints will not contain
-    // a `media_type: "tv"` in the results. Manually set.
-    if (kind === KIND.POPULAR || kind === KIND.TOP_RATED) {
+      // Format rating to contain only one fractional digit
+      // (API returns rating with three fractional digits)
       data.results = data.results.map((show) => ({
         ...show,
-        media_type: "tv",
+        vote_average: +show.vote_average.toFixed(1),
       }));
-    }
 
-    return data;
-  });
+      // Data returned from these endpoints will not contain
+      // a `media_type: "tv"` in the results. Manually set.
+      if (kind === KIND.POPULAR || kind === KIND.TOP_RATED) {
+        data.results = data.results.map((show) => ({
+          ...show,
+          media_type: "tv",
+        }));
+      }
+
+      return data;
+    }
+  );
 };
 
 export const { clearShowsCache } = tvShowsSlice.actions;
 
-export const fetchTrending = createAsyncFetchThunk(KIND.TRENDING);
-export const fetchPopular = createAsyncFetchThunk(KIND.POPULAR);
-export const fetchTopRated = createAsyncFetchThunk(KIND.TOP_RATED);
+export const fetchTvShows: Record<KIND, any> = {
+  [KIND.TRENDING]: createAsyncFetchThunk(KIND.TRENDING),
+  [KIND.POPULAR]: createAsyncFetchThunk(KIND.POPULAR),
+  [KIND.TOP_RATED]: createAsyncFetchThunk(KIND.TOP_RATED),
+};
 
+// TODO: replace KIND type with string? or figure out a way to extract
+// all values of the KIND enum into a type to use (to stop needing to type cast `KIND` everywhere)
 export const selectShowsByKind = (state: RootState, kind: KIND) =>
   state.tvShows[kind].shows;
+
+export const selectPageByKind = (state: RootState, kind: KIND) =>
+  state.tvShows[kind].page;
 
 export default tvShowsSlice.reducer;
 

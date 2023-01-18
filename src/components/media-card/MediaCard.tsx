@@ -1,7 +1,7 @@
-import type { TvShowInformation } from "../../utilities/axios/types";
-
 import MediaBadge from "./media-badge/MediaBadge";
 import MediaRating from "./media-rating/MediaRating";
+
+import type { TvShowInformation } from "../../utilities/axios/types";
 
 import CSS from "./MediaCard.module.scss";
 
@@ -9,7 +9,7 @@ type Props = {
   show: TvShowInformation;
 };
 
-function MediaCard({ show }: Props) {
+function MediaCard({ show, ...rest }: Props) {
   // TODO: Add placeholder backdrop for this case.
   const hasBackdropPath =
     show.backdrop_path != null && show.backdrop_path.length > 0;
@@ -33,7 +33,7 @@ function MediaCard({ show }: Props) {
   }`;
 
   return (
-    <button className={CSS.container}>
+    <button className={CSS.container} {...rest}>
       <img className={CSS.backdrop} src={imageUrl} alt="" />
       <div className={CSS.info}>
         <p className={CSS.mediaName}>{show.name}</p>

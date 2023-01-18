@@ -1,12 +1,7 @@
 import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "../redux/store/hooks";
-import {
-  fetchTrending,
-  fetchPopular,
-  fetchTopRated,
-  clearShowsCache,
-} from "../redux/slices/tv-show";
+import { fetchTvShows, clearShowsCache } from "../redux/slices/tv-show";
 import { elapsedOneHour } from "../utilities/date";
 import { KIND } from "../utilities/enum";
 
@@ -18,31 +13,20 @@ const isReadyToRefresh = (kind: KIND, tvShows: TvShowsState) => {
   );
 };
 
-const dispatchRefresh = (kind: KIND, tvShows: TvShowsState, dispatch: any) => {
+const dispatchRefresh = (
+  kind: KIND,
+  tvShows: TvShowsState,
+  dispatch: any,
+  controller: AbortController
+) => {
+  // This switch is needed to filter out `showsCache`
   switch (kind) {
     case KIND.TRENDING:
-      {
-        if (isReadyToRefresh(kind, tvShows)) {
-          dispatch(fetchTrending(1));
-          dispatch(clearShowsCache());
-        }
-      }
-      break;
     case KIND.POPULAR:
-      {
-        if (isReadyToRefresh(kind, tvShows)) {
-          dispatch(fetchPopular(1));
-          dispatch(clearShowsCache());
-        }
-      }
-      break;
-
     case KIND.TOP_RATED:
-      {
-        if (isReadyToRefresh(kind, tvShows)) {
-          dispatch(fetchTopRated(1));
-          dispatch(clearShowsCache());
-        }
+      if (isReadyToRefresh(kind, tvShows)) {
+        dispatch(fetchTvShows[kind](1, controller));
+        dispatch(clearShowsCache());
       }
       break;
 
@@ -59,10 +43,14 @@ export const useRefreshTvShows = (kind?: KIND) => {
   // Initial fetch or refreshing data every hour
   // from initial/subsequent fetch.
   useEffect(() => {
-    if (kind != null) dispatchRefresh(kind, tvShows, dispatch);
-    // `kind` wasn't passed in, so check every `kind`
+    const controller = new AbortController();
+
+    if (kind != null) dispatchRefresh(kind, tvShows, dispatch, controller);
+    // `kind` wasn't passed in, so dispatch a fetch for every `kind`
     else
       for (const tvKind in tvShows)
-        dispatchRefresh(tvKind as KIND, tvShows, dispatch);
+        dispatchRefresh(tvKind as KIND, tvShows, dispatch, controller);
+
+    return () => controller.abort();
   }, []);
 };

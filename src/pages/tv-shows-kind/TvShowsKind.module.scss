@@ -1,0 +1,57 @@
+@use "../../styles/utilities/variables" as *;
+@use "../../styles/utilities/mixins" as *;
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: var(--container-padding-y-sm) 0;
+
+  font-size: 1.3rem;
+
+  > svg {
+    width: 1.3rem;
+
+    @media (min-width: $Tablet) {
+      width: 1.5rem;
+    }
+
+    @media (min-width: $Desktop) {
+      width: 1.6rem;
+    }
+  }
+
+  @media (min-width: $Tablet) {
+    margin: var(--container-padding-y-md) 0;
+
+    font-size: 1.5rem;
+  }
+
+  @media (min-width: $Desktop) {
+    margin: var(--container-padding-y-lg) 0;
+
+    font-size: 1.6rem;
+  }
+
+  @include useAppContainerSidePadding;
+}
+
+.media-grid {
+  display: grid;
+  row-gap: var(--container-padding-y-sm);
+  margin-bottom: var(--container-padding-y-sm);
+
+  @media (min-width: $Tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--container-padding-y-md);
+    margin-bottom: var(--container-padding-y-md);
+  }
+
+  @media (min-width: $Desktop) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--container-padding-y-lg);
+    margin-bottom: var(--container-padding-y-lg);
+  }
+
+  @include useAppContainerSidePadding;
+}
