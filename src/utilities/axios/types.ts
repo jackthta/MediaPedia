@@ -61,3 +61,11 @@ type Movie = {
 
   media_type: "movie";
 };
+
+export type TmdbApiConfiguration = {
+  images: {
+    secure_base_url: string;
+    backdrop_sizes: string[];
+    still_sizes: string[];
+  };
+};
