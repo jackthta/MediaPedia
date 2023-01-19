@@ -60,8 +60,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// NOTE: Be sure to include `height: auto` to ensure
+// that responsive images with width/height attributes
+// set will respect the aspect ratio when constructing
+// the layout size.
 img {
   max-width: 100%;
+  width: 100%;
+  height: auto;
   display: block;
 }
 
