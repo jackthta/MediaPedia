@@ -52,10 +52,12 @@ function MediaSection({ kind }: Props) {
       break;
   }
 
-  const Shows = shows.map((show) => {
+  // Only eagerly load first three show backdrops for LCP;
+  // lazy load the rest.
+  const Shows = shows.map((show, index) => {
     return (
       <Fragment key={show.id}>
-        <MediaCard show={show} />
+        <MediaCard show={show} loading={index >= 3 ? "lazy" : "eager"} />
       </Fragment>
     );
   });

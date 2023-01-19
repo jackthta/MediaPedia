@@ -14,9 +14,18 @@ import notFoundSVG from "../../assets/svgs/404.svg";
 
 type Props = {
   show: TvShowInformation;
+
+  // Lazy loading for images
+  loading?: "lazy" | "eager";
+
+  // Last element hook for infinite scrolling
+  dataLast?: boolean | null;
+
+  // Rest props
+  [attribute: string]: any;
 };
 
-function MediaCard({ show, ...rest }: Props) {
+function MediaCard({ show, loading, dataLast }: Props) {
   const { secure_base_url, backdrop_sizes } = useSelector(
     selectTmdbConfiguration
   );
@@ -59,7 +68,7 @@ function MediaCard({ show, ...rest }: Props) {
   const rating = hasRating ? show.vote_average : "?";
 
   return (
-    <button className={CSS.container} {...rest}>
+    <button className={CSS.container} data-last={dataLast}>
       <img
         className={CSS_backdrop}
         src={image.defaultSrc}
@@ -68,6 +77,7 @@ function MediaCard({ show, ...rest }: Props) {
         width="300"
         height="169"
         alt=""
+        loading={loading}
       />
       <div className={CSS.info}>
         <p className={CSS.mediaName}>{show.name}</p>

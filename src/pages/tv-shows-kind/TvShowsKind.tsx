@@ -93,11 +93,14 @@ function TvShowsKind() {
       break;
   }
 
+  // Only eagerly load first three show backdrops for LCP;
+  // lazy load the rest.
   const Shows = shows.map((show, index) => (
     <Fragment key={show.id}>
       <MediaCard
         show={show}
-        data-last={index === shows.length - 1 ? true : null}
+        loading={index >= 3 ? "lazy" : "eager"}
+        dataLast={index === shows.length - 1 ? true : null}
       />
     </Fragment>
   ));
