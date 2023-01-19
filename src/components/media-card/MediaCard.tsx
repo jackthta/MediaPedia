@@ -1,3 +1,8 @@
+import { useSelector } from "../../redux/store/hooks";
+import { selectTmdbConfiguration } from "../../redux/slices/tmdb-configuration";
+import { generateImgSrcsetDimensions } from "../../utilities/image";
+import { BREAKPOINT } from "../../utilities/enum";
+
 import MediaBadge from "./media-badge/MediaBadge";
 import MediaRating from "./media-rating/MediaRating";
 
@@ -12,11 +17,38 @@ type Props = {
 };
 
 function MediaCard({ show, ...rest }: Props) {
+  const { secure_base_url, backdrop_sizes } = useSelector(
+    selectTmdbConfiguration
+  );
+
   const hasBackdropPath =
     show.backdrop_path != null && show.backdrop_path.length > 0;
   const CSS_backdrop = `${CSS.backdrop} ${
     !hasBackdropPath && CSS.placeholderBackdrop
   }`;
+
+  let image: {
+    srcset: string;
+    defaultSrc: string;
+    sizes: string;
+  } = {
+    srcset: "",
+    defaultSrc: "",
+    sizes: "",
+  };
+  if (hasBackdropPath) {
+    image = {
+      ...image,
+      ...generateImgSrcsetDimensions(
+        secure_base_url,
+        backdrop_sizes,
+        show.backdrop_path!
+      ),
+      sizes: `(min-width: ${BREAKPOINT.TABLET}) 50vw, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw`,
+    };
+  } else {
+    image.defaultSrc = notFoundSVG;
+  }
 
   const hasDebutYear = show.first_air_date.length > 0;
   const debutYear = hasDebutYear
@@ -26,18 +58,17 @@ function MediaCard({ show, ...rest }: Props) {
   const hasRating = show.vote_average > 0;
   const rating = hasRating ? show.vote_average : "?";
 
-  // TODO: Look for all supported width sizes from TMDB docs
-  // for responsive imaging (in the Example tab in the below link).
-
-  // Image URL formula:
-  // https://developers.themoviedb.org/3/configuration/get-api-configuration
-  const imageUrl = hasBackdropPath
-    ? `${import.meta.env.VITE_TMDB_IMAGE_BASE_URL}/w500${show.backdrop_path}`
-    : notFoundSVG;
-
   return (
     <button className={CSS.container} {...rest}>
-      <img className={CSS_backdrop} src={imageUrl} alt="" />
+      <img
+        className={CSS_backdrop}
+        src={image.defaultSrc}
+        srcSet={image.srcset}
+        sizes={image.sizes}
+        width="300"
+        height="169"
+        alt=""
+      />
       <div className={CSS.info}>
         <p className={CSS.mediaName}>{show.name}</p>
 
