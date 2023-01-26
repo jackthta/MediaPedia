@@ -26,8 +26,8 @@ function TvShow() {
   // Grab show details from cache if it exists.
   const show = useSelector((state) => selectCachedShowById(state, id));
 
+  // If show doesn't exist in cache, dispatch action to fetch it.
   useEffect(() => {
-    // If show doesn't exist in cache, dispatch action to fetch it.
     if (!show) dispatch(fetchTvShowById(id));
   }, []);
 
@@ -35,7 +35,7 @@ function TvShow() {
 
   return (
     <BaseLayout>
-      <main className={CSS.main}>
+      <main>
         {/* Backdrop section */}
         <TvShowOverview show={show} />
 
