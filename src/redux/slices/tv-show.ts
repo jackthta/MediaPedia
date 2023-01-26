@@ -143,7 +143,7 @@ export const tvShowsSlice = createSlice({
   },
 });
 
-const createAsyncFetchThunk = (kind: KIND) => {
+const createFetchTvShowsThunk = (kind: KIND) => {
   let typePrefix = "tv-shows";
   let endpoint: string;
 
@@ -299,9 +299,9 @@ export const fetchTvShowSimilarShows = createAsyncThunk(
 export const { clearShowsCache } = tvShowsSlice.actions;
 
 export const fetchTvShows: Record<KIND, any> = {
-  [KIND.TRENDING]: createAsyncFetchThunk(KIND.TRENDING),
-  [KIND.POPULAR]: createAsyncFetchThunk(KIND.POPULAR),
-  [KIND.TOP_RATED]: createAsyncFetchThunk(KIND.TOP_RATED),
+  [KIND.TRENDING]: createFetchTvShowsThunk(KIND.TRENDING),
+  [KIND.POPULAR]: createFetchTvShowsThunk(KIND.POPULAR),
+  [KIND.TOP_RATED]: createFetchTvShowsThunk(KIND.TOP_RATED),
 };
 
 export const selectShowsByKind = (state: RootState, kind: KIND) =>
