@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 import { useSelector } from "../../redux/store/hooks";
 import { selectTmdbConfiguration } from "../../redux/slices/tmdb-configuration";
 import { generateImgSrcsetDimensions } from "../../utilities/image";
-import { BREAKPOINT } from "../../utilities/enum";
+import { BREAKPOINT, ROUTES } from "../../utilities/enum";
 
 import MediaBadge from "./media-badge/MediaBadge";
 import MediaRating from "./media-rating/MediaRating";
@@ -26,6 +28,7 @@ type Props = {
 };
 
 function MediaCard({ show, loading, dataLast }: Props) {
+  const navigate = useNavigate();
   const { secure_base_url, backdrop_sizes } = useSelector(
     selectTmdbConfiguration
   );
@@ -67,8 +70,15 @@ function MediaCard({ show, loading, dataLast }: Props) {
   const hasRating = show.vote_average > 0;
   const rating = hasRating ? show.vote_average : "?";
 
+  const navigateToShowDetails = () =>
+    navigate(`${ROUTES.TV_SHOW.replace(":id", show.id.toString())}`);
+
   return (
-    <button className={CSS.container} data-last={dataLast}>
+    <button
+      className={CSS.container}
+      data-last={dataLast}
+      onClick={navigateToShowDetails}
+    >
       <img
         className={CSS_backdrop}
         src={image.defaultSrc}

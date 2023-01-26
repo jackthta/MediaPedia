@@ -1,0 +1,61 @@
+@use "../../../styles/utilities/mixins" as *;
+@use "../../../styles/utilities/variables" as *;
+
+.section {
+  padding: var(--container-padding-y-sm) 0;
+
+  @media (min-width: $Tablet) {
+    padding: var(--container-padding-y-md) 0;
+  }
+  @media (min-width: $Desktop) {
+    padding: var(--container-padding-y-lg) 0;
+  }
+}
+
+.heading {
+  margin-bottom: var(--container-padding-y-sm);
+  padding-left: var(--container-padding-x-sm);
+
+  font-size: 1.1rem;
+
+  @media (min-width: $Tablet) {
+    margin-bottom: var(--container-padding-y-md);
+    padding-left: var(--container-padding-x-md);
+
+    font-size: 1.2rem;
+  }
+  @media (min-width: $Desktop) {
+    margin-bottom: var(--container-padding-y-lg);
+    padding-left: var(--container-padding-x-lg);
+
+    font-size: 1.3rem;
+  }
+}
+
+.list {
+  display: flex;
+  gap: 0.75rem;
+
+  padding: 0 var(--container-padding-x-sm);
+
+  overflow: auto;
+
+  @media (min-width: $Tablet) {
+    padding: 0 var(--container-padding-x-md);
+  }
+  @media (min-width: $Desktop) {
+    padding: 0 var(--container-padding-x-lg);
+  }
+
+  > div {
+    flex: 0 0 15rem;
+
+    @media (min-width: $Tablet) {
+      flex-basis: 17rem;
+    }
+
+    @media (min-width: $Desktop) {
+      flex-basis: 19rem;
+    }
+  }
+}

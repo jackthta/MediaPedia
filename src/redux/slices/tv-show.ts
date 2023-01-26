@@ -3,8 +3,15 @@ import { createSlice, createAsyncThunk, isAnyOf } from "@reduxjs/toolkit";
 import axios from "../../utilities/axios/axios";
 import { KIND } from "../../utilities/enum";
 
-import type { AxiosResponse } from "axios";
+import { AxiosResponse, isAxiosError } from "axios";
 import type {
+  ContentRating,
+  ContentRatings,
+  Images,
+  Season,
+  Seasons,
+  SupplementalVideo,
+  SupplementalVideos,
   TvShowFetchResponse,
   TvShowInformation,
   TvShowSpecificInformation,
@@ -17,7 +24,14 @@ type Kind = {
   lastFetch: number | null;
 };
 
-type TVShowsCache = Record<number, TvShowSpecificInformation>;
+type TVShowsCache = Record<
+  number,
+  TvShowSpecificInformation &
+    Images &
+    ContentRating &
+    Seasons &
+    SupplementalVideos & { similarShows: TvShowInformation[] }
+>;
 
 export type TvShowsState = {
   trending: Kind;
@@ -60,6 +74,31 @@ export const tvShowsSlice = createSlice({
     },
   },
   extraReducers(builder) {
+    builder.addCase(fetchTvShowById.fulfilled, (state, action) => {
+      state.showsCache[action.payload.id] = action.payload;
+    });
+
+    builder.addCase(fetchTvShowSeason.fulfilled, (state, action) => {
+      const { showId, season_number } = action.payload;
+
+      state.showsCache[showId].seasons[season_number] = action.payload;
+    });
+
+    builder.addCase(
+      fetchTvShowSupplementalVideos.fulfilled,
+      (state, action) => {
+        const { id, results } = action.payload;
+
+        state.showsCache[id].supplementalVideos = results;
+      }
+    );
+
+    builder.addCase(fetchTvShowSimilarShows.fulfilled, (state, action) => {
+      const { id, results } = action.payload;
+
+      state.showsCache[id].similarShows = results;
+    });
+
     // Better pattern than having separate a `addCase` for every `KIND`
     // Source: https://github.com/reduxjs/redux-toolkit/issues/429#issuecomment-810031743
     builder.addMatcher(
@@ -126,6 +165,8 @@ const createAsyncFetchThunk = (kind: KIND) => {
       break;
   }
 
+  // TODO: AbortController isn't being passed in correctly.
+  // Has to be passed in through an object now with `page`.
   return createAsyncThunk(
     typePrefix,
     async (page: number, controller?: AbortController) => {
@@ -139,6 +180,10 @@ const createAsyncFetchThunk = (kind: KIND) => {
         signal: controller?.signal,
       });
 
+      // TODO: move this to MediaCard.
+      // Reason: Might save some operations because it's possible
+      // that not all shows will be displayed.
+      // I.e., only do the operation when MediaCard is displayed
       // Format rating to contain only one fractional digit
       // (API returns rating with three fractional digits)
       data.results = data.results.map((show) => ({
@@ -160,6 +205,111 @@ const createAsyncFetchThunk = (kind: KIND) => {
   );
 };
 
+export const fetchTvShowById = createAsyncThunk(
+  "tv-shows/fetchTvShowById",
+  async (id: number) => {
+    const { data } = await axios.get<
+      never,
+      AxiosResponse<TvShowSpecificInformation>
+    >(`/tv/${id}`);
+
+    // Format rating to contain only one fractional digit
+    // (API returns rating with three fractional digits)
+    data.vote_average = +data.vote_average.toFixed(1);
+
+    // Fetch for TV show's logo(s)
+    const { data: showImages } = await axios.get<never, AxiosResponse<Images>>(
+      `/tv/${id}/images`
+    );
+
+    // Fetch for TV show's content rating
+    const { data: _contentRating } = await axios.get<
+      never,
+      AxiosResponse<ContentRatings>
+    >(`/tv/${id}/content_ratings`);
+    // Extract only US rating for now
+    const contentRating: any = _contentRating.results.find(
+      (rating) => rating.iso_3166_1 === "US"
+    );
+
+    // Remove `seasons`
+    // NOTE: This is to make sure that fetching
+    // the seasons data via another endpoint won't
+    // clash with this data.
+    // *This is one occurrence for explicitly
+    // cherry-picking data returned from the API
+    data.seasons = {};
+
+    return {
+      ...data,
+      ...showImages,
+      ...contentRating,
+    };
+  }
+);
+
+export const fetchTvShowSeason = createAsyncThunk(
+  "tv-shows/fetchTvShowSeason",
+  async ({
+    tvId,
+    season,
+    controller,
+  }: {
+    tvId: number;
+    season: number;
+    controller: AbortController;
+  }) => {
+    const { data } = await axios.get<never, AxiosResponse<Season>>(
+      `/tv/${tvId}/season/${season}`,
+      {
+        signal: controller?.signal,
+      }
+    );
+
+    return { ...data, showId: tvId };
+  }
+);
+
+export const fetchTvShowSupplementalVideos = createAsyncThunk(
+  "tv-shows/fetchTvShowSupplementalVideos",
+  async ({
+    tvId,
+    controller,
+  }: {
+    tvId: number;
+    controller: AbortController;
+  }) => {
+    // TODO: fix type. API returns data in `results`,
+    // but want to namespace that into `supplementalVideos`.
+    // Another iteration of needing to separate data types
+    // returned from API and data types to be used within the
+    // application.
+    const { data } = await axios.get<never, AxiosResponse<any>>(
+      `/tv/${tvId}/videos`,
+      { signal: controller.signal }
+    );
+
+    return data;
+  }
+);
+
+export const fetchTvShowSimilarShows = createAsyncThunk(
+  "tv-shows/fetchTvShowSimilarShows",
+  async ({
+    tvId,
+    controller,
+  }: {
+    tvId: number;
+    controller: AbortController;
+  }) => {
+    const { data } = await axios.get(`/tv/${tvId}/similar`, {
+      signal: controller.signal,
+    });
+
+    return { ...data, id: tvId };
+  }
+);
+
 export const { clearShowsCache } = tvShowsSlice.actions;
 
 export const fetchTvShows: Record<KIND, any> = {
@@ -173,6 +323,26 @@ export const selectShowsByKind = (state: RootState, kind: KIND) =>
 
 export const selectPageByKind = (state: RootState, kind: KIND) =>
   state.tvShows[kind].page;
+
+export const selectCachedShowById = (state: RootState, id: number) =>
+  state.tvShows.showsCache[id];
+
+export const selectTvShowSeasons = (state: RootState, tvId: number) =>
+  state.tvShows.showsCache[tvId].seasons;
+
+export const selectTvShowSeason = (
+  state: RootState,
+  tvId: number,
+  season: number
+) => state.tvShows.showsCache[tvId].seasons[season];
+
+export const selectTvShowSupplementalVideos = (
+  state: RootState,
+  tvId: number
+) => state.tvShows.showsCache[tvId].supplementalVideos;
+
+export const selectTvShowSimilarShows = (state: RootState, tvId: number) =>
+  state.tvShows.showsCache[tvId].similarShows;
 
 export default tvShowsSlice.reducer;
 

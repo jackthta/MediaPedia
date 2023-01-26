@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "../utilities/enum";
 
 import Home from "../pages/home/Home";
+import TvShow from "../pages/tv-show/TvShow";
 import TvShows from "../pages/tv-shows/TvShows";
 import TvShowsKind from "../pages/tv-shows-kind/TvShowsKind";
 
@@ -26,4 +27,9 @@ const TV_SHOWS_KIND: RouteObject = {
   loader: tvShowKindParamGuard,
 };
 
-export default createBrowserRouter([HOME, TV_SHOWS, TV_SHOWS_KIND]);
+const TV_SHOW: RouteObject = {
+  path: ROUTES.TV_SHOW,
+  element: <TvShow />,
+};
+
+export default createBrowserRouter([HOME, TV_SHOW, TV_SHOWS, TV_SHOWS_KIND]);

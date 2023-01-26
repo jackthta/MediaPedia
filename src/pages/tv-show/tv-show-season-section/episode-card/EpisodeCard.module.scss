@@ -1,0 +1,105 @@
+@use "../../../../styles/utilities/mixins" as *;
+@use "../../../../styles/utilities/variables" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.still {
+  border-radius: 5px;
+}
+
+.information-container {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.subinformation-container {
+  margin-top: auto;
+  display: flex;
+  gap: 1rem;
+}
+
+.title {
+  grid-area: title;
+
+  font-size: 1rem;
+  font-weight: 500;
+
+  @media (min-width: $Tablet) {
+    font-size: 1.1rem;
+  }
+
+  @media (min-width: $Desktop) {
+    font-size: 1.2rem;
+  }
+}
+
+.episode-number {
+  grid-area: episode-number;
+
+  font-size: 0.8rem;
+  text-transform: uppercase;
+
+  @media (min-width: $Tablet) {
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: $Desktop) {
+    font-size: 1rem;
+  }
+}
+
+.overview {
+  grid-area: overview;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  line-height: 1.2;
+
+  @media (min-width: $Tablet) {
+    font-size: 1rem;
+  }
+
+  @media (min-width: $Desktop) {
+    font-size: 1.1rem;
+  }
+}
+
+.runtime {
+  grid-area: runtime;
+
+  font-size: 0.8rem;
+
+  @media (min-width: $Tablet) {
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: $Desktop) {
+    font-size: 1rem;
+  }
+}
+
+.release-date {
+  grid-area: release-date;
+
+  font-size: 0.8rem;
+
+  @media (min-width: $Tablet) {
+    font-size: 0.9rem;
+  }
+
+  @media (min-width: $Desktop) {
+    font-size: 1rem;
+  }
+}

@@ -1,4 +1,6 @@
-export type TvShowFetchResponse = PageData & { results: TvShowInformation[] };
+export type TvShowFetchResponse = PageData & {
+  results: TvShowInformation[] | TvShowSpecificInformation[];
+};
 export type MovieFetchResponse = PageData & { results: MovieInformation[] };
 
 type PageData = {
@@ -37,15 +39,18 @@ type SpecificInformation = {
   origin_country: string[];
   original_language: string;
   overview: string;
-  seasons: {
-    id: number;
-    air_date: string;
-    episode_count: number;
-    name: string;
-    overview: string;
-    poster_path: string;
-    season_number: number;
-  }[];
+  // TODO: replace this with `Seasons`
+  seasons:
+    | {
+        id: number;
+        air_date: string;
+        episode_count: number;
+        name: string;
+        overview: string;
+        poster_path: string;
+        season_number: number;
+      }[]
+    | {};
 };
 
 type TvShow = {
@@ -62,6 +67,77 @@ type Movie = {
   media_type: "movie";
 };
 
+type Image = {
+  file_path: string;
+  width: number;
+  height: number;
+};
+
+export type Images = {
+  id: number;
+  logos: Image[];
+};
+
+export type ContentRating = {
+  iso_3166_1: string;
+  rating: string;
+};
+
+export type ContentRatings = {
+  id: number;
+  results: ContentRating[];
+};
+
+export type Episode = {
+  id: number;
+  air_date: string;
+  episode_number: number;
+  name: string;
+  overview: string;
+  still_path: string;
+
+  // Unsure whether this will be needed.
+  // Might be convenient?
+  season_number: number;
+};
+
+export type Season = {
+  _id: string;
+  season_number: number;
+  name: string;
+  episodes: Episode[];
+};
+
+export type Seasons = {
+  seasons: {
+    [season: number | string]: Season;
+  };
+};
+
+export type SupplementalVideo = {
+  id: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  // Inferred values from data returned from API
+  // because TMDB docs doesn't explicitly state.
+  // Some may be missing.
+  type:
+    | "Trailer"
+    | "Behind the Scenes"
+    | "Bloopers"
+    | "Opening Credits"
+    | "Teaser";
+  published_at: string;
+};
+
+export type SupplementalVideos = {
+  id: number;
+  supplementalVideos: SupplementalVideo[];
+};
+
+
 export type TmdbApiConfiguration = {
   images: {
     secure_base_url: string;
@@ -69,3 +145,9 @@ export type TmdbApiConfiguration = {
     still_sizes: string[];
   };
 };
+
+export type TmdbApiConfigurationLanguages = {
+  iso_639_1: string;
+  english_name: string;
+  name: string;
+}[];

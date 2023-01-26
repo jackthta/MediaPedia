@@ -1,0 +1,158 @@
+@use "../../../styles/utilities/variables" as *;
+@use "../../../styles/utilities/mixins" as *;
+
+.backdrop {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 30rem;
+
+  // `background-image` is set programmatically
+  background: center / cover no-repeat;
+
+  @media (min-width: $Tablet) {
+    height: 40rem;
+  }
+
+  @media (min-width: $Desktop) {
+    position: relative;
+  }
+}
+
+.logo {
+  width: auto;
+  max-height: 20%;
+  margin-top: var(--container-padding-y-sm);
+
+  @media (min-width: $Tablet) {
+    margin-top: var(--container-padding-y-md);
+  }
+
+  @media (min-width: $Desktop) {
+    position: absolute;
+    top: 3rem;
+    left: 0;
+
+    width: 25rem;
+    height: auto;
+    max-height: 100%;
+    margin-top: unset;
+  }
+
+  @include useAppContainerSidePadding();
+}
+
+.blur {
+  max-height: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  backdrop-filter: blur(1rem);
+
+  // Blend from backdrop into blur, so there is no visible cut-off line.
+  -webkit-mask: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 0, 0, 0.66) 20px,
+    rgba(0, 0, 0, 0.8) 30px,
+    #000 40px
+  );
+
+  @media (min-width: $Desktop) {
+    max-height: unset;
+    height: 25%;
+  }
+
+  .overview-container {
+    position: relative;
+    margin: var(--container-padding-y-sm) auto;
+
+    overflow: auto;
+
+    @media (min-width: $Tablet) {
+      margin: var(--container-padding-y-md) auto;
+    }
+
+    @media (min-width: $Desktop) {
+      margin: var(--container-padding-y-lg) auto;
+    }
+
+    .overview {
+      color: var(--bg-color);
+      font-size: 1rem;
+
+      @media (min-width: $Tablet) {
+        font-size: 1.1rem;
+      }
+
+      @media (min-width: $Desktop) {
+        font-size: 1.2rem;
+      }
+    }
+
+    // TODO (future): replace prefixed `mask` with `mask` when you add `autoprefixer`
+    .unexpanded-overview {
+      // Limit the number of lines for the overview
+      // Source: https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+
+      overflow: hidden;
+
+      // This is inspired by how AppleTV+ created their synopsis
+      --line-height: 22;
+      --link-length: 4;
+      --one-ch: 8;
+      -webkit-mask: 
+        // First gradient does the bottom line of text (i.e., last line of text)
+        linear-gradient(
+          0deg,
+          transparent 0,
+          transparent calc(var(--line-height) * 1px),
+          #000 calc(var(--line-height) * 1px)
+        ),
+        // Second gradient does the right side
+        linear-gradient(
+            270deg,
+            transparent 0,
+            transparent calc((var(--link-length) * var(--one-ch)) * 1px),
+            #000
+              calc(
+                (
+                    (var(--link-length) * var(--one-ch)) +
+                      (var(--line-height) * 2)
+                  ) * 1px
+              )
+          );
+    }
+
+    .more-button {
+      position: absolute;
+      bottom: 0;
+      right: var(--container-padding-x-sm);
+
+      color: #2690cc;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-transform: uppercase;
+
+      @media (min-width: $Tablet) {
+        right: var(--container-padding-x-md);
+
+        font-size: 1rem;
+      }
+
+      @media (min-width: $Desktop) {
+        right: var(--container-padding-x-lg);
+
+        font-size: 1.1rem;
+      }
+    }
+
+    @include useAppContainerSidePadding();
+  }
+}

@@ -2,7 +2,10 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "../../utilities/axios/axios";
 
-import type { TmdbApiConfiguration } from "../../utilities/axios/types";
+import type {
+  TmdbApiConfiguration,
+  TmdbApiConfigurationLanguages,
+} from "../../utilities/axios/types";
 import type { AxiosResponse } from "axios";
 import type { RootState } from "../store";
 
@@ -13,6 +16,7 @@ import type { RootState } from "../store";
 // `backdrop_sizes.url` (aka `w#`) format at runtime
 // to a `srcset` compatible one.
 type TmdbConfigurationState = {
+  languages: TmdbApiConfigurationLanguages;
   images: {
     secure_base_url: string;
     backdrop_sizes: {
@@ -24,6 +28,7 @@ type TmdbConfigurationState = {
 };
 
 const initialState: TmdbConfigurationState = {
+  languages: [],
   images: {
     secure_base_url: "",
     backdrop_sizes: {
@@ -39,36 +44,48 @@ export const tmdbConfigurationSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchConfiguration.fulfilled, (state, action) => {
-      state.images = action.payload.images;
-    });
+    builder.addCase(
+      fetchConfiguration.fulfilled,
+      (state, action) => action.payload
+    );
   },
 });
 
 export const fetchConfiguration = createAsyncThunk(
   "tmdb-configuration/configuration",
   async () => {
-    const { data: _data } = await axios.get<
+    const { data: configuration } = await axios.get<
       never,
       AxiosResponse<TmdbApiConfiguration>
     >("/configuration");
 
+    // Fetch configuration languages
+    // I.e., list of languages (ISO 639_1 tags) used throughout TMDB API.
+    // Source: https://developers.themoviedb.org/3/configuration/get-languages
+    const { data: languages } = await axios.get<
+      never,
+      AxiosResponse<TmdbApiConfigurationLanguages>
+    >("/configuration/languages");
+
     // Transform srcset incompliant format sizes (`w#` || "original") to `#w` for `srcset` consumption.
-    const backdropSizesSrcset = _data.images.backdrop_sizes.map((size) => {
-      // "original" won't be a valid width value for `srcset`, so make it `1920w`.
-      if (size === "original") return "1920w";
-      else return size.split("w")[1].concat("w");
-    });
+    const backdropSizesSrcset = configuration.images.backdrop_sizes.map(
+      (size) => {
+        // "original" won't be a valid width value for `srcset`, so make it `1920w`.
+        if (size === "original") return "1920w";
+        else return size.split("w")[1].concat("w");
+      }
+    );
 
     // Cherry pick needed properties
     const data = {
+      languages,
       images: {
-        secure_base_url: _data.images.secure_base_url,
+        secure_base_url: configuration.images.secure_base_url,
         backdrop_sizes: {
           srcset: backdropSizesSrcset,
-          url: _data.images.backdrop_sizes,
+          url: configuration.images.backdrop_sizes,
         },
-        still_sizes: _data.images.still_sizes,
+        still_sizes: configuration.images.still_sizes,
       },
     } as TmdbConfigurationState;
 
@@ -78,5 +95,8 @@ export const fetchConfiguration = createAsyncThunk(
 
 export const selectTmdbConfiguration = (state: RootState) =>
   state.tmdbConfiguration.images;
+
+export const selectTmdbConfigurationLanguages = (state: RootState) =>
+  state.tmdbConfiguration.languages;
 
 export default tmdbConfigurationSlice.reducer;
