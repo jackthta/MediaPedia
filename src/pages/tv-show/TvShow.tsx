@@ -52,10 +52,14 @@ function TvShow() {
         {/* Show Trailers/Other Media Content */}
         <TvShowSupplementalContent show={show} />
 
+        <Separator />
+
         {/* Similar Shows */}
         {/* Optimization: Use IntersectionObserver to fetch similar shows only when
       user scrolls far enough down to see Trailers? */}
         <TvShowSimilarShows show={show} />
+
+        <Separator />
       </main>
     </BaseLayout>
   );

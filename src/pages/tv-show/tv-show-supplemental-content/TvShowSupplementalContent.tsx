@@ -85,8 +85,6 @@ function TvShowSupplementalContent({ show }: Props) {
         <h4 className={CSS.heading}>Other Content</h4>
         <div className={CSS.list}>{OtherContent}</div>
       </section>
-
-      <Separator />
     </>
   );
 }

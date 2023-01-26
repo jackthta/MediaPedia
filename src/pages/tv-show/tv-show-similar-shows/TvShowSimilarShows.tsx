@@ -7,7 +7,6 @@ import {
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
 
 import MediaCard from "../../../components/media-card/MediaCard";
-import Separator from "../../../components/separator/Separator";
 
 import type {
   ContentRating,
@@ -61,14 +60,10 @@ function TvShowSimilarShows({ show }: Props) {
     ));
 
   return (
-    <>
-      <section className={CSS.section}>
-        <h4 className={CSS.heading}>Similar Shows</h4>
-        <div className={CSS.list}>{SimilarShows}</div>
-      </section>
-
-      <Separator />
-    </>
+    <section className={CSS.section}>
+      <h4 className={CSS.heading}>Similar Shows</h4>
+      <div className={CSS.list}>{SimilarShows}</div>
+    </section>
   );
 }
 
