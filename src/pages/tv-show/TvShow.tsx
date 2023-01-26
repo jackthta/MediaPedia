@@ -28,7 +28,9 @@ function TvShow() {
 
   // If show doesn't exist in cache, dispatch action to fetch it.
   useEffect(() => {
-    if (!show) dispatch(fetchTvShowById(id));
+    if (!show) var fetch = dispatch(fetchTvShowById(id));
+
+    return () => fetch.abort();
   }, []);
 
   if (!show) return null;

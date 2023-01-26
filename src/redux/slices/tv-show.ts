@@ -165,53 +165,50 @@ const createAsyncFetchThunk = (kind: KIND) => {
       break;
   }
 
-  // TODO: AbortController isn't being passed in correctly.
-  // Has to be passed in through an object now with `page`.
-  return createAsyncThunk(
-    typePrefix,
-    async (page: number, controller?: AbortController) => {
-      const { data } = await axios.get<
-        never,
-        AxiosResponse<TvShowFetchResponse>
-      >(endpoint, {
+  return createAsyncThunk(typePrefix, async (page: number, { signal }) => {
+    const { data } = await axios.get<never, AxiosResponse<TvShowFetchResponse>>(
+      endpoint,
+      {
         params: {
           page,
         },
-        signal: controller?.signal,
-      });
+        signal,
+      }
+    );
 
-      // TODO: move this to MediaCard.
-      // Reason: Might save some operations because it's possible
-      // that not all shows will be displayed.
-      // I.e., only do the operation when MediaCard is displayed
-      // Format rating to contain only one fractional digit
-      // (API returns rating with three fractional digits)
+    // TODO: move this to MediaCard.
+    // Reason: Might save some operations because it's possible
+    // that not all shows will be displayed.
+    // I.e., only do the operation when MediaCard is displayed
+    // Format rating to contain only one fractional digit
+    // (API returns rating with three fractional digits)
+    data.results = data.results.map((show) => ({
+      ...show,
+      vote_average: +show.vote_average.toFixed(1),
+    }));
+
+    // Data returned from these endpoints will not contain
+    // a `media_type: "tv"` in the results. Manually set.
+    if (kind === KIND.POPULAR || kind === KIND.TOP_RATED) {
       data.results = data.results.map((show) => ({
         ...show,
-        vote_average: +show.vote_average.toFixed(1),
+        media_type: "tv",
       }));
-
-      // Data returned from these endpoints will not contain
-      // a `media_type: "tv"` in the results. Manually set.
-      if (kind === KIND.POPULAR || kind === KIND.TOP_RATED) {
-        data.results = data.results.map((show) => ({
-          ...show,
-          media_type: "tv",
-        }));
-      }
-
-      return data;
     }
-  );
+
+    return data;
+  });
 };
 
 export const fetchTvShowById = createAsyncThunk(
   "tv-shows/fetchTvShowById",
-  async (id: number) => {
+  async (id: number, { signal }) => {
     const { data } = await axios.get<
       never,
       AxiosResponse<TvShowSpecificInformation>
-    >(`/tv/${id}`);
+    >(`/tv/${id}`, {
+      signal,
+    });
 
     // Format rating to contain only one fractional digit
     // (API returns rating with three fractional digits)
@@ -250,19 +247,20 @@ export const fetchTvShowById = createAsyncThunk(
 
 export const fetchTvShowSeason = createAsyncThunk(
   "tv-shows/fetchTvShowSeason",
-  async ({
-    tvId,
-    season,
-    controller,
-  }: {
-    tvId: number;
-    season: number;
-    controller: AbortController;
-  }) => {
+  async (
+    {
+      tvId,
+      season,
+    }: {
+      tvId: number;
+      season: number;
+    },
+    { signal }
+  ) => {
     const { data } = await axios.get<never, AxiosResponse<Season>>(
       `/tv/${tvId}/season/${season}`,
       {
-        signal: controller?.signal,
+        signal,
       }
     );
 
@@ -272,13 +270,7 @@ export const fetchTvShowSeason = createAsyncThunk(
 
 export const fetchTvShowSupplementalVideos = createAsyncThunk(
   "tv-shows/fetchTvShowSupplementalVideos",
-  async ({
-    tvId,
-    controller,
-  }: {
-    tvId: number;
-    controller: AbortController;
-  }) => {
+  async (tvId: number, { signal }) => {
     // TODO: fix type. API returns data in `results`,
     // but want to namespace that into `supplementalVideos`.
     // Another iteration of needing to separate data types
@@ -286,7 +278,7 @@ export const fetchTvShowSupplementalVideos = createAsyncThunk(
     // application.
     const { data } = await axios.get<never, AxiosResponse<any>>(
       `/tv/${tvId}/videos`,
-      { signal: controller.signal }
+      { signal }
     );
 
     return data;
@@ -295,15 +287,9 @@ export const fetchTvShowSupplementalVideos = createAsyncThunk(
 
 export const fetchTvShowSimilarShows = createAsyncThunk(
   "tv-shows/fetchTvShowSimilarShows",
-  async ({
-    tvId,
-    controller,
-  }: {
-    tvId: number;
-    controller: AbortController;
-  }) => {
+  async (tvId: number, { signal }) => {
     const { data } = await axios.get(`/tv/${tvId}/similar`, {
-      signal: controller.signal,
+      signal,
     });
 
     return { ...data, id: tvId };

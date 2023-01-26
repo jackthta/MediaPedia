@@ -24,8 +24,8 @@ import CSS from "./TvShowsKind.module.scss";
 function TvShowsKind() {
   let { kind: _kind } = useParams();
   const kind = _kind! as KIND;
-  let controller = new AbortController();
   const dispatch = useDispatch();
+  let fetch: any;
 
   const shows = useSelector((state) => selectShowsByKind(state, kind));
   const page = useSelector((state) => selectPageByKind(state, kind));
@@ -61,7 +61,7 @@ function TvShowsKind() {
       observer.unobserve(lastElement.target);
 
       // Fetch next page
-      dispatch(fetchTvShows[kind](page, controller));
+      fetch = dispatch(fetchTvShows[kind](page));
     }
   }, observerOptions);
 
@@ -113,7 +113,7 @@ function TvShowsKind() {
     if (lastElement) observer.observe(lastElement);
 
     return () => {
-      controller.abort();
+      fetch.abort();
 
       if (lastElement) observer.unobserve(lastElement);
     };

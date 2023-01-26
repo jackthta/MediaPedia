@@ -35,15 +35,11 @@ function TvShowSimilarShows({ show }: Props) {
   // Fetch similar shows if it hasn't
   // been fetched and cached.
   useEffect(() => {
-    const abortController = new AbortController();
-
     if (similarShows == null) {
-      dispatch(
-        fetchTvShowSimilarShows({ tvId: show.id, controller: abortController })
-      );
+      var fetch = dispatch(fetchTvShowSimilarShows(show.id));
     }
 
-    return () => abortController.abort();
+    return () => fetch.abort();
   }, []);
 
   if (!similarShows) return null;

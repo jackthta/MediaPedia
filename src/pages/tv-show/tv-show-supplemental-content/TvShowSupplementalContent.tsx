@@ -36,18 +36,11 @@ function TvShowSupplementalContent({ show }: Props) {
   // Fetch supplemental videos if it doesn't
   // exist in the cache.
   useEffect(() => {
-    const abortController = new AbortController();
-
     if (supplementalVideos == null) {
-      dispatch(
-        fetchTvShowSupplementalVideos({
-          tvId: show.id,
-          controller: abortController,
-        })
-      );
+      var fetch = dispatch(fetchTvShowSupplementalVideos(show.id));
     }
 
-    return () => abortController.abort();
+    return () => fetch.abort();
   }, []);
 
   if (!supplementalVideos?.length) return null;

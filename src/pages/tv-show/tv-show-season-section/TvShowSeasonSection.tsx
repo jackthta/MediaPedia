@@ -28,26 +28,16 @@ function TvShowSeasonSection({ show }: Props) {
 
   // If season 1 isn't cached, fetch it first.
   useEffect(() => {
-    // NOTE: Every fetch request needs to have its own
-    // unique instance of an AbortController. If this was
-    // initialized in the component function scope and that
-    // instance is passed into different dispatched fetch
-    // requests, one `abort()` invokation _anywhere_ using
-    // that instance will cancel _all_ occurring fetch requests where
-    // that instance was passed through as the AbortController.
-    const abortController = new AbortController();
-
     if (seasons[1] == null) {
-      dispatch(
+      var fetch = dispatch(
         fetchTvShowSeason({
           tvId: show.id,
           season: 1,
-          controller: abortController,
         })
       );
     }
 
-    return () => abortController.abort();
+    return () => fetch.abort();
   }, []);
 
   // Only after season 1 has been fetched, fetch
@@ -58,21 +48,24 @@ function TvShowSeasonSection({ show }: Props) {
   // there won't be network contention caused by
   // fetching the remainder seasons in parallel.
   useEffect(() => {
-    const abortController = new AbortController();
+    const fetches: any[] = [];
 
     if (seasons[1] != null) {
       for (let season = 2; season <= show.number_of_seasons; season++) {
-        dispatch(
-          fetchTvShowSeason({
-            tvId: show.id,
-            season,
-            controller: abortController,
-          })
+        fetches.push(
+          dispatch(
+            fetchTvShowSeason({
+              tvId: show.id,
+              season,
+            })
+          )
         );
       }
     }
 
-    return () => abortController.abort();
+    return () => {
+      fetches.forEach((fetch) => fetch.abort());
+    };
   }, [seasons[1]]);
 
   const handleSeasonChange = ({
@@ -108,3 +101,16 @@ function TvShowSeasonSection({ show }: Props) {
 }
 
 export default TvShowSeasonSection;
+
+// This comment used to be included when manually
+// creating the AbortController and passing it in
+// explcitly as an argument to the thunk function,
+// but found out that the `createAsyncThunk` function
+// includes the AbortController within its API:
+// NOTE: Every fetch request needs to have its own
+// unique instance of an AbortController. If this was
+// initialized in the component function scope and that
+// instance is passed into different dispatched fetch
+// requests, one `abort()` invokation _anywhere_ using
+// that instance will cancel _all_ occurring fetch requests where
+// that instance was passed through as the AbortController.
