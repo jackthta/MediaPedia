@@ -5,7 +5,8 @@ import { fetchTvShows, clearShowsCache } from "../redux/slices/tv-shows/tv-shows
 import { elapsedOneHour } from "../utilities/date";
 import { KIND } from "../utilities/enum";
 
-import type { TvShowsState } from "../redux/slices/tv-shows/tv-shows";
+import type { TvShowsState } from "../redux/slices/tv-shows/types";
+
 
 const isReadyToRefresh = (kind: KIND, tvShows: TvShowsState) => {
   return (
