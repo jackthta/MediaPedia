@@ -9,7 +9,7 @@ import {
   fetchTvShowSupplementalVideos,
 } from "./thunks";
 
-import { TvShowsState } from "./types";
+import type { TvShowsState } from "./types";
 
 const initialState: TvShowsState = {
   trending: {
@@ -44,31 +44,28 @@ export const tvShowsSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(fetchTvShowById.fulfilled, (state, action) => {
-      state.showsCache[action.payload.id] = action.payload;
-    });
+    // TV Show Details Page
+    builder
+      .addCase(fetchTvShowById.fulfilled, (state, action) => {
+        state.showsCache[action.payload.id] = action.payload;
+      })
+      .addCase(fetchTvShowSeason.fulfilled, (state, action) => {
+        const { showId, season_number } = action.payload;
 
-    builder.addCase(fetchTvShowSeason.fulfilled, (state, action) => {
-      const { showId, season_number } = action.payload;
-
-      state.showsCache[showId].seasons[season_number] = action.payload;
-    });
-
-    builder.addCase(
-      fetchTvShowSupplementalVideos.fulfilled,
-      (state, action) => {
+        state.showsCache[showId].seasons[season_number] = action.payload;
+      })
+      .addCase(fetchTvShowSupplementalVideos.fulfilled, (state, action) => {
         const { id, results } = action.payload;
 
         state.showsCache[id].supplementalVideos = results;
-      }
-    );
+      })
+      .addCase(fetchTvShowSimilarShows.fulfilled, (state, action) => {
+        const { id, results } = action.payload;
 
-    builder.addCase(fetchTvShowSimilarShows.fulfilled, (state, action) => {
-      const { id, results } = action.payload;
+        state.showsCache[id].similarShows = results;
+      });
 
-      state.showsCache[id].similarShows = results;
-    });
-
+    // TV Show Kind Page
     // Better pattern than having separate a `addCase` for every `KIND`
     // Source: https://github.com/reduxjs/redux-toolkit/issues/429#issuecomment-810031743
     builder.addMatcher(
@@ -93,7 +90,7 @@ export const tvShowsSlice = createSlice({
         } else if (page > 1) {
           // A "new page" fetch
 
-          // Remove any duplicate shows
+          // Remove any duplicate shows.
           // API, on occasion, returns the same show
           // at (n) page's last item and (n + 1) page's
           // first item.
