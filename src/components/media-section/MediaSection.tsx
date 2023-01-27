@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
 import { useSelector } from "../../redux/store/hooks";
-import { selectShowsByKind } from "../../redux/slices/tv-show";
+import { selectShowsByKind } from "../../redux/slices/tv-show/tv-show";
 import { KIND } from "../../utilities/enum";
 
 import MediaCard from "../media-card/MediaCard";

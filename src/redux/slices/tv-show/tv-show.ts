@@ -1,22 +1,21 @@
 import { createSlice, createAsyncThunk, isAnyOf } from "@reduxjs/toolkit";
 
-import axios from "../../utilities/axios/axios";
-import { KIND } from "../../utilities/enum";
+import axios from "../../../utilities/axios/axios";
+import { KIND } from "../../../utilities/enum";
 
-import { AxiosResponse, isAxiosError } from "axios";
+import type { AxiosResponse } from "axios";
+import type { RootState } from "../../store";
 import type {
   ContentRating,
   ContentRatings,
   Images,
   Season,
   Seasons,
-  SupplementalVideo,
   SupplementalVideos,
   TvShowFetchResponse,
   TvShowInformation,
   TvShowSpecificInformation,
-} from "../../utilities/axios/types";
-import type { RootState } from "../store";
+} from "../../../utilities/axios/types";
 
 type Kind = {
   shows: TvShowInformation[];

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import {
   fetchTvShowSimilarShows,
   selectTvShowSimilarShows,
-} from "../../../redux/slices/tv-show";
+} from "../../../redux/slices/tv-show/tv-show";
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
 
 import MediaCard from "../../../components/media-card/MediaCard";

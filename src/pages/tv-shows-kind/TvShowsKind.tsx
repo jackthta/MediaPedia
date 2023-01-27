@@ -7,7 +7,7 @@ import {
   selectShowsByKind,
   selectPageByKind,
   fetchTvShows,
-} from "../../redux/slices/tv-show";
+} from "../../redux/slices/tv-show/tv-show";
 import { KIND } from "../../utilities/enum";
 
 import MediaCard from "../../components/media-card/MediaCard";

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "../../redux/store/hooks";
 import {
   fetchTvShowById,
   selectCachedShowById,
-} from "../../redux/slices/tv-show";
+} from "../../redux/slices/tv-show/tv-show";
 
 import TvShowOverview from "./tv-show-overview/TvShowOverview";
 import TvShowInformation from "./tv-show-information/TvShowInformation";

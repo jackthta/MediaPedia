@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "../../../redux/store/hooks";
 import {
   fetchTvShowSeason,
   selectTvShowSeasons,
-} from "../../../redux/slices/tv-show";
+} from "../../../redux/slices/tv-show/tv-show";
 
 import EpisodeCard from "./episode-card/EpisodeCard";
 

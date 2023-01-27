@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import {
   fetchTvShowSupplementalVideos,
   selectTvShowSupplementalVideos,
-} from "../../../redux/slices/tv-show";
+} from "../../../redux/slices/tv-show/tv-show";
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
 
 import SupplementalMediaCard from "./supplemental-media-card/SupplementalMediaCard";
