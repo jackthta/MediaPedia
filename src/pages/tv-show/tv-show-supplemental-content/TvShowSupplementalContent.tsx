@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import { fetchTvShowSupplementalVideos } from "../../../redux/slices/tv-show/tv-show";
-import { selectTvShowSupplementalVideos } from "../../../redux/slices/tv-show/selectors";
+import { fetchTvShowSupplementalVideos } from "../../../redux/slices/tv-shows/tv-shows";
+import { selectTvShowSupplementalVideos } from "../../../redux/slices/tv-shows/selectors";
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
 
 import SupplementalMediaCard from "./supplemental-media-card/SupplementalMediaCard";

@@ -3,11 +3,11 @@ import { Fragment, useEffect } from "react";
 
 import { useSelector, useDispatch } from "../../redux/store/hooks";
 import { useRefreshTvShows } from "../../hooks/tv-shows";
-import { fetchTvShows } from "../../redux/slices/tv-show/tv-show";
+import { fetchTvShows } from "../../redux/slices/tv-shows/tv-shows";
 import {
   selectShowsByKind,
   selectPageByKind,
-} from "../../redux/slices/tv-show/selectors";
+} from "../../redux/slices/tv-shows/selectors";
 import { KIND } from "../../utilities/enum";
 
 import MediaCard from "../../components/media-card/MediaCard";

@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEventHandler, useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
-import { fetchTvShowSeason } from "../../../redux/slices/tv-show/tv-show";
-import { selectTvShowSeasons } from "../../../redux/slices/tv-show/selectors";
+import { fetchTvShowSeason } from "../../../redux/slices/tv-shows/tv-shows";
+import { selectTvShowSeasons } from "../../../redux/slices/tv-shows/selectors";
 
 import EpisodeCard from "./episode-card/EpisodeCard";
 

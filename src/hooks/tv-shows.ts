@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "../redux/store/hooks";
-import { fetchTvShows, clearShowsCache } from "../redux/slices/tv-show/tv-show";
+import { fetchTvShows, clearShowsCache } from "../redux/slices/tv-shows/tv-shows";
 import { elapsedOneHour } from "../utilities/date";
 import { KIND } from "../utilities/enum";
 
-import type { TvShowsState } from "../redux/slices/tv-show/tv-show";
+import type { TvShowsState } from "../redux/slices/tv-shows/tv-shows";
 
 const isReadyToRefresh = (kind: KIND, tvShows: TvShowsState) => {
   return (

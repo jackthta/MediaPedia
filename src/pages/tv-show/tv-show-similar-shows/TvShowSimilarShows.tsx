@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import { fetchTvShowSimilarShows } from "../../../redux/slices/tv-show/tv-show";
-import { selectTvShowSimilarShows } from "../../../redux/slices/tv-show/selectors";
+import { fetchTvShowSimilarShows } from "../../../redux/slices/tv-shows/tv-shows";
+import { selectTvShowSimilarShows } from "../../../redux/slices/tv-shows/selectors";
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
 
 import MediaCard from "../../../components/media-card/MediaCard";
