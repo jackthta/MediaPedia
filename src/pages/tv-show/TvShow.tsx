@@ -2,10 +2,8 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "../../redux/store/hooks";
-import {
-  fetchTvShowById,
-  selectCachedShowById,
-} from "../../redux/slices/tv-show/tv-show";
+import { fetchTvShowById } from "../../redux/slices/tv-show/tv-show";
+import { selectCachedShowById } from "../../redux/slices/tv-show/selectors";
 
 import TvShowOverview from "./tv-show-overview/TvShowOverview";
 import TvShowInformation from "./tv-show-information/TvShowInformation";
