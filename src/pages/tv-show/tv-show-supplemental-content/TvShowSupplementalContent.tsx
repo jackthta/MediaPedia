@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { fetchTvShowSupplementalVideos } from "../../../redux/slices/tv-shows/tv-shows";
+import { fetchTvShowSupplementalVideos } from "../../../redux/slices/tv-shows/thunks";
 import { selectTvShowSupplementalVideos } from "../../../redux/slices/tv-shows/selectors";
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
 

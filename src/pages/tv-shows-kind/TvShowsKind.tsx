@@ -3,7 +3,7 @@ import { Fragment, useEffect } from "react";
 
 import { useSelector, useDispatch } from "../../redux/store/hooks";
 import { useRefreshTvShows } from "../../hooks/tv-shows";
-import { fetchTvShows } from "../../redux/slices/tv-shows/tv-shows";
+import { fetchTvShows } from "../../redux/slices/tv-shows/thunks";
 import {
   selectShowsByKind,
   selectPageByKind,
