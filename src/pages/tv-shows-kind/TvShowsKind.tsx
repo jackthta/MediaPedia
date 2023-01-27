@@ -113,8 +113,7 @@ function TvShowsKind() {
     if (lastElement) observer.observe(lastElement);
 
     return () => {
-      fetch.abort();
-
+      if (fetch) fetch.abort();
       if (lastElement) observer.unobserve(lastElement);
     };
   }, [shows.length]);
