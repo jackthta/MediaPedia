@@ -12,6 +12,10 @@ type Props = {
 function TvShowInformation({ show }: Props) {
   const configLangs = useSelector(selectTmdbConfigurationLanguages);
 
+  // Format rating to contain only one fractional digit
+  // (API returns rating with three fractional digits)
+  const rating = show.vote_average.toFixed(1);
+
   const releaseDate = new Intl.DateTimeFormat("en-US", {
     month: "long",
     day: "numeric",
@@ -29,7 +33,7 @@ function TvShowInformation({ show }: Props) {
       <dl>
         <div className={CSS.content}>
           <dt>Rating</dt>
-          <dd>{show.vote_average} / 10</dd>
+          <dd>{rating} / 10</dd>
         </div>
 
         <div className={CSS.content}>

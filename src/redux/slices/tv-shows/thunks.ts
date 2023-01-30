@@ -52,17 +52,6 @@ const createFetchTvShowsThunk = (kind: KIND) => {
       signal,
     });
 
-    // TODO: move this to MediaCard.
-    // Reason: Might save some operations because it's possible
-    // that not all shows will be displayed.
-    // I.e., only do the operation when MediaCard is displayed
-    // Format rating to contain only one fractional digit
-    // (API returns rating with three fractional digits)
-    // data.results = data.results.map((show) => ({
-    //   ...show,
-    //   vote_average: +show.vote_average.toFixed(1),
-    // }));
-
     // Cherry pick data returned from API to be return type compliant.
     const shows = fetched.results.map(
       ({
@@ -106,12 +95,6 @@ export const fetchTvShowById = createAsyncThunk(
     >(`/tv/${showId}`, {
       signal,
     });
-
-    // TODO: Decide whether you want to format the rating's
-    // fractional digits here or during rendering.
-    // Format rating to contain only one fractional digit
-    // (API returns rating with three fractional digits)
-    // data.vote_average = +data.vote_average.toFixed(1);
 
     // Fetch for TV show's images (e.g., logo(s))
     const { data: showImages } = await axios.get<
