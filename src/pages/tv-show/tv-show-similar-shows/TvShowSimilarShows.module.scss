@@ -2,9 +2,6 @@
 @use "../../../styles/utilities/variables" as *;
 
 .section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   padding: var(--container-padding-y-sm) 0;
 
   @media (min-width: $Tablet) {
@@ -16,20 +13,26 @@
 }
 
 .heading {
-  margin-bottom: var(--container-padding-y-sm);
-  padding-left: var(--container-padding-x-sm);
+  padding: {
+    left: var(--container-padding-x-sm);
+    bottom: calc(var(--container-padding-y-sm) / 2);
+  }
 
   font-size: 1.1rem;
 
   @media (min-width: $Tablet) {
-    margin-bottom: var(--container-padding-y-md);
-    padding-left: var(--container-padding-x-md);
+    padding: {
+      left: var(--container-padding-x-md);
+      bottom: calc(var(--container-padding-y-md) / 2);
+    }
 
     font-size: 1.2rem;
   }
   @media (min-width: $Desktop) {
-    margin-bottom: var(--container-padding-y-lg);
-    padding-left: var(--container-padding-x-lg);
+    padding: {
+      left: var(--container-padding-x-lg);
+      bottom: calc(var(--container-padding-y-lg) / 2);
+    }
 
     font-size: 1.3rem;
   }
@@ -50,5 +53,13 @@
 
   > button {
     flex: 0 0 15rem;
+
+    @media (min-width: $Tablet) {
+      flex-basis: 17rem;
+    }
+
+    @media (min-width: $Desktop) {
+      flex-basis: 19rem;
+    }
   }
 }

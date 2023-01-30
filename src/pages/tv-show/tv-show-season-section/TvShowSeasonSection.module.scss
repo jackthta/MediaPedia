@@ -16,7 +16,7 @@
 .season-select {
   margin: {
     left: var(--container-padding-x-sm);
-    bottom: var(--container-padding-y-sm);
+    bottom: calc(var(--container-padding-y-sm) / 2);
   }
   padding: 0.5rem 0.75rem;
 
@@ -27,7 +27,7 @@
   @media (min-width: $Tablet) {
     margin: {
       left: var(--container-padding-x-md);
-      bottom: var(--container-padding-y-md);
+      bottom: calc(var(--container-padding-y-md) / 2);
     }
 
     font-size: 1.1rem;
@@ -36,7 +36,7 @@
   @media (min-width: $Desktop) {
     margin: {
       left: var(--container-padding-x-lg);
-      bottom: var(--container-padding-y-lg);
+      bottom: calc(var(--container-padding-y-lg) / 2);
     }
 
     font-size: 1.2rem;
@@ -46,25 +46,16 @@
 .episode-list {
   display: flex;
   gap: 1rem;
-  padding: {
-    left: var(--container-padding-x-sm);
-    right: var(--container-padding-x-sm);
-  }
+  padding: 0 var(--container-padding-x-sm);
 
   overflow: auto;
 
   @media (min-width: $Tablet) {
-    padding: {
-      left: var(--container-padding-x-md);
-      right: var(--container-padding-x-md);
-    }
+    padding: 0 var(--container-padding-x-md);
   }
 
   @media (min-width: $Desktop) {
-    padding: {
-      left: var(--container-padding-x-lg);
-      right: var(--container-padding-x-lg);
-    }
+    padding: 0 var(--container-padding-x-lg);
   }
 
   > div {

@@ -13,20 +13,26 @@
 }
 
 .heading {
-  margin-bottom: var(--container-padding-y-sm);
-  padding-left: var(--container-padding-x-sm);
+  padding: {
+    left: var(--container-padding-x-sm);
+    bottom: calc(var(--container-padding-y-sm) / 2);
+  }
 
   font-size: 1.1rem;
 
   @media (min-width: $Tablet) {
-    margin-bottom: var(--container-padding-y-md);
-    padding-left: var(--container-padding-x-md);
+    padding: {
+      left: var(--container-padding-x-md);
+      bottom: calc(var(--container-padding-y-md) / 2);
+    }
 
     font-size: 1.2rem;
   }
   @media (min-width: $Desktop) {
-    margin-bottom: var(--container-padding-y-lg);
-    padding-left: var(--container-padding-x-lg);
+    padding: {
+      left: var(--container-padding-x-lg);
+      bottom: calc(var(--container-padding-y-lg) / 2);
+    }
 
     font-size: 1.3rem;
   }

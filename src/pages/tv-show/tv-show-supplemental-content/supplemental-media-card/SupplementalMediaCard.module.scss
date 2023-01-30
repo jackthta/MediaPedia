@@ -4,7 +4,15 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: calc(var(--container-padding-y-sm) / 3);
+
+  @media (min-width: $Tablet) {
+    gap: calc(var(--container-padding-y-md) / 3);
+  }
+
+  @media (min-width: $Desktop) {
+    gap: calc(var(--container-padding-y-lg) / 3);
+  }
 }
 
 .thumbnail {
@@ -12,6 +20,12 @@
 }
 
 .title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+
+  font-weight: 500;
   font-size: 0.9rem;
 
   @media (min-width: $Tablet) {
