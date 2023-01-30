@@ -255,14 +255,15 @@ export const fetchTvShowSimilarShows = createAsyncThunk(
     const similarShows = fetchedSimilarShows.map(
       ({
         id,
-        media_type,
         name,
         backdrop_path,
         vote_average,
         first_air_date,
       }): TvShowGeneralInformation => ({
         id,
-        media_type,
+        // Data returned from this endpoint will not
+        // contain a `media_type: "tv"`. Manually set.
+        media_type: "tv",
         name,
         backdrop_path,
         vote_average,
