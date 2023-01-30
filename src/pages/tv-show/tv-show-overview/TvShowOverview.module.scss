@@ -93,7 +93,6 @@
       }
     }
 
-    // TODO (future): replace prefixed `mask` with `mask` when you add `autoprefixer`
     .unexpanded-overview {
       // Limit the number of lines for the overview
       // Source: https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp
@@ -103,11 +102,11 @@
 
       overflow: hidden;
 
-      // This is inspired by how AppleTV+ created their synopsis
+      // This is inspired by how AppleTV+ made their synopsis
       --line-height: 22;
       --link-length: 4;
       --one-ch: 8;
-      -webkit-mask: 
+      mask: 
         // First gradient does the bottom line of text (i.e., last line of text)
         linear-gradient(
           0deg,
