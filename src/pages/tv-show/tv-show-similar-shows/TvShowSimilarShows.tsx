@@ -32,7 +32,6 @@ function TvShowSimilarShows({ show }: Props) {
 
   if (!similarShows) return null;
 
-  // TODO: figure out why movie "similar shows" are being returned
   const SimilarShows = similarShows
     .slice(0, 10)
     .map((show, index) => (
