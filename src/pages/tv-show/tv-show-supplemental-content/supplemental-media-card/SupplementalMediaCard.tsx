@@ -1,7 +1,7 @@
 import { generateYoutubeThumbnailImgSrcsetDimensions } from "../../../../utilities/image";
 import { BREAKPOINT } from "../../../../utilities/enum";
 
-import type { SupplementalVideo } from "../../../../utilities/axios/types";
+import type { SupplementalVideo } from "../../../../redux/slices/tv-shows/types";
 
 import CSS from "./SupplementalMediaCard.module.scss";
 

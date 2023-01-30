@@ -3,19 +3,14 @@ import { selectTmdbConfiguration } from "../../../../redux/slices/tmdb-configura
 import { generateImgSrcsetDimensions } from "../../../../utilities/image";
 import { BREAKPOINT } from "../../../../utilities/enum";
 
-import type {
-  ContentRating,
-  Episode,
-  Images,
-  Seasons,
-  TvShowSpecificInformation,
-} from "../../../../utilities/axios/types";
+import type { TvShowSpecificInformation } from "../../../../redux/slices/tv-shows/types";
+import type { Episode } from "../../../../utilities/themoviedb/types";
 
 import CSS from "./EpisodeCard.module.scss";
 
 type Props = {
   episode: Episode;
-  show: TvShowSpecificInformation & Images & ContentRating & Seasons;
+  show: TvShowSpecificInformation;
 
   loading: "eager" | "lazy";
 };

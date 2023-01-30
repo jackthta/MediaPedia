@@ -1,26 +1,10 @@
 import type {
   ContentRating,
-  Images,
-  Seasons,
-  SupplementalVideos,
-  TvShowInformation,
-  TvShowSpecificInformation,
-} from "../../../utilities/axios/types";
-
-type Kind = {
-  shows: TvShowInformation[];
-  page: number;
-  lastFetch: number | null;
-};
-
-type TVShowsCache = Record<
-  number,
-  TvShowSpecificInformation &
-    Images &
-    ContentRating &
-    Seasons &
-    SupplementalVideos & { similarShows: TvShowInformation[] }
->;
+  Episode,
+  Genre,
+  Image,
+  Network,
+} from "../../../utilities/themoviedb/types";
 
 export type TvShowsState = {
   trending: Kind;
@@ -28,6 +12,63 @@ export type TvShowsState = {
   topRated: Kind;
 
   showsCache: TVShowsCache; // *1
+};
+
+// Convenience types for `TvShowsState`
+type Kind = {
+  shows: TvShowGeneralInformation[];
+  page: number;
+  lastFetch: number | null;
+};
+export type TvShowGeneralInformation = {
+  id: number;
+  media_type: "tv";
+  name: string;
+  backdrop_path: string | null;
+  vote_average: number;
+  first_air_date: string;
+};
+
+type TVShowsCache = Record<number, TvShowSpecificInformation>;
+export type TvShowSpecificInformation = TvShowGeneralInformation & {
+  overview: string;
+  genres: Genre[];
+  original_language: string;
+  networks: Network[];
+  number_of_seasons: number;
+  next_episode_to_air: any | null; // API states that it returns only null?
+  episode_run_time: number[];
+  origin_country: string[];
+
+  logos: Image[];
+  content_rating?: ContentRating;
+  seasons: { [seasonNumber: number | string]: Season };
+  supplemental_videos?: SupplementalVideo[];
+  similar_shows?: TvShowGeneralInformation[];
+};
+export type Season = {
+  _id: string;
+  season_number: number;
+  name: string;
+  episodes: Episode[];
+};
+export type SupplementalVideo = {
+  id: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  // Inferred values from data returned from API
+  // because TMDB docs doesn't explicitly state.
+  // Some may be missing.
+  type:
+    | "Trailer"
+    | "Behind the Scenes"
+    | "Bloopers"
+    | "Opening Credits"
+    | "Teaser"
+    | string;
+  published_at: string;
 };
 
 /**

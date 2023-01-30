@@ -46,24 +46,32 @@ export const tvShowsSlice = createSlice({
   extraReducers(builder) {
     // TV Show Details Page
     builder
-      .addCase(fetchTvShowById.fulfilled, (state, action) => {
-        state.showsCache[action.payload.id] = action.payload;
-      })
-      .addCase(fetchTvShowSeason.fulfilled, (state, action) => {
-        const { showId, season_number } = action.payload;
+      .addCase(
+        fetchTvShowById.fulfilled,
+        ({ showsCache }, { payload: show }) => {
+          showsCache[show.id] = show;
+        }
+      )
+      .addCase(
+        fetchTvShowSeason.fulfilled,
+        ({ showsCache }, { payload: season }) => {
+          const { showId, season_number } = season;
 
-        state.showsCache[showId].seasons[season_number] = action.payload;
-      })
-      .addCase(fetchTvShowSupplementalVideos.fulfilled, (state, action) => {
-        const { id, results } = action.payload;
-
-        state.showsCache[id].supplementalVideos = results;
-      })
-      .addCase(fetchTvShowSimilarShows.fulfilled, (state, action) => {
-        const { id, results } = action.payload;
-
-        state.showsCache[id].similarShows = results;
-      });
+          showsCache[showId].seasons[season_number] = season;
+        }
+      )
+      .addCase(
+        fetchTvShowSupplementalVideos.fulfilled,
+        ({ showsCache }, { payload: { showId, supplementalVideos } }) => {
+          showsCache[showId].supplemental_videos = supplementalVideos;
+        }
+      )
+      .addCase(
+        fetchTvShowSimilarShows.fulfilled,
+        ({ showsCache }, { payload: { showId, similarShows } }) => {
+          showsCache[showId].similar_shows = similarShows;
+        }
+      );
 
     // TV Show Kind Page
     // Better pattern than having separate a `addCase` for every `KIND`
@@ -74,13 +82,9 @@ export const tvShowsSlice = createSlice({
         fetchTvShows[KIND.POPULAR].fulfilled,
         fetchTvShows[KIND.TOP_RATED].fulfilled
       ),
-      (tvShows, action) => {
-        const {
-          payload: { page, results: newShows },
-        } = action;
-
+      (tvShows, { type, payload: { page, shows: newShows } }) => {
         // `action.type` format: `tv-shows/${KIND}/fulfilled`
-        const kind: KIND = action.type.split("/")[1];
+        const kind: KIND = type.split("/")[1];
 
         if (page === 1) {
           // Initial fetch or refresh

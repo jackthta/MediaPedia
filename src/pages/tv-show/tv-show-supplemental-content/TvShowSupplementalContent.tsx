@@ -7,22 +7,12 @@ import { useDispatch, useSelector } from "../../../redux/store/hooks";
 import SupplementalMediaCard from "./supplemental-media-card/SupplementalMediaCard";
 import Separator from "../../../components/separator/Separator";
 
-import type {
-  ContentRating,
-  Images,
-  Seasons,
-  SupplementalVideos,
-  TvShowSpecificInformation,
-} from "../../../utilities/axios/types";
+import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
 
 import CSS from "./TvShowSupplementalContent.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation &
-    Images &
-    ContentRating &
-    Seasons &
-    SupplementalVideos;
+  show: TvShowSpecificInformation;
 };
 
 function TvShowSupplementalContent({ show }: Props) {

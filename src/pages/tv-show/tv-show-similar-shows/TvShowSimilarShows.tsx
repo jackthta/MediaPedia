@@ -6,22 +6,12 @@ import { useDispatch, useSelector } from "../../../redux/store/hooks";
 
 import MediaCard from "../../../components/media-card/MediaCard";
 
-import type {
-  ContentRating,
-  Images,
-  Seasons,
-  SupplementalVideos,
-  TvShowSpecificInformation,
-} from "../../../utilities/axios/types";
+import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
 
 import CSS from "./TvShowSimilarShows.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation &
-    Images &
-    ContentRating &
-    Seasons &
-    SupplementalVideos;
+  show: TvShowSpecificInformation;
 };
 
 function TvShowSimilarShows({ show }: Props) {

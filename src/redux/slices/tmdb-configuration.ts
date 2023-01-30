@@ -3,9 +3,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "../../utilities/axios/axios";
 
 import type {
-  TmdbApiConfiguration,
-  TmdbApiConfigurationLanguages,
-} from "../../utilities/axios/types";
+  ImageConfiguration,
+  LanguageConfiguration,
+} from "../../utilities/themoviedb/types";
 import type { AxiosResponse } from "axios";
 import type { RootState } from "../store";
 
@@ -15,8 +15,8 @@ import type { RootState } from "../store";
 // Would rather store it in memory than transform the
 // `backdrop_sizes.url` (aka `w#`) format at runtime
 // to a `srcset` compatible one.
-type TmdbConfigurationState = {
-  languages: TmdbApiConfigurationLanguages;
+type ConfigurationState = {
+  languages: LanguageConfiguration;
   images: {
     secure_base_url: string;
     backdrop_sizes: {
@@ -27,7 +27,7 @@ type TmdbConfigurationState = {
   };
 };
 
-const initialState: TmdbConfigurationState = {
+const initialState: ConfigurationState = {
   languages: [],
   images: {
     secure_base_url: "",
@@ -56,7 +56,7 @@ export const fetchConfiguration = createAsyncThunk(
   async () => {
     const { data: configuration } = await axios.get<
       never,
-      AxiosResponse<TmdbApiConfiguration>
+      AxiosResponse<ImageConfiguration>
     >("/configuration");
 
     // Fetch configuration languages
@@ -64,7 +64,7 @@ export const fetchConfiguration = createAsyncThunk(
     // Source: https://developers.themoviedb.org/3/configuration/get-languages
     const { data: languages } = await axios.get<
       never,
-      AxiosResponse<TmdbApiConfigurationLanguages>
+      AxiosResponse<LanguageConfiguration>
     >("/configuration/languages");
 
     // Transform srcset incompliant format sizes (`w#` || "original") to `#w` for `srcset` consumption.
@@ -87,7 +87,7 @@ export const fetchConfiguration = createAsyncThunk(
         },
         still_sizes: configuration.images.still_sizes,
       },
-    } as TmdbConfigurationState;
+    } as ConfigurationState;
 
     return data;
   }

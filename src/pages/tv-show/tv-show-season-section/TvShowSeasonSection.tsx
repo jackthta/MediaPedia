@@ -1,28 +1,24 @@
-import { ChangeEvent, FormEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
-import { fetchTvShowSeason } from "../../../redux/slices/tv-shows/thunks"; 
+import { fetchTvShowSeason } from "../../../redux/slices/tv-shows/thunks";
 import { selectTvShowSeasons } from "../../../redux/slices/tv-shows/selectors";
 
 import EpisodeCard from "./episode-card/EpisodeCard";
 
-import type {
-  ContentRating,
-  Images,
-  Seasons,
-  TvShowSpecificInformation,
-} from "../../../utilities/axios/types";
+import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
 
 import CSS from "./TvShowSeasonSection.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation & Images & ContentRating & Seasons;
+  show: TvShowSpecificInformation;
 };
 
 function TvShowSeasonSection({ show }: Props) {
   const dispatch = useDispatch();
   const [season, setSeason] = useState<number | string>(1);
-  const seasons = useSelector((state) => selectTvShowSeasons(state, show.id));
+  const seasons =
+    useSelector((state) => selectTvShowSeasons(state, show.id)) ?? [];
 
   // If season 1 isn't cached, fetch it first.
   useEffect(() => {
@@ -30,7 +26,7 @@ function TvShowSeasonSection({ show }: Props) {
       var fetch = dispatch(
         fetchTvShowSeason({
           tvId: show.id,
-          season: 1,
+          seasonNumber: 1,
         })
       );
     }
@@ -54,7 +50,7 @@ function TvShowSeasonSection({ show }: Props) {
           dispatch(
             fetchTvShowSeason({
               tvId: show.id,
-              season,
+              seasonNumber: season,
             })
           )
         );

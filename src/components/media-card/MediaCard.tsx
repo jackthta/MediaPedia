@@ -8,14 +8,14 @@ import { BREAKPOINT, ROUTES } from "../../utilities/enum";
 import MediaBadge from "./media-badge/MediaBadge";
 import MediaRating from "./media-rating/MediaRating";
 
-import type { TvShowInformation } from "../../utilities/axios/types";
+import type { TvShowGeneralInformation } from "../../redux/slices/tv-shows/types";
 
 import CSS from "./MediaCard.module.scss";
 
 import notFoundSVG from "../../assets/svgs/404.svg";
 
 type Props = {
-  show: TvShowInformation;
+  show: TvShowGeneralInformation;
 
   // Lazy loading for images
   loading?: "lazy" | "eager";

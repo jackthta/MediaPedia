@@ -23,7 +23,7 @@ export const selectTvShowSeason = (
 export const selectTvShowSupplementalVideos = (
   state: RootState,
   tvId: number
-) => state.tvShows.showsCache[tvId].supplementalVideos;
+) => state.tvShows.showsCache[tvId].supplemental_videos;
 
 export const selectTvShowSimilarShows = (state: RootState, tvId: number) =>
-  state.tvShows.showsCache[tvId].similarShows;
+  state.tvShows.showsCache[tvId].similar_shows;

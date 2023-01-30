@@ -1,16 +1,12 @@
 import { selectTmdbConfigurationLanguages } from "../../../redux/slices/tmdb-configuration";
 import { useSelector } from "../../../redux/store/hooks";
 
-import type {
-  ContentRating,
-  Images,
-  TvShowSpecificInformation,
-} from "../../../utilities/axios/types";
+import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
 
 import CSS from "./TvShowInformation.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation & Images & ContentRating;
+  show: TvShowSpecificInformation;
 };
 
 function TvShowInformation({ show }: Props) {
@@ -29,7 +25,7 @@ function TvShowInformation({ show }: Props) {
   return (
     <section className={CSS.section}>
       <h2 className={CSS.heading}>Information</h2>
-      
+
       <dl>
         <div className={CSS.content}>
           <dt>Rating</dt>
@@ -62,7 +58,7 @@ function TvShowInformation({ show }: Props) {
 
         <div className={CSS.content}>
           <dt>Rated</dt>
-          <dd>{show.rating}</dd>
+          <dd>{show.content_rating?.rating}</dd>
         </div>
       </dl>
     </section>

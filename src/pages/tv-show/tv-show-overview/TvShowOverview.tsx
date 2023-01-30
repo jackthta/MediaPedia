@@ -6,16 +6,12 @@ import { selectTmdbConfiguration } from "../../../redux/slices/tmdb-configuratio
 import { generateImgSrcsetDimensions } from "../../../utilities/image";
 import { BREAKPOINT } from "../../../utilities/enum";
 
-import type {
-  ContentRating,
-  Images,
-  TvShowSpecificInformation,
-} from "../../../utilities/axios/types";
+import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
 
 import CSS from "./TvShowOverview.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation & Images & ContentRating;
+  show: TvShowSpecificInformation;
 };
 
 // Possible enhancement: use matchMedia to determine viewport to programmatically
