@@ -26,6 +26,8 @@ function SupplementalMediaCard({ media, loading }: Props) {
         srcSet={thumbnail.srcset}
         sizes={`(min-width: ${BREAKPOINT.TABLET}) 50vw, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw`}
         loading={loading}
+        width="320"
+        height="180"
       />
 
       {/* Title */}

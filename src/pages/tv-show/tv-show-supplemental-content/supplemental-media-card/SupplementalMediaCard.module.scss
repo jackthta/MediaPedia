@@ -17,6 +17,13 @@
 
 .thumbnail {
   border-radius: 5px;
+
+  // YouTube returns thumbnails in a
+  // 4:3 intrinsic aspect ratio. Need to make
+  // it align with the 16:9 aspect ratio images
+  // returned from the TMDB API.
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
 }
 
 .title {
