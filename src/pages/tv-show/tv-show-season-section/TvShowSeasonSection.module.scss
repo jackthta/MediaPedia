@@ -15,13 +15,17 @@
 
 .season-select {
   margin: {
-    left: var(--container-padding-x-sm);
+    // NOTE: HTML5 <select> has some strange horizontal
+    // padding even if `padding: 0`. Need to manually
+    // align.
+    left: calc(var(--container-padding-x-sm) - 0.25rem);
     bottom: calc(var(--container-padding-y-sm) / 2);
   }
-  padding: 0.5rem 0.75rem;
 
-  font-size: 1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
 
+  border: none;
   border-radius: 5px;
 
   @media (min-width: $Tablet) {
@@ -30,7 +34,7 @@
       bottom: calc(var(--container-padding-y-md) / 2);
     }
 
-    font-size: 1.1rem;
+    font-size: 1.4rem;
   }
 
   @media (min-width: $Desktop) {
@@ -39,7 +43,7 @@
       bottom: calc(var(--container-padding-y-lg) / 2);
     }
 
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 }
 
