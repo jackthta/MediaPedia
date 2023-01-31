@@ -28,8 +28,8 @@ function TvShow() {
   useEffect(() => {
     if (!show) var fetch = dispatch(fetchTvShowById(id));
 
-    return () => fetch.abort();
-  }, []);
+    return () => fetch && fetch.abort();
+  }, [show]);
 
   if (!show) return null;
 
