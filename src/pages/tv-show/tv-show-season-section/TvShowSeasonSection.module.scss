@@ -53,6 +53,11 @@
   padding: 0 var(--container-padding-x-sm);
 
   overflow: auto;
+  // Disable unwanted/accidental browser navigation
+  // when two-finger swiping at the edge/boundary of the
+  // horizontally overflowed container.
+  // Source: https://stackoverflow.com/a/56071966
+  overscroll-behavior-x: none;
 
   @media (min-width: $Tablet) {
     padding: 0 var(--container-padding-x-md);

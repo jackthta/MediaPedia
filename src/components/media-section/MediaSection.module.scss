@@ -70,6 +70,11 @@
     gap: 0.75rem;
 
     overflow-x: auto;
+    // Disable unwanted/accidental browser navigation
+    // when two-finger swiping at the edge/boundary of the
+    // horizontally overflowed container.
+    // Source: https://stackoverflow.com/a/56071966
+    overscroll-behavior-x: none;
 
     > button {
       flex: 1 0 15rem;
