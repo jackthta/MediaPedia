@@ -28,7 +28,7 @@ function TvShowSupplementalContent({ show }: Props) {
       var fetch = dispatch(fetchTvShowSupplementalVideos(show.id));
     }
 
-    return () => fetch.abort();
+    return () => fetch && fetch.abort();
   }, []);
 
   if (!supplementalVideos?.length) return null;

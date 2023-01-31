@@ -31,7 +31,7 @@ function TvShowSeasonSection({ show }: Props) {
       );
     }
 
-    return () => fetch.abort();
+    return () => fetch && fetch.abort();
   }, []);
 
   // Only after season 1 has been fetched, fetch
@@ -58,7 +58,7 @@ function TvShowSeasonSection({ show }: Props) {
     }
 
     return () => {
-      fetches.forEach((fetch) => fetch.abort());
+      fetches.forEach((fetch) => fetch && fetch.abort());
     };
   }, [seasons[1]]);
 

@@ -27,7 +27,7 @@ function TvShowSimilarShows({ show }: Props) {
       var fetch = dispatch(fetchTvShowSimilarShows(show.id));
     }
 
-    return () => fetch.abort();
+    return () => fetch && fetch.abort();
   }, []);
 
   if (!similarShows) return null;
