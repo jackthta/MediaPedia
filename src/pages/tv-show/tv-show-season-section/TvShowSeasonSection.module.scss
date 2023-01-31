@@ -30,7 +30,7 @@
 
   @media (min-width: $Tablet) {
     margin: {
-      left: var(--container-padding-x-md);
+      left: calc(var(--container-padding-x-md) - 0.25rem);
       bottom: calc(var(--container-padding-y-md) / 2);
     }
 
@@ -39,7 +39,7 @@
 
   @media (min-width: $Desktop) {
     margin: {
-      left: var(--container-padding-x-lg);
+      left: calc(var(--container-padding-x-lg) - 0.25rem);
       bottom: calc(var(--container-padding-y-lg) / 2);
     }
 
