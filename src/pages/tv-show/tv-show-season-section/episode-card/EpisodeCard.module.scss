@@ -51,7 +51,7 @@
 
 .title {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
 
   @media (min-width: $Tablet) {
     font-size: 1.1rem;
@@ -64,6 +64,7 @@
 
 .episode-number {
   font-size: 0.8rem;
+  font-weight: 500;
   text-transform: uppercase;
 
   @media (min-width: $Tablet) {
