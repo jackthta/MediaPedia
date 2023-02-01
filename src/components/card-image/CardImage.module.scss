@@ -1,0 +1,9 @@
+.image {
+  border-radius: 5px;
+
+  // Ensure images are in 16:9 aspect ratio.
+  // TMDB API and YouTube images aren't guaranteed
+  // to be 16:9.
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}

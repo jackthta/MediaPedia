@@ -7,6 +7,7 @@ import { BREAKPOINT, ROUTES } from "../../utilities/enum";
 
 import MediaBadge from "./media-badge/MediaBadge";
 import MediaRating from "./media-rating/MediaRating";
+import CardImage from "../card-image/CardImage";
 
 import type { TvShowGeneralInformation } from "../../redux/slices/tv-shows/types";
 
@@ -35,9 +36,7 @@ function MediaCard({ show, loading, dataLast }: Props) {
 
   const hasBackdropPath =
     show.backdrop_path != null && show.backdrop_path.length > 0;
-  const CSS_backdrop = `${CSS.backdrop} ${
-    !hasBackdropPath && CSS.placeholderBackdrop
-  }`;
+  const CSS_backdrop = `${!hasBackdropPath && CSS.placeholderBackdrop}`;
 
   let image: {
     srcset: string;
@@ -79,7 +78,7 @@ function MediaCard({ show, loading, dataLast }: Props) {
       data-last={dataLast}
       onClick={navigateToShowDetails}
     >
-      <img
+      <CardImage
         className={CSS_backdrop}
         src={image.defaultSrc}
         srcSet={image.srcset}

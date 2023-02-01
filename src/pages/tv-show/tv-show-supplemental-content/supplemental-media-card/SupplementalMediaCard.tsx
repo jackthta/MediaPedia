@@ -1,6 +1,8 @@
 import { generateYoutubeThumbnailImgSrcsetDimensions } from "../../../../utilities/image";
 import { BREAKPOINT } from "../../../../utilities/enum";
 
+import CardImage from "../../../../components/card-image/CardImage";
+
 import type { SupplementalVideo } from "../../../../redux/slices/tv-shows/types";
 
 import CSS from "./SupplementalMediaCard.module.scss";
@@ -20,8 +22,7 @@ function SupplementalMediaCard({ media, loading }: Props) {
   return (
     <div className={CSS.card}>
       {/* Image Thumbnail */}
-      <img
-        className={CSS.thumbnail}
+      <CardImage
         src={thumbnail.defaultSrc}
         srcSet={thumbnail.srcset}
         sizes={`(min-width: ${BREAKPOINT.TABLET}) 50vw, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw`}

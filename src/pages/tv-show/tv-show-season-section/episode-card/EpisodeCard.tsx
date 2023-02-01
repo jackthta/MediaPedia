@@ -3,6 +3,8 @@ import { selectTmdbConfiguration } from "../../../../redux/slices/tmdb-configura
 import { generateImgSrcsetDimensions } from "../../../../utilities/image";
 import { BREAKPOINT } from "../../../../utilities/enum";
 
+import CardImage from "../../../../components/card-image/CardImage";
+
 import type { TvShowSpecificInformation } from "../../../../redux/slices/tv-shows/types";
 import type { Episode } from "../../../../utilities/themoviedb/types";
 
@@ -36,8 +38,7 @@ function EpisodeCard({ episode, show, loading }: Props) {
       <p className={CSS.episodeNumber}>Episode {episode.episode_number}</p>
 
       {/* Still image */}
-      <img
-        className={CSS.still}
+      <CardImage
         src={image.defaultSrc}
         srcSet={image.srcset}
         sizes={imageSizes}

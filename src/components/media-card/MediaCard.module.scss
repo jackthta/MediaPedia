@@ -14,16 +14,6 @@
   gap: 0.5rem;
 }
 
-.backdrop {
-  border-radius: 5px;
-
-  // Some images returned from the TMDB
-  // API are in 4:3 aspect ratio, but want
-  // to set it to 16:9.
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
 .placeholder-backdrop {
   object-fit: unset;
 
