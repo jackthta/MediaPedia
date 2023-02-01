@@ -1,7 +1,11 @@
+import { useEffect, useRef, useState } from "react";
+import { flushSync } from "react-dom";
+
 import { generateYoutubeThumbnailImgSrcsetDimensions } from "../../../../utilities/image";
 import { BREAKPOINT } from "../../../../utilities/enum";
 
 import CardImage from "../../../../components/card-image/CardImage";
+import CloseSVG from "../../../../components/SVGs/CloseSVG";
 
 import type { SupplementalVideo } from "../../../../redux/slices/tv-shows/types";
 
@@ -14,26 +18,83 @@ type Props = {
 };
 
 function SupplementalMediaCard({ media, loading }: Props) {
+  const videoPlayerDialogRef = useRef<HTMLDialogElement | null>(null);
+  const [dialogIsOpen, setDialogIsOpen] = useState(false);
+
   const thumbnail = generateYoutubeThumbnailImgSrcsetDimensions(media.key);
 
-  // TODO: This card should be a button that opens a dialog containing a video
-  // https://www.youtube.com/watch?v=lJIrF4YjHfQ for how to embed via iframe OR
-  // use this format: https://www.youtube.com/embed/{key} for video source
-  return (
-    <div className={CSS.card}>
-      {/* Image Thumbnail */}
-      <CardImage
-        src={thumbnail.defaultSrc}
-        srcSet={thumbnail.srcset}
-        sizes={`(min-width: ${BREAKPOINT.TABLET}) 50vw, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw`}
-        loading={loading}
-        width="320"
-        height="180"
-      />
+  const openVideoPlayerDialog = () => {
+    flushSync(() => setDialogIsOpen(true));
+    videoPlayerDialogRef.current?.showModal();
 
-      {/* Title */}
-      <h4 className={CSS.title}>{media.name}</h4>
-    </div>
+    // Lock body from scrolling when dialog is open
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeVideoPlayerDialog = () => {
+    flushSync(() => setDialogIsOpen(false));
+    videoPlayerDialogRef.current?.close();
+
+    // Unlock body to scroll when dialog is closed.
+    document.body.style.overflow = "auto";
+  };
+
+  useEffect(() => {
+    // Ensure dialog is closed if component is destroyed
+    // and that the body is unlocked to scroll.
+    return () => {
+      videoPlayerDialogRef.current?.close();
+      document.body.style.overflow = "auto";
+    };
+  }, []);
+
+  return (
+    <>
+      <button className={CSS.card} onClick={openVideoPlayerDialog}>
+        {/* Image Thumbnail */}
+        <CardImage
+          src={thumbnail.defaultSrc}
+          srcSet={thumbnail.srcset}
+          sizes={`(min-width: ${BREAKPOINT.TABLET}) 50vw, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw`}
+          loading={loading}
+          width="320"
+          height="180"
+        />
+
+        {/* Title */}
+        <h4 className={CSS.title}>{media.name}</h4>
+      </button>
+
+      {/* Video Player Dialog */}
+      {/*
+        NOTE: Need to listen for the dialog "cancel" event (i.e. `Esc` key press)
+        and pass instructions to close it if triggered or else
+        playing video will continue playing "invisibly" in the background
+      */}
+      {/* Possible enhancement: close dialog when clicking on backdrop */}
+      {dialogIsOpen && (
+        <dialog
+          className={CSS.dialog}
+          ref={videoPlayerDialogRef}
+          onCancel={closeVideoPlayerDialog}
+        >
+          {/* Close button */}
+          <button className={CSS.dialogClose} onClick={closeVideoPlayerDialog}>
+            <CloseSVG />
+          </button>
+
+          {/* Video */}
+          {/* Possible enhancement: add `poster` attribute and set it responsively */}
+          {/* Source: https://developers.google.com/youtube/iframe_api_reference */}
+          <iframe
+            className={CSS.iframe}
+            src={`https://www.youtube.com/embed/${media.key}`}
+            title={media.name}
+            allowFullScreen
+          ></iframe>
+        </dialog>
+      )}
+    </>
   );
 }
 
