@@ -55,17 +55,29 @@ function TvShowSupplementalContent({ show }: Props) {
 
   return (
     <>
-      <section className={CSS.section}>
-        <h4 className={CSS.heading}>Trailers</h4>
-        <div className={CSS.list}>{Trailers}</div>
-      </section>
+      {/* Only show "Trailers" section if there are trailers to show */}
+      {Trailers.length > 0 && (
+        <>
+          <section className={CSS.section}>
+            <h4 className={CSS.heading}>Trailers</h4>
+            <div className={CSS.list}>{Trailers}</div>
+          </section>
 
-      <Separator />
+          <Separator />
+        </>
+      )}
 
-      <section className={CSS.section}>
-        <h4 className={CSS.heading}>Other Content</h4>
-        <div className={CSS.list}>{OtherContent}</div>
-      </section>
+      {/* Only show "Other Content" section if there is other content to show */}
+      {OtherContent.length > 0 && (
+        <>
+          <section className={CSS.section}>
+            <h4 className={CSS.heading}>Other Content</h4>
+            <div className={CSS.list}>{OtherContent}</div>
+          </section>
+
+          <Separator />
+        </>
+      )}
     </>
   );
 }

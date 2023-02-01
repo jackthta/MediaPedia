@@ -10,7 +10,6 @@ import TvShowInformation from "./tv-show-information/TvShowInformation";
 import TvShowSeasonSection from "./tv-show-season-section/TvShowSeasonSection";
 import TvShowSupplementalContent from "./tv-show-supplemental-content/TvShowSupplementalContent";
 import TvShowSimilarShows from "./tv-show-similar-shows/TvShowSimilarShows";
-import Separator from "../../components/separator/Separator";
 
 import BaseLayout from "../../layouts/base-layout/BaseLayout";
 
@@ -42,24 +41,14 @@ function TvShow() {
         {/* Show Information */}
         <TvShowInformation show={show} />
 
-        <Separator />
-
         {/* Show Seasons */}
         <TvShowSeasonSection show={show} />
-
-        <Separator />
 
         {/* Show Trailers/Other Media Content */}
         <TvShowSupplementalContent show={show} />
 
-        <Separator />
-
         {/* Similar Shows */}
-        {/* Optimization: Use IntersectionObserver to fetch similar shows only when
-      user scrolls far enough down to see Trailers? */}
         <TvShowSimilarShows show={show} />
-
-        <Separator />
       </main>
     </BaseLayout>
   );

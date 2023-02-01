@@ -5,6 +5,7 @@ import { selectTvShowSimilarShows } from "../../../redux/slices/tv-shows/selecto
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
 
 import MediaCard from "../../../components/media-card/MediaCard";
+import Separator from "../../../components/separator/Separator";
 
 import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
 
@@ -43,10 +44,18 @@ function TvShowSimilarShows({ show }: Props) {
     ));
 
   return (
-    <section className={CSS.section}>
-      <h4 className={CSS.heading}>Similar Shows</h4>
-      <div className={CSS.list}>{SimilarShows}</div>
-    </section>
+    <>
+      {SimilarShows.length > 0 && (
+        <>
+          <section className={CSS.section}>
+            <h4 className={CSS.heading}>Similar Shows</h4>
+            <div className={CSS.list}>{SimilarShows}</div>
+          </section>
+
+          <Separator />
+        </>
+      )}
+    </>
   );
 }
 

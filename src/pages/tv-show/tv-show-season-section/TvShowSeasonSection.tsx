@@ -5,6 +5,7 @@ import { fetchTvShowSeason } from "../../../redux/slices/tv-shows/thunks";
 import { selectTvShowSeasons } from "../../../redux/slices/tv-shows/selectors";
 
 import EpisodeCard from "./episode-card/EpisodeCard";
+import Separator from "../../../components/separator/Separator";
 
 import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
 
@@ -84,13 +85,17 @@ function TvShowSeasonSection({ show }: Props) {
   });
 
   return (
-    <section className={CSS.section} onChange={handleSeasonChange}>
-      {/* Seasons selector */}
-      <select className={CSS.seasonSelect}>{SeasonSelectOption}</select>
+    <>
+      <section className={CSS.section} onChange={handleSeasonChange}>
+        {/* Seasons selector */}
+        <select className={CSS.seasonSelect}>{SeasonSelectOption}</select>
 
-      {/* Episodes */}
-      <div className={CSS.episodeList}>{Episodes}</div>
-    </section>
+        {/* Episodes */}
+        <div className={CSS.episodeList}>{Episodes}</div>
+      </section>
+
+      <Separator />
+    </>
   );
 }
 
