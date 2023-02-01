@@ -11,7 +11,15 @@
   // https://stackoverflow.com/a/38224283
   min-width: 0;
 
-  gap: 0.5rem;
+  gap: calc(var(--container-padding-y-sm) / 3);
+
+  @media (min-width: $Tablet) {
+    gap: calc(var(--container-padding-y-md) / 3);
+  }
+
+  @media (min-width: $Desktop) {
+    gap: calc(var(--container-padding-y-lg) / 3);
+  }
 }
 
 .placeholder-backdrop {
