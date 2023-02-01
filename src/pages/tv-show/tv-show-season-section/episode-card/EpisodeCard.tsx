@@ -33,7 +33,7 @@ function EpisodeCard({ episode, show, loading }: Props) {
   }).format(new Date(episode.air_date));
 
   return (
-    <div className={CSS.card}>
+    <div className={CSS.card} tabIndex={0}>
       {/* Episode # */}
       <p className={CSS.episodeNumber}>Episode {episode.episode_number}</p>
 
