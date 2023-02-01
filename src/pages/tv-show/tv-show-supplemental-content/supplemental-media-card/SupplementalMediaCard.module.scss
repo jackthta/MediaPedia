@@ -1,9 +1,9 @@
-@use "../../../../styles/utilities/mixins" as *;
 @use "../../../../styles/utilities/variables" as *;
 
 .card {
   display: flex;
   flex-direction: column;
+
   gap: calc(var(--container-padding-y-sm) / 3);
 
   @media (min-width: $Tablet) {
