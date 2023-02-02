@@ -1,3 +1,19 @@
-// Dimension Breakpoints
+@use "sass:math";
+@use "sass:list";
+
+// Dimension breakpoints
 $Tablet: 700px;
 $Desktop: 1024px;
+
+// Dimension breakpoint extremes
+$min-breakpoint: 300px;
+$max-breakpoint: 1920px;
+
+// Variables for modular scale
+$type-base-min: 16px;
+$type-base-max: 19px;
+$type-scale-min: 1.2;
+$type-scale-max: 1.333;
+$type-steps: "xxxxs", "xxxs", "xxs", "xs", "sm", "base", "md", "lg", "xl", "xxl",
+  "xxxl";
+$type-base-index: list.index($type-steps, "base");

@@ -1,4 +1,7 @@
 @use "./utilities/variables" as *;
+@use "./utilities/functions" as *;
+@use "sass:list";
+@use "sass:math";
 
 *,
 *::before,
@@ -21,6 +24,16 @@
 
   // Light-mode related
   --rating-star-fill: #fec828;
+
+  // Generate fluid typography scale
+  @for $i from 1 through length($type-steps) {
+    $step: list.nth($type-steps, $i);
+    $power: $i - $type-base-index;
+    $min: $type-base-min * math.pow($type-scale-min, $power);
+    $max: $type-base-max * math.pow($type-scale-max, $power);
+
+    --font-size-#{$step}: #{clamped($min, $max)};
+  }
 }
 
 html {

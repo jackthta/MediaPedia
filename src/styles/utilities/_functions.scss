@@ -1,0 +1,38 @@
+@use "sass:math";
+@use "./variables" as *;
+
+@function clamped(
+  $min-px,
+  $max-px,
+  $min-bp: $min-breakpoint,
+  $max-bp: $max-breakpoint
+) {
+  $slope: math.div($max-px - $min-px, $max-bp - $min-bp);
+  $slope-vw: round($slope * 100, 2);
+  $y-intercept-rems: round(px-to-rems($min-px - $slope * $min-bp), 2);
+  $min-rems: round(px-to-rems($min-px), 2);
+  $max-rems: round(px-to-rems($max-px), 2);
+
+  @return clamp(
+    #{$min-rems},
+    #{$slope-vw}vw + #{$y-intercept-rems},
+    #{$max-rems}
+  );
+}
+
+@function px-to-rems($px) {
+  $rems: math.div($px, 16px) * 1rem;
+
+  @return $rems;
+}
+
+// Source: https://www.aleksandrhovhannisyan.com/blog/fluid-type-scale-with-css-clamp/
+@function round($number, $places: 0) {
+  $n: 1;
+  @if $places > 0 {
+    @for $i from 1 through $places {
+      $n: $n * 10;
+    }
+  }
+  @return math.div(math.round($number * $n), $n);
+}
