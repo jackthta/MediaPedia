@@ -45,10 +45,12 @@
 }
 
 .blur {
-  max-height: 40%;
+  height: 30%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  padding: var(--container-padding-y-sm) 0;
 
   backdrop-filter: blur(1rem);
 
@@ -56,15 +58,10 @@
   -webkit-mask: linear-gradient(
     to bottom,
     transparent,
-    rgba(0, 0, 0, 0.66) 20px,
-    rgba(0, 0, 0, 0.8) 30px,
-    #000 40px
+    rgba(0, 0, 0, 0.66) 15px,
+    rgba(0, 0, 0, 0.8) 25px,
+    #000 30px
   );
-
-  @media (min-width: $Desktop) {
-    max-height: unset;
-    height: 25%;
-  }
 
   .overview-container {
     position: relative;
