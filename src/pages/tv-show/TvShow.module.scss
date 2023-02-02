@@ -1,0 +1,7 @@
+:global {
+  // Don't show background image if on TV show details page.
+  // It looks strange with the backdrop on top of it.
+  body {
+    background-image: none;
+  }
+}

@@ -13,7 +13,7 @@ import TvShowSimilarShows from "./tv-show-similar-shows/TvShowSimilarShows";
 
 import BaseLayout from "../../layouts/base-layout/BaseLayout";
 
-import CSS from "./TvShow.module.scss";
+import "./TvShow.module.scss";
 
 function TvShow() {
   const { id: _id } = useParams();
