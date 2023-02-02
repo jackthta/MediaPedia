@@ -63,7 +63,7 @@ function MediaSection({ kind }: Props) {
   });
 
   return (
-    <section className={CSS.container}>
+    <section>
       <header className={CSS.header}>
         <h2 className={CSS.heading}>{Heading}</h2>
 

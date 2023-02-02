@@ -1,14 +1,14 @@
 @use "../../../styles/utilities/variables" as *;
 
 .section {
-  padding: var(--container-padding-y-sm) 0;
+  padding-top: var(--container-padding-y-sm);
 
   @media (min-width: $Tablet) {
-    padding: var(--container-padding-y-md) 0;
+    padding-top: var(--container-padding-y-md);
   }
 
   @media (min-width: $Desktop) {
-    padding: var(--container-padding-y-lg) 0;
+    padding-top: var(--container-padding-y-lg);
   }
 }
 
@@ -50,6 +50,7 @@
   display: flex;
   gap: 1rem;
   padding: 0 var(--container-padding-x-sm);
+  padding-bottom: var(--container-padding-y-sm);
 
   overflow: auto;
   // Disable unwanted/accidental browser navigation
@@ -60,10 +61,12 @@
 
   @media (min-width: $Tablet) {
     padding: 0 var(--container-padding-x-md);
+    padding-bottom: var(--container-padding-y-md);
   }
 
   @media (min-width: $Desktop) {
     padding: 0 var(--container-padding-x-lg);
+    padding-bottom: var(--container-padding-y-lg);
   }
 
   > div {

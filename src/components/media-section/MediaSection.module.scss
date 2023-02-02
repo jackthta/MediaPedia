@@ -1,101 +1,99 @@
 @use "../../styles/utilities/mixins" as *;
 @use "../../styles/utilities/variables" as *;
 
-.container {
-  margin-bottom: var(--container-padding-y-sm);
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 
-  .header {
+  margin-bottom: 0.75rem;
+
+  .heading {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    gap: 0.25rem;
 
-    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
 
-    .heading {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-
-      font-size: 1.1rem;
-
-      > svg {
-        width: 1.1rem;
-
-        @media (min-width: $Tablet) {
-          width: 1.3rem;
-        }
-
-        @media (min-width: $Desktop) {
-          width: 1.4rem;
-        }
-      }
+    > svg {
+      width: 1.1rem;
 
       @media (min-width: $Tablet) {
-        font-size: 1.3rem;
+        width: 1.3rem;
       }
 
       @media (min-width: $Desktop) {
-        font-size: 1.4rem;
+        width: 1.4rem;
       }
     }
 
-    .see-all-link {
-      display: flex;
-      align-items: center;
-      gap: 0.1rem;
-
-      font-size: 0.9rem;
-
-      > svg {
-        width: 0.9rem;
-
-        @media (min-width: $Tablet) {
-          width: 1rem;
-        }
-      }
-
-      @media (min-width: $Tablet) {
-        font-size: 1rem;
-      }
+    @media (min-width: $Tablet) {
+      font-size: 1.3rem;
     }
 
-    @include useAppContainerSidePadding;
+    @media (min-width: $Desktop) {
+      font-size: 1.4rem;
+    }
   }
 
-  .shows {
-    max-width: 100%;
-
+  .see-all-link {
     display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
+    align-items: center;
+    gap: 0.1rem;
 
-    overflow-x: auto;
-    // Disable unwanted/accidental browser navigation
-    // when two-finger swiping at the edge/boundary of the
-    // horizontally overflowed container.
-    // Source: https://stackoverflow.com/a/56071966
-    overscroll-behavior-x: none;
+    font-size: 0.9rem;
 
-    > button {
-      flex: 1 0 15rem;
+    > svg {
+      width: 0.9rem;
 
       @media (min-width: $Tablet) {
-        flex-basis: 20rem;
-      }
-
-      @media (min-width: $Desktop) {
-        flex-basis: 23rem;
+        width: 1rem;
       }
     }
 
-    @include useAppContainerSidePadding;
+    @media (min-width: $Tablet) {
+      font-size: 1rem;
+    }
   }
+
+  @include useAppContainerSidePadding;
+}
+
+.shows {
+  max-width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+
+  padding-bottom: var(--container-padding-y-sm);
 
   @media (min-width: $Tablet) {
-    margin-bottom: var(--container-padding-y-md);
+    padding-bottom: var(--container-padding-y-md);
   }
 
   @media (min-width: $Desktop) {
-    margin-bottom: var(--container-padding-y-lg);
+    padding-bottom: var(--container-padding-y-lg);
   }
+
+  overflow-x: auto;
+  // Disable unwanted/accidental browser navigation
+  // when two-finger swiping at the edge/boundary of the
+  // horizontally overflowed container.
+  // Source: https://stackoverflow.com/a/56071966
+  overscroll-behavior-x: none;
+
+  > button {
+    flex: 1 0 15rem;
+
+    @media (min-width: $Tablet) {
+      flex-basis: 20rem;
+    }
+
+    @media (min-width: $Desktop) {
+      flex-basis: 23rem;
+    }
+  }
+
+  @include useAppContainerSidePadding;
 }
