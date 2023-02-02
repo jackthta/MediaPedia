@@ -1,13 +1,3 @@
-// Hacky fix: for some reason, the body styles
-// in `index.scss` have higher specificity and
-// precedence than here..? Unsure why, b/c I'd
-// assume that these styles are parsed after
-// those in `index.scss` unless something's 
-// happening during the build step where the 
-// body style(s) here are being overridden by
-// the former?
-html > body {
-  // Don't show background image if on TV show details page.
-  // It looks strange with the backdrop on top of it.
-  background-image: none ;
+.hide-background-image {
+  background-image: none;
 }
