@@ -55,7 +55,7 @@
   backdrop-filter: blur(1rem);
 
   // Blend from backdrop into blur, so there is no visible cut-off line.
-  -webkit-mask: linear-gradient(
+  mask: linear-gradient(
     to bottom,
     transparent,
     rgba(0, 0, 0, 0.66) 15px,
