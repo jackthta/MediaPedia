@@ -29,11 +29,7 @@
     }
 
     .home-link {
-      font-size: 1.1rem;
-
-      @media (min-width: $Tablet) {
-        font-size: 1.5rem;
-      }
+      font-size: var(--font-size-md);
     }
   }
 

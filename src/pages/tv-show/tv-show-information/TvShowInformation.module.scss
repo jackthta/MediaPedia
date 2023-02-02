@@ -15,18 +15,14 @@
   .heading {
     padding-bottom: calc(var(--container-padding-y-sm) / 2);
 
-    font-size: 1.3rem;
+    font-size: var(--font-size-md);
 
     @media (min-width: $Tablet) {
       padding-bottom: calc(var(--container-padding-y-md) / 2);
-
-      font-size: 1.4rem;
     }
 
     @media (min-width: $Desktop) {
       padding-bottom: calc(var(--container-padding-y-lg) / 2);
-
-      font-size: 1.5rem;
     }
   }
 
@@ -35,18 +31,14 @@
     flex-direction: column;
     gap: calc(var(--container-padding-y-sm) / 3);
 
-    font-size: 1rem;
+    font-size: var(--font-size-base);
 
     @media (min-width: $Tablet) {
       gap: calc(var(--container-padding-y-md) / 3);
-
-      font-size: 1.1rem;
     }
 
     @media (min-width: $Desktop) {
       gap: calc(var(--container-padding-y-lg) / 3);
-
-      font-size: 1.2rem;
     }
   }
 

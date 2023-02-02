@@ -22,14 +22,7 @@
   overflow: hidden;
 
   font-weight: 500;
-  font-size: 0.9rem;
-
-  @media (min-width: $Tablet) {
-    font-size: 1rem;
-  }
-  @media (min-width: $Desktop) {
-    font-size: 1.1rem;
-  }
+  font-size: calc(var(--font-size-sm) + 0.1rem);
 }
 
 .dialog {

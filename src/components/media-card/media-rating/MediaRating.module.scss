@@ -16,8 +16,6 @@
   border-radius: 5px;
 
   > svg {
-    width: 0.8rem;
-
     fill: var(--rating-star-fill);
 
     // SVG isn't vertically aligned with rating text
@@ -25,24 +23,26 @@
     // manually adjust.
     margin-top: -0.1rem;
 
-    @media (min-width: $Tablet) {
-      width: 0.9rem;
+    // <TVShowSimilarShows>
+    @container (min-width: 15rem) {
+      width: calc(var(--font-size-xs) + 0.1rem);
     }
 
-    @media (min-width: $Desktop) {
-      width: 1rem;
+    // <MediaSection>
+    @container (min-width: 17rem) {
+      width: var(--font-size-sm);
     }
   }
 
   > span {
-    font-size: 0.8rem;
-
-    @media (min-width: $Tablet) {
-      font-size: 0.9rem;
+    // <TVShowSimilarShows>
+    @container (min-width: 15rem) {
+      font-size: calc(var(--font-size-xs) + 0.1rem);
     }
 
-    @media (min-width: $Desktop) {
-      font-size: 1rem;
+    // <MediaSection>
+    @container (min-width: 17rem) {
+      font-size: var(--font-size-sm);
     }
   }
 }

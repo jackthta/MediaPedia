@@ -1,6 +1,8 @@
 @use "../../styles/utilities/variables" as *;
 
 .container {
+  container-type: inline-size;
+
   // For `MediaRating` to hook onto
   position: relative;
 
@@ -36,7 +38,6 @@
   gap: 1rem;
 
   .media-name {
-    font-size: 1rem;
     font-weight: 500;
 
     // (🏳)
@@ -44,12 +45,14 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    @media (min-width: $Tablet) {
-      font-size: 1.1rem;
+    // <TVShowSimilarShows>
+    @container (min-width: 15rem) {
+      font-size: calc(var(--font-size-sm) + 0.1rem);
     }
 
-    @media (min-width: $Desktop) {
-      font-size: 1.2rem;
+    // <MediaSection>
+    @container (min-width: 17rem) {
+      font-size: var(--font-size-base);
     }
   }
 
@@ -59,14 +62,15 @@
 
     .debut-year {
       color: #555;
-      font-size: 0.8rem;
 
-      @media (min-width: $Tablet) {
-        font-size: 0.9rem;
+      // <TVShowSimilarShows>
+      @container (min-width: 15rem) {
+        font-size: calc(var(--font-size-xs) + 0.1rem);
       }
 
-      @media (min-width: $Desktop) {
-        font-size: 1rem;
+      // <MediaSection>
+      @container (min-width: 17rem) {
+        font-size: var(--font-size-sm);
       }
     }
   }

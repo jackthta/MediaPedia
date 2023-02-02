@@ -17,23 +17,19 @@
     bottom: calc(var(--container-padding-y-sm) / 2);
   }
 
-  font-size: 1.1rem;
+  font-size: var(--font-size-base);
 
   @media (min-width: $Tablet) {
     padding: {
       left: var(--container-padding-x-md);
       bottom: calc(var(--container-padding-y-md) / 2);
     }
-
-    font-size: 1.2rem;
   }
   @media (min-width: $Desktop) {
     padding: {
       left: var(--container-padding-x-lg);
       bottom: calc(var(--container-padding-y-lg) / 2);
     }
-
-    font-size: 1.3rem;
   }
 }
 

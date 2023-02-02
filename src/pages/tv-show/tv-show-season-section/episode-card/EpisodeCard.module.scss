@@ -39,30 +39,13 @@
 }
 
 .title {
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   font-weight: 600;
-
-  @media (min-width: $Tablet) {
-    font-size: 1.1rem;
-  }
-
-  @media (min-width: $Desktop) {
-    font-size: 1.2rem;
-  }
 }
 
 .episode-number {
-  font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
-
-  @media (min-width: $Tablet) {
-    font-size: 0.9rem;
-  }
-
-  @media (min-width: $Desktop) {
-    font-size: 1rem;
-  }
 }
 
 .overview {
@@ -72,27 +55,12 @@
   overflow: hidden;
 
   text-overflow: ellipsis;
-  font-size: 0.9rem;
-  line-height: 1.2;
-
-  @media (min-width: $Tablet) {
-    font-size: 1rem;
-  }
-
-  @media (min-width: $Desktop) {
-    font-size: 1.1rem;
-  }
+  line-height: 1.3;
 }
 
+.episode-number,
+.overview,
 .runtime,
 .release-date {
-  font-size: 0.8rem;
-
-  @media (min-width: $Tablet) {
-    font-size: 0.9rem;
-  }
-
-  @media (min-width: $Desktop) {
-    font-size: 1rem;
-  }
+  font-size: var(--font-size-sm);
 }

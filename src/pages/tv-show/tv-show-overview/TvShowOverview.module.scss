@@ -82,15 +82,7 @@
 
     .overview {
       color: var(--bg-color);
-      font-size: 1rem;
-
-      @media (min-width: $Tablet) {
-        font-size: 1.1rem;
-      }
-
-      @media (min-width: $Desktop) {
-        font-size: 1.2rem;
-      }
+      font-size: var(--font-size-base);
     }
 
     .unexpanded-overview {
@@ -135,20 +127,16 @@
       right: var(--container-padding-x-sm);
 
       color: #2690cc;
-      font-size: 0.9rem;
+      font-size: var(--font-size-sm);
       font-weight: 500;
       text-transform: uppercase;
 
       @media (min-width: $Tablet) {
         right: var(--container-padding-x-md);
-
-        font-size: 1rem;
       }
 
       @media (min-width: $Desktop) {
         right: var(--container-padding-x-lg);
-
-        font-size: 1.1rem;
       }
     }
 

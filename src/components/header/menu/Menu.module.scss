@@ -3,12 +3,7 @@
 .menu-button {
   display: grid;
   place-items: center;
-  width: 1.5rem;
-
-
-  @media (min-width: $Tablet) {
-    width: 2rem;
-  }
+  width: var(--font-size-lg);
 
   @media (min-width: $Desktop) {
     /* Don't show Mobile | Tablet menu button on Desktop */

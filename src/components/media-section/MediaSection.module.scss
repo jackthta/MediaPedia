@@ -13,26 +13,10 @@
     align-items: center;
     gap: 0.25rem;
 
-    font-size: 1.1rem;
+    font-size: var(--font-size-md);
 
     > svg {
-      width: 1.1rem;
-
-      @media (min-width: $Tablet) {
-        width: 1.3rem;
-      }
-
-      @media (min-width: $Desktop) {
-        width: 1.4rem;
-      }
-    }
-
-    @media (min-width: $Tablet) {
-      font-size: 1.3rem;
-    }
-
-    @media (min-width: $Desktop) {
-      font-size: 1.4rem;
+      width: var(--font-size-md);
     }
   }
 
@@ -41,18 +25,10 @@
     align-items: center;
     gap: 0.1rem;
 
-    font-size: 0.9rem;
+    font-size: var(--font-size-base);
 
     > svg {
-      width: 0.9rem;
-
-      @media (min-width: $Tablet) {
-        width: 1rem;
-      }
-    }
-
-    @media (min-width: $Tablet) {
-      font-size: 1rem;
+      width: var(--font-size-base);
     }
   }
 
@@ -84,10 +60,10 @@
   overscroll-behavior-x: none;
 
   > button {
-    flex: 1 0 15rem;
+    flex: 1 0 17rem;
 
     @media (min-width: $Tablet) {
-      flex-basis: 20rem;
+      flex-basis: 19rem;
     }
 
     @media (min-width: $Desktop) {

@@ -42,13 +42,11 @@
 
   display: grid;
   place-items: center;
-  width: 1.5rem;
+  width: var(--font-size-lg);
 
   margin-bottom: var(--container-padding-y-sm);
 
   @media (min-width: $Tablet) {
-    width: 2rem;
-
     margin-bottom: var(--container-padding-y-md);
   }
 }
