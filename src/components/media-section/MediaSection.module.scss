@@ -1,5 +1,6 @@
 @use "../../styles/utilities/mixins" as *;
 @use "../../styles/utilities/variables" as *;
+@use "../../styles/utilities/functions" as *;
 
 .header {
   display: flex;
@@ -60,15 +61,7 @@
   overscroll-behavior-x: none;
 
   > button {
-    flex: 1 0 17rem;
-
-    @media (min-width: $Tablet) {
-      flex-basis: 19rem;
-    }
-
-    @media (min-width: $Desktop) {
-      flex-basis: 23rem;
-    }
+    flex: 0 0 clamped(300px, 400px);
   }
 
   @include useAppContainerSidePadding;

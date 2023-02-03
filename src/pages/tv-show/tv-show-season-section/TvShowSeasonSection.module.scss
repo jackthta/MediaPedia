@@ -1,4 +1,5 @@
 @use "../../../styles/utilities/variables" as *;
+@use "../../../styles/utilities/functions" as *;
 
 .section {
   padding-top: var(--container-padding-y-sm);
@@ -66,14 +67,6 @@
   }
 
   > div {
-    flex: 1 0 20rem;
-
-    @media (min-width: $Tablet) {
-      flex-basis: 25rem;
-    }
-
-    @media (min-width: $Desktop) {
-      flex-basis: 30rem;
-    }
+    flex: 1 0 clamped(300px, 500px);
   }
 }

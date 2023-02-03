@@ -24,24 +24,24 @@
     margin-top: -0.1rem;
 
     // <TVShowSimilarShows>
-    @container (min-width: 15rem) {
+    @container (min-width: 250px) and (max-width: 300px) {
       width: calc(var(--font-size-xs) + 0.1rem);
     }
 
     // <MediaSection>
-    @container (min-width: 17rem) {
+    @container (min-width: 300px) and (max-width: 400px) {
       width: var(--font-size-sm);
     }
   }
 
   > span {
     // <TVShowSimilarShows>
-    @container (min-width: 15rem) {
+    @container (min-width: 250px) and (max-width: 300px) {
       font-size: calc(var(--font-size-xs) + 0.1rem);
     }
 
     // <MediaSection>
-    @container (min-width: 17rem) {
+    @container (min-width: 300px) and (max-width: 400px) {
       font-size: var(--font-size-sm);
     }
   }

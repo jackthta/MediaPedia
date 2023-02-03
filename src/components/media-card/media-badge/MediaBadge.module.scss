@@ -14,12 +14,12 @@
   }
 
   // <TVShowSimilarShows>
-  @container (min-width: 15rem) {
+  @container (min-width: 250px) and (max-width: 300px) {
     font-size: var(--font-size-xs);
   }
 
   // <MediaSection>
-  @container (min-width: 17rem) {
+  @container (min-width: 300px) and (max-width: 400px) {
     font-size: calc(var(--font-size-sm) - 0.1rem);
   }
 }
