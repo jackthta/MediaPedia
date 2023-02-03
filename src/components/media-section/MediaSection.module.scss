@@ -43,15 +43,7 @@
   align-items: flex-start;
   gap: 0.75rem;
 
-  padding-bottom: var(--container-padding-y-sm);
-
-  @media (min-width: $Tablet) {
-    padding-bottom: var(--container-padding-y-md);
-  }
-
-  @media (min-width: $Desktop) {
-    padding-bottom: var(--container-padding-y-lg);
-  }
+  padding-bottom: clamped($container-padding-y-min, $container-padding-y-max);
 
   overflow-x: auto;
   // Disable unwanted/accidental browser navigation

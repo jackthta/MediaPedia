@@ -3,42 +3,22 @@
 @use "../../../styles/utilities/mixins" as *;
 
 .section {
-  padding-top: var(--container-padding-y-sm);
-
-  @media (min-width: $Tablet) {
-    padding-top: var(--container-padding-y-md);
-  }
-  @media (min-width: $Desktop) {
-    padding-top: var(--container-padding-y-lg);
-  }
+  padding-top: clamped($container-padding-y-min, $container-padding-y-max);
 }
 
 .heading {
   padding: {
-    left: var(--container-padding-x-sm);
-    bottom: calc(var(--container-padding-y-sm) / 2);
+    left: clamped($container-padding-x-min, $container-padding-x-max);
+    bottom: clamped($container-padding-y-min / 2, $container-padding-y-max / 2);
   }
 
   font-size: var(--font-size-base);
-
-  @media (min-width: $Tablet) {
-    padding: {
-      left: var(--container-padding-x-md);
-      bottom: calc(var(--container-padding-y-md) / 2);
-    }
-  }
-  @media (min-width: $Desktop) {
-    padding: {
-      left: var(--container-padding-x-lg);
-      bottom: calc(var(--container-padding-y-lg) / 2);
-    }
-  }
 }
 
 .list {
   display: flex;
   gap: 0.75rem;
-  padding-bottom: var(--container-padding-y-sm);
+  padding-bottom: clamped($container-padding-y-min, $container-padding-y-max);
 
   overflow: auto;
   // Disable unwanted/accidental browser navigation
@@ -46,14 +26,6 @@
   // horizontally overflowed container.
   // Source: https://stackoverflow.com/a/56071966
   overscroll-behavior-x: none;
-
-  @media (min-width: $Tablet) {
-    padding-bottom: var(--container-padding-y-md);
-  }
-
-  @media (min-width: $Desktop) {
-    padding-bottom: var(--container-padding-y-lg);
-  }
 
   > button {
     flex: 0 0 clamped(250px, 300px);

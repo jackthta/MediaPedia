@@ -1,4 +1,5 @@
 @use "../../styles/utilities/variables" as *;
+@use "../../styles/utilities/functions" as *;
 
 :root {
   --separator-color: #eee;
@@ -13,15 +14,10 @@
 }
 
 .separator {
-  width: calc(100% - calc(var(--container-padding-x-sm) * 2));
-
-  @media (min-width: $Tablet) {
-    width: calc(100% - calc(var(--container-padding-x-md) * 2));
-  }
-
-  @media (min-width: $Desktop) {
-    width: calc(100% - calc(var(--container-padding-x-lg) * 2));
-  }
+  width: clamped(
+    calc($min-breakpoint - calc($container-padding-x-min * 2)),
+    calc($max-breakpoint - calc($container-padding-x-max * 2))
+  );
 }
 
 .menu-dialog-separator {

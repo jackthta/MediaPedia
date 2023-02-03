@@ -1,5 +1,6 @@
 @use "../../styles/utilities/mixins" as *;
 @use "../../styles/utilities/variables" as *;
+@use "../../styles/utilities/functions" as *;
 
 .header {
   .navigation {
@@ -7,26 +8,9 @@
     justify-content: space-between;
     align-items: center;
 
-    padding: {
-      top: var(--container-padding-y-sm);
-      bottom: var(--container-padding-y-sm);
-    }
+    padding: clamped($container-padding-y-min, $container-padding-y-max) 0;
 
     font-weight: 500;
-
-    @media (min-width: $Tablet) {
-      padding: {
-        top: var(--container-padding-y-md);
-        bottom: var(--container-padding-y-md);
-      }
-    }
-
-    @media (min-width: $Desktop) {
-      padding: {
-        top: var(--container-padding-y-lg);
-        bottom: var(--container-padding-y-lg);
-      }
-    }
 
     .home-link {
       font-size: var(--font-size-md);

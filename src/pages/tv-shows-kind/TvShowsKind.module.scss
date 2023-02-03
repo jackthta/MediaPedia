@@ -1,11 +1,12 @@
 @use "../../styles/utilities/variables" as *;
 @use "../../styles/utilities/mixins" as *;
+@use "../../styles/utilities/functions" as *;
 
 .heading {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  margin: var(--container-padding-y-sm) 0;
+  margin: clamped($container-padding-y-min, $container-padding-y-max) 0;
 
   font-size: var(--font-size-md);
 
@@ -13,33 +14,14 @@
     width: var(--font-size-md);
   }
 
-  @media (min-width: $Tablet) {
-    margin: var(--container-padding-y-md) 0;
-  }
-
-  @media (min-width: $Desktop) {
-    margin: var(--container-padding-y-lg) 0;
-  }
-
   @include useAppContainerSidePadding;
 }
 
 .media-grid {
   display: grid;
-  row-gap: var(--container-padding-y-sm);
-  margin-bottom: var(--container-padding-y-sm);
-
-  @media (min-width: $Tablet) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--container-padding-y-md);
-    margin-bottom: var(--container-padding-y-md);
-  }
-
-  @media (min-width: $Desktop) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--container-padding-y-lg);
-    margin-bottom: var(--container-padding-y-lg);
-  }
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: clamped($container-padding-y-min, $container-padding-y-max);
+  margin-bottom: clamped($container-padding-y-min, $container-padding-y-max);
 
   @include useAppContainerSidePadding;
 }

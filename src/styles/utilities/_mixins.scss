@@ -1,22 +1,9 @@
 @use "./variables" as *;
+@use "./functions" as *;
 
 @mixin useAppContainerSidePadding {
   padding: {
-    left: var(--container-padding-x-sm);
-    right: var(--container-padding-x-sm);
-  }
-
-  @media (min-width: $Tablet) {
-    padding: {
-      left: var(--container-padding-x-md);
-      right: var(--container-padding-x-md);
-    }
-  }
-
-  @media (min-width: $Desktop) {
-    padding: {
-      left: var(--container-padding-x-lg);
-      right: var(--container-padding-x-lg);
-    }
+    left: clamped($container-padding-x-min, $container-padding-x-max);
+    right: clamped($container-padding-x-min, $container-padding-x-max);
   }
 }

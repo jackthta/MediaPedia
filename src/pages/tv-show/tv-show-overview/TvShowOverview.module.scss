@@ -1,5 +1,6 @@
 @use "../../../styles/utilities/variables" as *;
 @use "../../../styles/utilities/mixins" as *;
+@use "../../../styles/utilities/functions" as *;
 
 .backdrop {
   display: flex;
@@ -20,11 +21,7 @@
 .logo {
   width: 70%;
   max-height: 20%;
-  margin-top: var(--container-padding-y-sm);
-
-  @media (min-width: $Tablet) {
-    margin-top: var(--container-padding-y-md);
-  }
+  margin-top: clamped($container-padding-y-min, $container-padding-y-max);
 
   @media (min-width: $Desktop) {
     position: absolute;
@@ -46,7 +43,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--container-padding-y-sm) 0;
+  padding: clamped($container-padding-y-min, $container-padding-y-max) 0;
 
   backdrop-filter: blur(1rem);
 
@@ -61,17 +58,9 @@
 
   .overview-container {
     position: relative;
-    margin: var(--container-padding-y-sm) auto;
+    margin: clamped($container-padding-y-min, $container-padding-y-max) auto;
 
     overflow: auto;
-
-    @media (min-width: $Tablet) {
-      margin: var(--container-padding-y-md) auto;
-    }
-
-    @media (min-width: $Desktop) {
-      margin: var(--container-padding-y-lg) auto;
-    }
 
     .overview {
       color: var(--bg-color);
@@ -117,20 +106,12 @@
     .more-button {
       position: absolute;
       bottom: 0;
-      right: var(--container-padding-x-sm);
+      right: clamped($container-padding-x-min, $container-padding-x-max);
 
       color: #2690cc;
       font-size: var(--font-size-sm);
       font-weight: 500;
       text-transform: uppercase;
-
-      @media (min-width: $Tablet) {
-        right: var(--container-padding-x-md);
-      }
-
-      @media (min-width: $Desktop) {
-        right: var(--container-padding-x-lg);
-      }
     }
 
     @include useAppContainerSidePadding();

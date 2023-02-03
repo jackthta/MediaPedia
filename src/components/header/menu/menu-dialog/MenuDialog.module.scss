@@ -1,5 +1,6 @@
 @use "/src/styles/utilities/variables" as *;
 @use "/src/styles/utilities/mixins" as *;
+@use "/src/styles/utilities/functions" as *;
 
 .menu-open {
   display: flex;
@@ -14,18 +15,7 @@
   flex-direction: column;
   width: 100%;
   height: 100vh;
-  padding: {
-    top: var(--container-padding-y-sm);
-    bottom: var(--container-padding-y-sm);
-  }
-
-  @media (min-width: $Tablet) {
-    // padding: var(--container-padding-y-md) var(--container-padding-x-md);
-    padding: {
-      top: var(--container-padding-y-md);
-      bottom: var(--container-padding-y-md);
-    }
-  }
+  padding: clamped($container-padding-y-min, $container-padding-y-max) 0;
 }
 
 .menu-header {
@@ -44,9 +34,5 @@
   place-items: center;
   width: var(--font-size-lg);
 
-  margin-bottom: var(--container-padding-y-sm);
-
-  @media (min-width: $Tablet) {
-    margin-bottom: var(--container-padding-y-md);
-  }
+  margin-bottom: clamped($container-padding-y-min, $container-padding-y-max);
 }

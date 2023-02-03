@@ -1,4 +1,5 @@
 @use "/src/styles/utilities/variables" as *;
+@use "/src/styles/utilities/functions" as *;
 
 :root {
   --branded-light-mode-gray: #696e70;
@@ -35,11 +36,7 @@
 }
 
 .menu-dialog-search-bar {
-  margin: var(--container-padding-y-sm) 0;
-
-  @media (min-width: $Tablet) {
-    margin: var(--container-padding-y-md) 0;
-  }
+  margin: clamped($container-padding-y-min, $container-padding-y-max) 0;
 
   svg {
     margin: 0 0.5rem;
