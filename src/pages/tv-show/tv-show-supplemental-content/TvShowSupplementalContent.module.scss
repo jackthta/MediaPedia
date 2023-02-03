@@ -1,5 +1,6 @@
 @use "../../../styles/utilities/variables" as *;
 @use "../../../styles/utilities/functions" as *;
+@use "../../../styles/utilities/mixins" as *;
 
 .section {
   padding-top: var(--container-padding-y-sm);
@@ -37,8 +38,6 @@
 .list {
   display: flex;
   gap: 0.75rem;
-
-  padding: 0 var(--container-padding-x-sm);
   padding-bottom: var(--container-padding-y-sm);
 
   overflow: auto;
@@ -49,16 +48,16 @@
   overscroll-behavior-x: none;
 
   @media (min-width: $Tablet) {
-    padding: 0 var(--container-padding-x-md);
     padding-bottom: var(--container-padding-y-md);
   }
 
   @media (min-width: $Desktop) {
-    padding: 0 var(--container-padding-x-lg);
     padding-bottom: var(--container-padding-y-lg);
   }
 
   > button {
     flex: 0 0 clamped(250px, 300px);
   }
+
+  @include useAppContainerSidePadding();
 }
