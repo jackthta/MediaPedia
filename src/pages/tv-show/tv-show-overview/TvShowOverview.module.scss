@@ -7,14 +7,10 @@
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  height: 30rem;
+  height: 40rem;
 
   // `background-image` is set programmatically
   background: center / cover no-repeat;
-
-  @media (min-width: $Tablet) {
-    height: 40rem;
-  }
 
   @media (min-width: $Desktop) {
     position: relative;
@@ -22,7 +18,7 @@
 }
 
 .logo {
-  width: auto;
+  width: 70%;
   max-height: 20%;
   margin-top: var(--container-padding-y-sm);
 
@@ -35,7 +31,7 @@
     top: 3rem;
     left: 0;
 
-    width: 25rem;
+    width: 40%;
     height: auto;
     max-height: 100%;
     margin-top: unset;
