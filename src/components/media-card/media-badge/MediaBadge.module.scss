@@ -13,13 +13,13 @@
     radius: 3px;
   }
 
-  // <TVShowSimilarShows>
-  @container (min-width: 250px) and (max-width: 300px) {
+  // <TVShowSimilarShows> (250px – 300px)
+  @container (max-width: 300px) {
     font-size: var(--font-size-xs);
   }
 
-  // <MediaSection>
-  @container (min-width: 300px) and (max-width: 400px) {
+  // <MediaSection> (300px – 400px)
+  @container (min-width: 300px) {
     font-size: calc(var(--font-size-sm) - 0.1rem);
   }
 }
