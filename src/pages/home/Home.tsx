@@ -9,7 +9,7 @@ function Home() {
     <BaseLayout>
       <main className={CSS.main}>
         <h1 className={CSS.mainHeading}>
-          <span>Best source for </span>
+          <span>Convenient source for </span>
           <span>film information</span>
         </h1>
         <SearchBar />
