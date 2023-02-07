@@ -33,7 +33,7 @@ function MediaOverview({ show }: Props) {
     backdropSizes,
     show.logos[0].file_path
   );
-  const logoImageSizes = `(min-width: ${BREAKPOINT.TABLET}) 500px, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw `;
+  const logoImageSizes = `(min-width: ${BREAKPOINT.DESKTOP}) 40vw, 70vw `;
 
   const handleExpandOverview = () => setOverviewExpanded(true);
 

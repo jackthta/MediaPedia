@@ -55,7 +55,7 @@ function MediaCard({ show, loading, dataLast }: Props) {
         backdrop_sizes,
         show.backdrop_path!
       ),
-      sizes: `(min-width: ${BREAKPOINT.TABLET}) 50vw, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw`,
+      sizes: `(min-width: ${BREAKPOINT.DESKTOP}) 400px, 350px`,
     };
   } else {
     image.defaultSrc = notFoundSVG;
