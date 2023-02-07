@@ -96,7 +96,6 @@ function SupplementalMediaCard({ media, loading }: Props) {
           </button>
 
           {/* Video */}
-          {/* Possible enhancement: add `poster` attribute and set it responsively */}
           {/* Source: https://developers.google.com/youtube/iframe_api_reference */}
           <iframe
             className={CSS.iframe}
