@@ -39,6 +39,17 @@ function SupplementalMediaCard({ media, loading }: Props) {
     document.body.style.overflow = "auto";
   };
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    const dialogRect = videoPlayerDialogRef.current?.getBoundingClientRect()!;
+    const clickedInDialog =
+      dialogRect.top <= e.clientY &&
+      e.clientY <= dialogRect.right &&
+      dialogRect.left <= e.clientX &&
+      e.clientX <= dialogRect.right;
+
+    if (!clickedInDialog) closeVideoPlayerDialog();
+  };
+
   useEffect(() => {
     // Ensure dialog is closed if component is destroyed
     // and that the body is unlocked to scroll.
@@ -71,12 +82,12 @@ function SupplementalMediaCard({ media, loading }: Props) {
         and pass instructions to close it if triggered or else
         playing video will continue playing "invisibly" in the background
       */}
-      {/* Possible enhancement: close dialog when clicking on backdrop */}
       {dialogIsOpen && (
         <dialog
           className={CSS.dialog}
           ref={videoPlayerDialogRef}
           onCancel={closeVideoPlayerDialog}
+          onClick={handleBackdropClick}
         >
           {/* Close button */}
           <button className={CSS.dialogClose} onClick={closeVideoPlayerDialog}>
