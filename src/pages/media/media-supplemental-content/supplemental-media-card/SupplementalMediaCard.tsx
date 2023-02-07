@@ -66,6 +66,7 @@ function SupplementalMediaCard({ media, loading }: Props) {
         <CardImage
           src={thumbnail.defaultSrc}
           srcSet={thumbnail.srcset}
+          // Enhancement: make sizes more accurate
           sizes={`(min-width: ${BREAKPOINT.TABLET}) 50vw, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw`}
           loading={loading}
           width="320"
