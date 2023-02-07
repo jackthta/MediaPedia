@@ -18,10 +18,12 @@ type Props = {
 };
 
 function EpisodeCard({ episode, show, loading }: Props) {
-  const imageConfiguration = useSelector(selectTmdbConfiguration);
+  const { secure_base_url: imgBaseUrl, backdrop_sizes: backdropSizes } =
+    useSelector(selectTmdbConfiguration);
+    
   const image = generateImgSrcsetDimensions(
-    imageConfiguration.secure_base_url,
-    imageConfiguration.backdrop_sizes,
+    imgBaseUrl,
+    backdropSizes,
     episode.still_path
   );
   const imageSizes = `(min-width: ${BREAKPOINT.TABLET}) 500px, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw `;

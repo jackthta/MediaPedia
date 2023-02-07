@@ -14,10 +14,9 @@ type Props = {
   show: MediaSpecificInformation;
 };
 
-// Possible enhancement: use matchMedia to determine viewport to programmatically
-// set `background-images` to appropriate size.
 function MediaOverview({ show }: Props) {
-  const imageConfiguration = useSelector(selectTmdbConfiguration);
+  const { secure_base_url: imgBaseUrl, backdrop_sizes: backdropSizes } =
+    useSelector(selectTmdbConfiguration);
   const overviewRef = useRef<HTMLDivElement | null>(null);
   const [overviewExpanded, setOverviewExpanded] = useState(false);
 
@@ -25,13 +24,13 @@ function MediaOverview({ show }: Props) {
     !overviewExpanded && CSS.unexpandedOverview
   }`;
 
-  // Possible enhancement: make backdrop image responsive.
-  const backdropBackgroundImageUrl = `url(${
-    imageConfiguration.secure_base_url
-  }${imageConfiguration.backdrop_sizes.url.slice(-1)[0]}${show.backdrop_path})`;
+  const backdropBackgroundImageUrl = `url(${imgBaseUrl}${
+    backdropSizes.url.slice(-1)[0]
+  }${show.backdrop_path})`;
+
   const logoImage = generateImgSrcsetDimensions(
-    imageConfiguration.secure_base_url,
-    imageConfiguration.backdrop_sizes,
+    imgBaseUrl,
+    backdropSizes,
     show.logos[0].file_path
   );
   const logoImageSizes = `(min-width: ${BREAKPOINT.TABLET}) 500px, (min-width: ${BREAKPOINT.DESKTOP}) 33vw, 100vw `;
@@ -71,7 +70,7 @@ function MediaOverview({ show }: Props) {
     return () => removeEventListener("resize", checkOverviewOverflow);
   }, [overviewExpanded]);
 
-  if (!imageConfiguration.secure_base_url) return null;
+  if (!imgBaseUrl) return null;
 
   return (
     <div
