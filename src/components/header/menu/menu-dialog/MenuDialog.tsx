@@ -45,7 +45,7 @@ const MenuDialog = forwardRef<HTMLDialogElement, Props>(function MenuDialog(
       </header>
 
       {/* Body */}
-      <NavigationLinks inMenuDialog />
+      <NavigationLinks inMenuDialog onMenuClose={onClose} />
 
       <footer>{/* TODO: Add light/dark mode switch */}</footer>
     </dialog>

@@ -7,13 +7,15 @@ import CSS from "./NavigationLinks.module.scss";
 
 type Props = {
   inMenuDialog?: boolean;
+  onMenuClose?: () => void;
 };
 
 const DefaultProps: Props = {
   inMenuDialog: false,
+  onMenuClose: () => ({}),
 };
 
-const NavigationLinks: React.FC<Props> = ({ inMenuDialog }) => {
+const NavigationLinks: React.FC<Props> = ({ inMenuDialog, onMenuClose }) => {
   const CSS_navigationLinks = inMenuDialog
     ? CSS.menuDialogNavigationLinks
     : CSS.desktopNavigationLinks;
@@ -21,13 +23,17 @@ const NavigationLinks: React.FC<Props> = ({ inMenuDialog }) => {
   return (
     <menu className={CSS_navigationLinks}>
       <li>
-        <Link className={CSS.navigationLink} to="/tv-shows">
+        <Link
+          className={CSS.navigationLink}
+          to="/tv-shows"
+          onClick={onMenuClose}
+        >
           <TvSVG />
           <span>TV Shows</span>
         </Link>
       </li>
       <li>
-        <Link className={CSS.navigationLink} to="/movies">
+        <Link className={CSS.navigationLink} to="/movies" onClick={onMenuClose}>
           <MovieSVG />
           <span>Movies</span>
         </Link>

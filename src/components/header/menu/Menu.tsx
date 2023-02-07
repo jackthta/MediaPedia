@@ -9,8 +9,6 @@ import SandwichMenuSVG from "../../SVGs/SandwichMenuSVG";
 
 import CSS from "./Menu.module.scss";
 
-// TODO: Make menu dialog close when clicking on navigation link
-
 function Menu() {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
