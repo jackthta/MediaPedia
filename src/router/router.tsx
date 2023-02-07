@@ -3,11 +3,11 @@ import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "../utilities/enum";
 
 import Home from "../pages/home/Home";
-import TvShow from "../pages/tv-show/TvShow";
-import TvShows from "../pages/tv-shows/TvShows";
-import TvShowsKind from "../pages/tv-shows-kind/TvShowsKind";
+import EveryMediaKind from "../pages/every-media-kind/EveryMediaKind";
+import MediaKind from "../pages/media-kind/MediaKind";
+import Media from "../pages/media/Media";
 
-import { tvShowKindParamGuard } from "./loaders/tv-show-kind-loader";
+import { mediaKindParamGuard } from "./loaders/media-kind-loader";
 
 import type { RouteObject } from "react-router-dom";
 
@@ -18,18 +18,44 @@ const HOME: RouteObject = {
 
 const TV_SHOWS: RouteObject = {
   path: ROUTES.TV_SHOWS,
-  element: <TvShows />,
+  element: <EveryMediaKind mediaType="tv" />,
 };
 
 const TV_SHOWS_KIND: RouteObject = {
   path: ROUTES.TV_SHOWS_KIND,
-  element: <TvShowsKind />,
-  loader: tvShowKindParamGuard,
+  element: <MediaKind mediaType="tv" />,
+  loader: mediaKindParamGuard,
 };
 
 const TV_SHOW: RouteObject = {
   path: ROUTES.TV_SHOW,
-  element: <TvShow />,
+  element: <Media mediaType="tv" />,
 };
 
-export default createBrowserRouter([HOME, TV_SHOW, TV_SHOWS, TV_SHOWS_KIND]);
+const MOVIES: RouteObject = {
+  path: ROUTES.MOVIES,
+  element: <EveryMediaKind mediaType="movie" />,
+};
+
+const MOVIES_KIND: RouteObject = {
+  path: ROUTES.MOVIES_KIND,
+  element: <MediaKind mediaType="movie" />,
+  loader: mediaKindParamGuard,
+};
+
+const MOVIE: RouteObject = {
+  path: ROUTES.MOVIE,
+  element: <Media mediaType="movie" />,
+};
+
+export default createBrowserRouter([
+  HOME,
+
+  TV_SHOW,
+  TV_SHOWS,
+  TV_SHOWS_KIND,
+
+  MOVIE,
+  MOVIES,
+  MOVIES_KIND,
+]);

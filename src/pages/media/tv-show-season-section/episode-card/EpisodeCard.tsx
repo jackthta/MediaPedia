@@ -5,14 +5,14 @@ import { BREAKPOINT } from "../../../../utilities/enum";
 
 import CardImage from "../../../../components/card-image/CardImage";
 
-import type { TvShowSpecificInformation } from "../../../../redux/slices/tv-shows/types";
+import type { MediaSpecificInformation } from "../../../../redux/slices/media/types";
 import type { Episode } from "../../../../utilities/themoviedb/types";
 
 import CSS from "./EpisodeCard.module.scss";
 
 type Props = {
   episode: Episode;
-  show: TvShowSpecificInformation;
+  show: MediaSpecificInformation;
 
   loading: "eager" | "lazy";
 };
@@ -57,7 +57,7 @@ function EpisodeCard({ episode, show, loading }: Props) {
 
         <div className={CSS.subinformationContainer}>
           {/* Episode runtime */}
-          <p className={CSS.runtime}>{show.episode_run_time} min</p>
+          <p className={CSS.runtime}>{show.run_time} min</p>
 
           {/* Episode release date */}
           <p className={CSS.releaseDate}>{airDate}</p>

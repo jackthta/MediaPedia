@@ -2,30 +2,38 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "../../redux/store/hooks";
-import { fetchTvShowById } from "../../redux/slices/tv-shows/thunks";
-import { selectCachedShowById } from "../../redux/slices/tv-shows/selectors";
+import { fetchMediaById } from "../../redux/slices/media/thunks";
+import { selectCachedShowById } from "../../redux/slices/media/selectors";
 
-import TvShowOverview from "./tv-show-overview/TvShowOverview";
-import TvShowInformation from "./tv-show-information/TvShowInformation";
+import MediaOverview from "./media-overview/MediaOverview";
+import MediaInformation from "./media-information/MediaInformation";
 import TvShowSeasonSection from "./tv-show-season-section/TvShowSeasonSection";
-import TvShowSupplementalContent from "./tv-show-supplemental-content/TvShowSupplementalContent";
-import TvShowSimilarShows from "./tv-show-similar-shows/TvShowSimilarShows";
+import MediaSupplementalContent from "./media-supplemental-content/MediaSupplementalContent";
+import MediaSimilarShows from "./media-similar-shows/MediaSimilarShows";
 
 import BaseLayout from "../../layouts/base-layout/BaseLayout";
 
-import CSS from "./TvShow.module.scss";
+import type { MediaType } from "../../redux/slices/media/types";
 
-function TvShow() {
+import CSS from "./Media.module.scss";
+
+type Props = {
+  mediaType: MediaType;
+};
+
+function Media({ mediaType }: Props) {
   const { id: _id } = useParams();
   const id = +_id!;
   const dispatch = useDispatch();
 
   // Grab show details from cache if it exists.
-  const show = useSelector((state) => selectCachedShowById(state, id));
+  const show = useSelector((state) =>
+    selectCachedShowById(state, mediaType, id)
+  );
 
   // If show doesn't exist in cache, dispatch action to fetch it.
   useEffect(() => {
-    if (!show) var fetch = dispatch(fetchTvShowById(id));
+    if (!show) var fetch = dispatch(fetchMediaById({ mediaType, mediaId: id }));
 
     return () => fetch && fetch.abort();
   }, [show]);
@@ -44,22 +52,22 @@ function TvShow() {
     <BaseLayout>
       <main>
         {/* Backdrop section */}
-        <TvShowOverview show={show} />
+        <MediaOverview show={show} />
 
         {/* Show Information */}
-        <TvShowInformation show={show} />
+        <MediaInformation show={show} />
 
         {/* Show Seasons */}
-        <TvShowSeasonSection show={show} />
+        {mediaType === "tv" && <TvShowSeasonSection show={show} />}
 
         {/* Show Trailers/Other Media Content */}
-        <TvShowSupplementalContent show={show} />
+        <MediaSupplementalContent show={show} />
 
         {/* Similar Shows */}
-        <TvShowSimilarShows show={show} />
+        <MediaSimilarShows show={show} />
       </main>
     </BaseLayout>
   );
 }
 
-export default TvShow;
+export default Media;

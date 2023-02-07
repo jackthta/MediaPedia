@@ -6,45 +6,54 @@ import type {
   Network,
 } from "../../../utilities/themoviedb/types";
 
-export type TvShowsState = {
+export type MediaType = "tv" | "movie";
+
+export type MediaState = {
+  tv: KindState;
+  movie: KindState;
+};
+
+// Convenience types for `MediaState`
+export type KindState = {
   trending: Kind;
   popular: Kind;
   topRated: Kind;
 
-  showsCache: TVShowsCache; // *1
+  cache: Cache; // *1
 };
-
-// Convenience types for `TvShowsState`
 type Kind = {
-  shows: TvShowGeneralInformation[];
+  shows: MediaGeneralInformation[];
   page: number;
   lastFetch: number | null;
 };
-export type TvShowGeneralInformation = {
+export type MediaGeneralInformation = {
   id: number;
-  media_type: "tv";
+  media_type: MediaType;
   name: string;
   backdrop_path: string | null;
   vote_average: number;
-  first_air_date: string;
+  release_date: string;
 };
 
-type TVShowsCache = Record<number, TvShowSpecificInformation>;
-export type TvShowSpecificInformation = TvShowGeneralInformation & {
+type Cache = Record<number, MediaSpecificInformation>;
+export type MediaSpecificInformation = MediaGeneralInformation & {
   overview: string;
   genres: Genre[];
   original_language: string;
-  networks: Network[];
-  number_of_seasons: number;
-  next_episode_to_air: any | null; // API states that it returns only null?
-  episode_run_time: number[];
-  origin_country: string[];
+
+  // This group only exists for TV shows
+  networks?: Network[];
+  number_of_seasons?: number;
+  next_episode_to_air?: any; // API states that it returns only null?
+  run_time?: number[];
+  origin_country?: string[];
 
   logos: Image[];
+  // This only exists for TV shows
   content_rating?: ContentRating;
   seasons: { [seasonNumber: number | string]: Season };
   supplemental_videos?: SupplementalVideo[];
-  similar_shows?: TvShowGeneralInformation[];
+  similar_shows?: MediaGeneralInformation[];
 };
 export type Season = {
   _id: string;

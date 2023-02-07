@@ -3,17 +3,18 @@
 // it consistent with the documentation's order so that
 // it would be easier to reference back to the documentation.
 
-// Response object for /trending/tv, /tv/popular,
-// and /tv/top_rated (Trending/Popular/Top Rated)
-export type TvKindResponse = {
+// Response object for /trending/(tv | movie), /(tv | movie)/popular,
+// and /(tv | movie)/top_rated (Trending/Popular/Top Rated)
+export type MediaKindResponse = {
   page: number;
-  results: TvResultObject[];
+  results: TvResultObject[] | MovieResultObject[];
   total_results: number;
   total_pages: number;
 };
 
-// Convenience types for `TvKindResponse`
+// Convenience types for `MediaKindResponse`
 type TvResultObject = ResultObject & TvShow;
+type MovieResultObject = ResultObject & Movie;
 type ResultObject = {
   poster_path: string | null;
   popularity: number;
@@ -25,8 +26,6 @@ type ResultObject = {
   genre_ids: number[];
   original_language: string;
   vote_count: number;
-  name: string;
-  original_name: string;
 };
 // (extracted) properties from `ResultObject` that define a Tv Show
 type TvShow = {
@@ -49,7 +48,9 @@ type Movie = {
 };
 
 // Response object for /tv/{tv_id} (Tv Show Specific Details)
-export type TvDetailsResponse = {
+// NOTE: Need to inject `media_type` to differentiate the
+// kind of data returned
+export type TvDetailsResponse = { media_type: "tv" } & {
   backdrop_path: string | null;
   created_by: Creator[];
   episode_run_time: number[];
@@ -97,8 +98,38 @@ export type TvDetailsResponse = {
   vote_average: number;
   vote_count: number;
 };
+// Response object for /movie/{movie_id} (Movie Specific Details)
+// NOTE: Need to inject `media_type` to differentiate the
+// kind of data returned
+export type MovieDetailsResponse = { media_type: "movie" } & {
+  adult: boolean;
+  backdrop_path: string | null;
+  belongs_to_collection: {} | null;
+  budget: number;
+  genres: Genre[];
+  homepage: string;
+  id: number;
+  imdb_id: string | null;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string | null;
+  production_companies: ProductionCompany[];
+  production_countries: ProductionCountry[];
+  release_date: string;
+  revenue: number;
+  runtime: number;
+  spoken_languages: SpokenLanguage[];
+  status: string;
+  tagline: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+};
 
-// Convenience types for `TvDetailsResponse`
+// Convenience types for `(Tv | Movie)DetailsResponse`
 type Creator = {
   id: number;
   credit_id: string;
@@ -141,8 +172,8 @@ type SpokenLanguage = {
   name: string;
 };
 
-// Response object for /tv/{tv_id}/images (Tv Show Images)
-export type TvImagesResponse = {
+// Response object for /(tv | movie)/{(tv | movie)_id}/images (Tv Show | Movie Images)
+export type ImagesResponse = {
   backdrops: Image[];
   id: number;
   posters: Image[];
@@ -155,7 +186,7 @@ export type TvImagesResponse = {
   logos: Image[];
 };
 
-// Convenience type for `TvImagesResponse`
+// Convenience type for `ImagesResponse`
 export type Image = {
   aspect_ratio: number;
   file_path: string;
@@ -232,13 +263,13 @@ type GuestStar = {
   profile_path: string | null;
 };
 
-// Response object for /tv/{tv_id}/videos (Tv Show Video(s))
-export type TvVideosResponse = {
+// Response object for /{tv | movie}/{(tv | movie)_id}/videos (Tv Show | Movie Video(s))
+export type VideosResponse = {
   id: number;
   results: Video[];
 };
 
-// Convenience type for `TvVideosResponse`
+// Convenience type for `VideosResponse`
 type Video = {
   iso_639_1: string;
   iso_3166_1: string;
@@ -251,10 +282,6 @@ type Video = {
   published_at: string;
   id: string;
 };
-
-// Response object for /tv/{tv_id}/similar (Similar Tv Shows)
-// Exactly the same shape as `TvKindResponse`
-export type TvSimilarResponse = TvKindResponse;
 
 /* =========================== CONFIGURATION ===========================*/
 

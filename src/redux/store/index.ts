@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import tvShowsReducer from "../slices/tv-shows/tv-shows";
+import mediaReducer from "../slices/media/media";
 import tmdbConfigurationReducer from "../slices/tmdb-configuration";
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -8,7 +8,7 @@ export type AppDispatch = typeof store.dispatch;
 
 const store = configureStore({
   reducer: {
-    tvShows: tvShowsReducer,
+    media: mediaReducer,
     tmdbConfiguration: tmdbConfigurationReducer,
   },
 });

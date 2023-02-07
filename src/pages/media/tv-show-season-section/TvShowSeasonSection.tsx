@@ -1,25 +1,24 @@
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
-import { fetchTvShowSeason } from "../../../redux/slices/tv-shows/thunks";
-import { selectTvShowSeasons } from "../../../redux/slices/tv-shows/selectors";
+import { fetchTvShowSeason } from "../../../redux/slices/media/thunks";
+import { selectTvShowSeasons } from "../../../redux/slices/media/selectors";
 
 import EpisodeCard from "./episode-card/EpisodeCard";
 import Separator from "../../../components/separator/Separator";
 
-import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
+import type { MediaSpecificInformation } from "../../../redux/slices/media/types";
 
 import CSS from "./TvShowSeasonSection.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation;
+  show: MediaSpecificInformation;
 };
 
 function TvShowSeasonSection({ show }: Props) {
   const dispatch = useDispatch();
   const [season, setSeason] = useState<number | string>(1);
-  const seasons =
-    useSelector((state) => selectTvShowSeasons(state, show.id)) ?? [];
+  const seasons = useSelector((state) => selectTvShowSeasons(state, show.id));
 
   // If season 1 isn't cached, fetch it first.
   useEffect(() => {
@@ -45,7 +44,7 @@ function TvShowSeasonSection({ show }: Props) {
   useEffect(() => {
     const fetches: any[] = [];
 
-    if (seasons[1] != null) {
+    if (seasons[1] != null && show.number_of_seasons) {
       for (let season = 2; season <= show.number_of_seasons; season++) {
         fetches.push(
           dispatch(

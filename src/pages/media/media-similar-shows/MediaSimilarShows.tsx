@@ -1,31 +1,33 @@
 import { useEffect } from "react";
 
-import { fetchTvShowSimilarShows } from "../../../redux/slices/tv-shows/thunks";
-import { selectTvShowSimilarShows } from "../../../redux/slices/tv-shows/selectors";
+import { fetchMediaSimilarShows } from "../../../redux/slices/media/thunks";
+import { selectSimilarShows } from "../../../redux/slices/media/selectors";
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
 
 import MediaCard from "../../../components/media-card/MediaCard";
 import Separator from "../../../components/separator/Separator";
 
-import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
+import type { MediaSpecificInformation } from "../../../redux/slices/media/types";
 
-import CSS from "./TvShowSimilarShows.module.scss";
+import CSS from "./MediaSimilarShows.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation;
+  show: MediaSpecificInformation;
 };
 
-function TvShowSimilarShows({ show }: Props) {
+function MediaSimilarShows({ show }: Props) {
   const dispatch = useDispatch();
   const similarShows = useSelector((state) =>
-    selectTvShowSimilarShows(state, show.id)
+    selectSimilarShows(state, show.media_type, show.id)
   );
 
   // Fetch similar shows if it hasn't
   // been fetched and cached.
   useEffect(() => {
     if (similarShows == null) {
-      var fetch = dispatch(fetchTvShowSimilarShows(show.id));
+      var fetch = dispatch(
+        fetchMediaSimilarShows({ mediaType: show.media_type, mediaId: show.id })
+      );
     }
 
     return () => fetch && fetch.abort();
@@ -59,4 +61,4 @@ function TvShowSimilarShows({ show }: Props) {
   );
 }
 
-export default TvShowSimilarShows;
+export default MediaSimilarShows;

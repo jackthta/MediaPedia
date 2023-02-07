@@ -9,14 +9,14 @@ import MediaBadge from "./media-badge/MediaBadge";
 import MediaRating from "./media-rating/MediaRating";
 import CardImage from "../card-image/CardImage";
 
-import type { TvShowGeneralInformation } from "../../redux/slices/tv-shows/types";
+import type { MediaGeneralInformation } from "../../redux/slices/media/types";
 
 import CSS from "./MediaCard.module.scss";
 
 import notFoundSVG from "../../assets/svgs/404.svg";
 
 type Props = {
-  show: TvShowGeneralInformation;
+  show: MediaGeneralInformation;
 
   // Lazy loading for images
   loading?: "lazy" | "eager";
@@ -61,16 +61,18 @@ function MediaCard({ show, loading, dataLast }: Props) {
     image.defaultSrc = notFoundSVG;
   }
 
-  const hasDebutYear = show.first_air_date.length > 0;
+  const hasDebutYear = show.release_date.length > 0;
   const debutYear = hasDebutYear
-    ? new Date(show.first_air_date).getFullYear()
+    ? new Date(show.release_date).getFullYear()
     : "?";
 
   const hasRating = show.vote_average > 0;
   const rating = hasRating ? show.vote_average : "?";
 
-  const navigateToShowDetails = () =>
-    navigate(`${ROUTES.TV_SHOW.replace(":id", show.id.toString())}`);
+  const navigateToShowDetails = () => {
+    const url = show.media_type === "tv" ? ROUTES.TV_SHOW : ROUTES.MOVIE;
+    navigate(`${url.replace(":id", show.id.toString())}`);
+  };
 
   return (
     <button

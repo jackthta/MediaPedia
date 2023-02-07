@@ -1,31 +1,36 @@
 import { useEffect } from "react";
 
-import { fetchTvShowSupplementalVideos } from "../../../redux/slices/tv-shows/thunks";
-import { selectTvShowSupplementalVideos } from "../../../redux/slices/tv-shows/selectors";
+import { fetchMediaSupplementalVideos } from "../../../redux/slices/media/thunks";
+import { selectSupplementalVideos } from "../../../redux/slices/media/selectors";
 import { useDispatch, useSelector } from "../../../redux/store/hooks";
 
 import SupplementalMediaCard from "./supplemental-media-card/SupplementalMediaCard";
 import Separator from "../../../components/separator/Separator";
 
-import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
+import type { MediaSpecificInformation } from "../../../redux/slices/media/types";
 
-import CSS from "./TvShowSupplementalContent.module.scss";
+import CSS from "./MediaSupplementalContent.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation;
+  show: MediaSpecificInformation;
 };
 
-function TvShowSupplementalContent({ show }: Props) {
+function MediaSupplementalContent({ show }: Props) {
   const dispatch = useDispatch();
   const supplementalVideos = useSelector((state) =>
-    selectTvShowSupplementalVideos(state, show.id)
+    selectSupplementalVideos(state, show.media_type, show.id)
   );
 
   // Fetch supplemental videos if it doesn't
   // exist in the cache.
   useEffect(() => {
     if (supplementalVideos == null) {
-      var fetch = dispatch(fetchTvShowSupplementalVideos(show.id));
+      var fetch = dispatch(
+        fetchMediaSupplementalVideos({
+          mediaType: show.media_type,
+          mediaId: show.id,
+        })
+      );
     }
 
     return () => fetch && fetch.abort();
@@ -82,4 +87,4 @@ function TvShowSupplementalContent({ show }: Props) {
   );
 }
 
-export default TvShowSupplementalContent;
+export default MediaSupplementalContent;

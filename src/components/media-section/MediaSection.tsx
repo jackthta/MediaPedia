@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
 import { useSelector } from "../../redux/store/hooks";
-import { selectShowsByKind } from "../../redux/slices/tv-shows/selectors";
+import { selectShowsByKind } from "../../redux/slices/media/selectors";
 import { KIND } from "../../utilities/enum";
 
 import MediaCard from "../media-card/MediaCard";
@@ -12,16 +12,19 @@ import FireSVG from "../SVGs/FireSVG";
 import TopRatedSVG from "../SVGs/TopRatedSVG";
 import ChevronRightSVG from "../SVGs/ChevronRightSVG";
 
+import type { MediaType } from "../../redux/slices/media/types";
+
 import CSS from "./MediaSection.module.scss";
 
 type Props = {
+  mediaType: MediaType;
   kind: KIND;
 };
 
-function MediaSection({ kind }: Props) {
+function MediaSection({ mediaType, kind }: Props) {
   const shows = useSelector((state) =>
     // Only want 10 shows, don't need the whole list.
-    selectShowsByKind(state, kind).slice(0, 10)
+    selectShowsByKind(state, mediaType, kind).slice(0, 10)
   );
 
   let Heading;

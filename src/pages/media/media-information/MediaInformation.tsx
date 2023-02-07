@@ -3,15 +3,15 @@ import { useSelector } from "../../../redux/store/hooks";
 
 import Separator from "../../../components/separator/Separator";
 
-import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
+import type { MediaSpecificInformation } from "../../../redux/slices/media/types";
 
-import CSS from "./TvShowInformation.module.scss";
+import CSS from "./MediaInformation.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation;
+  show: MediaSpecificInformation;
 };
 
-function TvShowInformation({ show }: Props) {
+function MediaInformation({ show }: Props) {
   const configLangs = useSelector(selectTmdbConfigurationLanguages);
 
   // Format rating to contain only one fractional digit
@@ -22,7 +22,7 @@ function TvShowInformation({ show }: Props) {
     month: "long",
     day: "numeric",
     year: "numeric",
-  }).format(new Date(show.first_air_date));
+  }).format(new Date(show.release_date));
 
   const language = configLangs.find(
     (lang) => lang.iso_639_1 === show.original_language
@@ -54,19 +54,23 @@ function TvShowInformation({ show }: Props) {
             <dd>{language?.english_name}</dd>
           </div>
 
-          <div className={CSS.content}>
-            <dt>Network</dt>
-            <dd>
-              {show.networks.map((network) => (
-                <span key={network.id}>{network.name}</span>
-              ))}
-            </dd>
-          </div>
+          {show.networks && (
+            <div className={CSS.content}>
+              <dt>Network</dt>
+              <dd>
+                {show.networks.map((network) => (
+                  <span key={network.id}>{network.name}</span>
+                ))}
+              </dd>
+            </div>
+          )}
 
-          <div className={CSS.content}>
-            <dt>Rated</dt>
-            <dd>{show.content_rating?.rating}</dd>
-          </div>
+          {show.content_rating && (
+            <div className={CSS.content}>
+              <dt>Rated</dt>
+              <dd>{show.content_rating.rating}</dd>
+            </div>
+          )}
         </dl>
       </section>
 
@@ -75,4 +79,4 @@ function TvShowInformation({ show }: Props) {
   );
 }
 
-export default TvShowInformation;
+export default MediaInformation;

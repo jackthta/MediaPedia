@@ -6,17 +6,17 @@ import { selectTmdbConfiguration } from "../../../redux/slices/tmdb-configuratio
 import { generateImgSrcsetDimensions } from "../../../utilities/image";
 import { BREAKPOINT } from "../../../utilities/enum";
 
-import type { TvShowSpecificInformation } from "../../../redux/slices/tv-shows/types";
+import type { MediaSpecificInformation } from "../../../redux/slices/media/types";
 
-import CSS from "./TvShowOverview.module.scss";
+import CSS from "./MediaOverview.module.scss";
 
 type Props = {
-  show: TvShowSpecificInformation;
+  show: MediaSpecificInformation;
 };
 
 // Possible enhancement: use matchMedia to determine viewport to programmatically
 // set `background-images` to appropriate size.
-function TvShowOverview({ show }: Props) {
+function MediaOverview({ show }: Props) {
   const imageConfiguration = useSelector(selectTmdbConfiguration);
   const overviewRef = useRef<HTMLDivElement | null>(null);
   const [overviewExpanded, setOverviewExpanded] = useState(false);
@@ -108,4 +108,4 @@ function isElementOverflow(element: HTMLElement) {
   return element.clientHeight < element.scrollHeight;
 }
 
-export default TvShowOverview;
+export default MediaOverview;

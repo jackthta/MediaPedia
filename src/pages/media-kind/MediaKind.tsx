@@ -2,12 +2,12 @@ import { useParams } from "react-router";
 import { Fragment, useEffect } from "react";
 
 import { useSelector, useDispatch } from "../../redux/store/hooks";
-import { useRefreshTvShows } from "../../hooks/tv-shows";
-import { fetchTvShows } from "../../redux/slices/tv-shows/thunks";
+import { useRefreshTvShows } from "../../hooks/media";
+import { fetchMediaByKindAndType } from "../../redux/slices/media/thunks";
 import {
   selectShowsByKind,
   selectPageByKind,
-} from "../../redux/slices/tv-shows/selectors";
+} from "../../redux/slices/media/selectors";
 import { KIND } from "../../utilities/enum";
 
 import MediaCard from "../../components/media-card/MediaCard";
@@ -18,17 +18,25 @@ import TopRatedSVG from "../../components/SVGs/TopRatedSVG";
 
 import BaseLayout from "../../layouts/base-layout/BaseLayout";
 
-import TvShowsCSS from "../tv-shows/TvShows.module.scss";
-import CSS from "./TvShowsKind.module.scss";
+import type { MediaType } from "../../redux/slices/media/types";
 
-function TvShowsKind() {
+import EveryMediaKindCSS from "../every-media-kind/EveryMediaKind.module.scss";
+import CSS from "./MediaKind.module.scss";
+
+type Props = {
+  mediaType: MediaType;
+};
+
+function MediaKind({ mediaType }: Props) {
   let { kind: _kind } = useParams();
   const kind = _kind! as KIND;
   const dispatch = useDispatch();
   let fetch: any;
 
-  const shows = useSelector((state) => selectShowsByKind(state, kind));
-  const page = useSelector((state) => selectPageByKind(state, kind));
+  const shows = useSelector((state) =>
+    selectShowsByKind(state, mediaType, kind)
+  );
+  const page = useSelector((state) => selectPageByKind(state, mediaType, kind));
 
   const observerOptions = {
     // Set intersection relative to
@@ -61,7 +69,7 @@ function TvShowsKind() {
       observer.unobserve(lastElement.target);
 
       // Fetch next page
-      fetch = dispatch(fetchTvShows[kind](page));
+      fetch = dispatch(fetchMediaByKindAndType[kind](mediaType)(page));
     }
   }, observerOptions);
 
@@ -105,7 +113,7 @@ function TvShowsKind() {
     </Fragment>
   ));
 
-  useRefreshTvShows(kind);
+  useRefreshTvShows(mediaType, kind);
 
   useEffect(() => {
     // Obtain target element to observe (i.e., last <MediaCard>)
@@ -122,11 +130,11 @@ function TvShowsKind() {
     <BaseLayout>
       <main>
         <h1 className={CSS.heading}>{Heading}</h1>
-        <Separator className={TvShowsCSS.separator} />
+        <Separator className={EveryMediaKindCSS.separator} />
         <div className={CSS.mediaGrid}>{Shows}</div>
       </main>
     </BaseLayout>
   );
 }
 
-export default TvShowsKind;
+export default MediaKind;

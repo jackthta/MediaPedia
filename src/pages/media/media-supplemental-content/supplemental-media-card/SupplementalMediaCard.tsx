@@ -7,7 +7,7 @@ import { BREAKPOINT } from "../../../../utilities/enum";
 import CardImage from "../../../../components/card-image/CardImage";
 import CloseSVG from "../../../../components/SVGs/CloseSVG";
 
-import type { SupplementalVideo } from "../../../../redux/slices/tv-shows/types";
+import type { SupplementalVideo } from "../../../../redux/slices/media/types";
 
 import CSS from "./SupplementalMediaCard.module.scss";
 

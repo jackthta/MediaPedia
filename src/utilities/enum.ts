@@ -15,4 +15,8 @@ export enum ROUTES {
   TV_SHOW = "/tv-show/:id",
   TV_SHOWS = "/tv-shows",
   TV_SHOWS_KIND = "/tv-shows/:kind",
+
+  MOVIE = "/movie/:id",
+  MOVIES = "/movies",
+  MOVIES_KIND = "/movies/:kind",
 }
