@@ -9,7 +9,7 @@ function Header() {
     <header className={CSS.header}>
       <nav className={CSS.navigation}>
         <Link className={CSS.homeLink} to="/">
-          MediaPedia
+          synopedia
         </Link>
 
         <Menu />
