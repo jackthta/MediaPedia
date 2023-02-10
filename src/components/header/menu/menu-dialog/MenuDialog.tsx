@@ -39,7 +39,7 @@ const MenuDialog = forwardRef<HTMLDialogElement, Props>(function MenuDialog(
 
         <Separator inMenuDialog />
 
-        <SearchBar inMenuDialog />
+        <SearchBar inMenuDialog closeDialog={onClose} />
 
         <Separator inMenuDialog />
       </header>

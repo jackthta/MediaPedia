@@ -7,13 +7,15 @@ import CSS from "./SearchBar.module.scss";
 
 type Props = {
   inMenuDialog?: boolean;
+  closeDialog?: () => void;
 };
 
 const DefaultProps: Props = {
   inMenuDialog: false,
+  closeDialog: Function,
 };
 
-const SearchBar: React.FC<Props> = ({ inMenuDialog }) => {
+const SearchBar: React.FC<Props> = ({ inMenuDialog, closeDialog }) => {
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -22,6 +24,10 @@ const SearchBar: React.FC<Props> = ({ inMenuDialog }) => {
     const target = e.target as typeof e.target & {
       search: { value: string };
     };
+
+    // If searching from menu dialog, close dialog before
+    // navigating to search results page
+    if (inMenuDialog) closeDialog?.();
 
     const searchQuery = target.search.value;
     navigate({
