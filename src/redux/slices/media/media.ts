@@ -17,16 +17,19 @@ const initialState: MediaState = {
     trending: {
       shows: [],
       page: 1,
+      totalPages: Infinity,
       lastFetch: null,
     },
     popular: {
       shows: [],
       page: 1,
+      totalPages: Infinity,
       lastFetch: null,
     },
     topRated: {
       shows: [],
       page: 1,
+      totalPages: Infinity,
       lastFetch: null,
     },
 
@@ -37,16 +40,19 @@ const initialState: MediaState = {
     trending: {
       shows: [],
       page: 1,
+      totalPages: Infinity,
       lastFetch: null,
     },
     popular: {
       shows: [],
       page: 1,
+      totalPages: Infinity,
       lastFetch: null,
     },
     topRated: {
       shows: [],
       page: 1,
+      totalPages: Infinity,
       lastFetch: null,
     },
 
@@ -103,7 +109,10 @@ export const mediaSlice = createSlice({
         fetchMediaByKindAndType[KIND.POPULAR]("movie").fulfilled,
         fetchMediaByKindAndType[KIND.TOP_RATED]("movie").fulfilled
       ),
-      (state, { type, payload: { mediaType, page, shows: newShows } }) => {
+      (
+        state,
+        { type, payload: { mediaType, page, totalPages, shows: newShows } }
+      ) => {
         // RTK documentation doesn't seem to explain how to set `action.payload`
         // type in `extraReducers`. Manually cast for now.
 
@@ -132,6 +141,7 @@ export const mediaSlice = createSlice({
         }
 
         state[mediaType as MediaType][kind].page += 1;
+        state[mediaType as MediaType][kind].totalPages = totalPages;
       }
     );
   },

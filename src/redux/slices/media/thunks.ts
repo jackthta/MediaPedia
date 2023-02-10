@@ -56,6 +56,7 @@ const createFetchMediaByKindAndTypeThunk = (
       mediaType: MediaType;
       shows: MediaGeneralInformation[];
       page: number;
+      totalPages: number;
     }> => {
       const { data: fetched } = await axios.get<
         never,
@@ -84,7 +85,12 @@ const createFetchMediaByKindAndTypeThunk = (
         };
       });
 
-      return { mediaType, shows, page: fetched.page };
+      return {
+        mediaType,
+        shows,
+        page: fetched.page,
+        totalPages: fetched.total_pages,
+      };
     }
   );
 };

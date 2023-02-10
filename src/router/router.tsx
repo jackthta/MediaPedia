@@ -10,6 +10,7 @@ import Media from "../pages/media/Media";
 import { mediaKindParamGuard } from "./loaders/media-kind-loader";
 
 import type { RouteObject } from "react-router-dom";
+import SearchResults from "../pages/search-results/SearchResults";
 
 const HOME: RouteObject = {
   path: ROUTES.HOME,
@@ -48,6 +49,11 @@ const MOVIE: RouteObject = {
   element: <Media mediaType="movie" />,
 };
 
+const SEARCH_RESULTS: RouteObject = {
+  path: ROUTES.SEARCH_RESULTS,
+  element: <SearchResults />,
+};
+
 export default createBrowserRouter([
   HOME,
 
@@ -58,4 +64,6 @@ export default createBrowserRouter([
   MOVIE,
   MOVIES,
   MOVIES_KIND,
+
+  SEARCH_RESULTS,
 ]);

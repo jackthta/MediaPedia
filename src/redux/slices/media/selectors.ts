@@ -15,6 +15,12 @@ export const selectPageByKind = (
   kind: KIND
 ) => media[mediaType][kind].page;
 
+export const selectTotalPagesByKind = (
+  { media }: RootState,
+  mediaType: MediaType,
+  kind: KIND
+) => media[mediaType][kind].totalPages;
+
 export const selectCachedShowById = (
   { media }: RootState,
   mediaType: MediaType,

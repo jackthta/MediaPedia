@@ -19,4 +19,6 @@ export enum ROUTES {
   MOVIE = "/movie/:id",
   MOVIES = "/movies",
   MOVIES_KIND = "/movies/:kind",
+
+  SEARCH_RESULTS = "/search?",
 }

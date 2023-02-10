@@ -1,0 +1,27 @@
+@use "../../styles/utilities/variables" as *;
+@use "../../styles/utilities/mixins" as *;
+@use "../../styles/utilities/functions" as *;
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin: clamped($container-padding-y-min, $container-padding-y-max) 0;
+
+  font-size: var(--font-size-md);
+
+  > svg {
+    width: var(--font-size-md);
+  }
+
+  @include useAppContainerSidePadding;
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: clamped($container-padding-y-min, $container-padding-y-max);
+  margin-bottom: clamped($container-padding-y-min, $container-padding-y-max);
+
+  @include useAppContainerSidePadding;
+}

@@ -24,6 +24,7 @@ export type KindState = {
 type Kind = {
   shows: MediaGeneralInformation[];
   page: number;
+  totalPages: number;
   lastFetch: number | null;
 };
 export type MediaGeneralInformation = {

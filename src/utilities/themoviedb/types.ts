@@ -13,8 +13,8 @@ export type MediaKindResponse = {
 };
 
 // Convenience types for `MediaKindResponse`
-type TvResultObject = ResultObject & TvShow;
-type MovieResultObject = ResultObject & Movie;
+export type TvResultObject = ResultObject & TvShow;
+export type MovieResultObject = ResultObject & Movie;
 type ResultObject = {
   poster_path: string | null;
   popularity: number;
@@ -282,6 +282,10 @@ type Video = {
   published_at: string;
   id: string;
 };
+
+/* =========================== SEARCH ===========================*/
+
+export type SearchResults = MediaKindResponse;
 
 /* =========================== CONFIGURATION ===========================*/
 
