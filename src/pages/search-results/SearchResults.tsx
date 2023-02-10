@@ -24,16 +24,13 @@ function SearchResults() {
   const hasFetched = totalPages !== Infinity;
 
   useEffect(() => {
-    // Results have not been fetched yet, do so.
-    if (!hasFetched) {
-      var fetch = dispatch(action);
-    }
+    var fetch = dispatch(action);
 
     return () => {
       fetch && fetch.abort();
       dispatch(clearSearchResults());
     };
-  }, []);
+  }, [query]);
 
   return (
     <BaseLayout>
