@@ -34,6 +34,9 @@ const SearchBar: React.FC<Props> = ({ inMenuDialog, closeDialog }) => {
       pathname: ROUTES.SEARCH_RESULTS.replace("?", ""),
       search: `?q=${encodeURIComponent(searchQuery)}`,
     });
+
+    // Clear search input
+    target.search.value = "";
   };
 
   const CSS_searchBar = inMenuDialog
