@@ -45,8 +45,6 @@ export const searchSlice = createSlice({
 
         state.page = page + 1;
         state.totalPages = totalPages;
-
-        console.log(totalPages);
       }
     );
   },
