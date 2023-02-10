@@ -41,6 +41,7 @@ function SearchResults() {
           page={page}
           totalPages={totalPages}
           action={action}
+          searchQuery={query}
         />
       </main>
     </BaseLayout>

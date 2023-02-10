@@ -28,6 +28,9 @@ type Props = {
   // Supplemental props for "media" type
   kind?: KIND;
   mediaType?: MediaType;
+
+  // Supplemental prop for "search" type
+  searchQuery?: string;
 };
 
 function ShowResults({
@@ -38,6 +41,7 @@ function ShowResults({
   action,
   kind,
   mediaType,
+  searchQuery,
 }: Props) {
   useInfiniteScrollShows(shows, action, page, totalPages);
 
@@ -74,8 +78,11 @@ function ShowResults({
     }
 
     case "search": {
-      // TODO: fix
-      Heading = <span>Search results</span>;
+      Heading = (
+        <span>
+          Results found for <span>{searchQuery}</span>
+        </span>
+      );
       break;
     }
   }
