@@ -15,7 +15,7 @@ import type {
 } from "../../redux/slices/media/types";
 import type { AsyncThunkAction } from "@reduxjs/toolkit";
 
-import CSS from "./ShowResultsLayout.module.scss";
+import CSS from "./ShowResults.module.scss";
 import EveryMediaKindCSS from "../../pages/every-media-kind/EveryMediaKind.module.scss";
 
 type Props = {
@@ -30,7 +30,7 @@ type Props = {
   mediaType?: MediaType;
 };
 
-function ShowResultsLayout({
+function ShowResults({
   type,
   shows,
   page,
@@ -103,4 +103,4 @@ function ShowResultsLayout({
   );
 }
 
-export default ShowResultsLayout;
+export default ShowResults;

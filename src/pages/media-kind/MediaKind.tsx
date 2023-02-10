@@ -11,7 +11,7 @@ import {
 import { KIND } from "../../utilities/enum";
 
 import BaseLayout from "../../layouts/base-layout/BaseLayout";
-import ShowResultsLayout from "../../layouts/show-results-layout/ShowResultsLayout";
+import ShowResults from "../../components/show-results/ShowResults";
 
 import type { MediaType } from "../../redux/slices/media/types";
 
@@ -37,7 +37,7 @@ function MediaKind({ mediaType }: Props) {
   return (
     <BaseLayout>
       <main>
-        <ShowResultsLayout
+        <ShowResults
           type="media"
           shows={shows}
           page={page}

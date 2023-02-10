@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "../../redux/store/hooks";
 import { clearSearchResults, searchShows } from "../../redux/slices/search";
 
 import BaseLayout from "../../layouts/base-layout/BaseLayout";
-import ShowResultsLayout from "../../layouts/show-results-layout/ShowResultsLayout";
+import ShowResults from "../../components/show-results/ShowResults";
 
 import CSS from "./SearchResults.module.scss";
 
@@ -35,7 +35,7 @@ function SearchResults() {
   return (
     <BaseLayout>
       <main>
-        <ShowResultsLayout
+        <ShowResults
           type="search"
           shows={shows}
           page={page}
