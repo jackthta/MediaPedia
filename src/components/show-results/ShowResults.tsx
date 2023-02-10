@@ -80,7 +80,8 @@ function ShowResults({
     case "search": {
       Heading = (
         <span>
-          Results found for <span>{searchQuery}</span>
+          Results found for{" "}
+          <span className={CSS.searchQuery}>{searchQuery}</span>
         </span>
       );
       break;
@@ -100,13 +101,13 @@ function ShowResults({
   ));
 
   return (
-    <>
+    <main>
       <h1 className={CSS.heading}>{Heading}</h1>
 
       <Separator className={EveryMediaKindCSS.separator} />
 
       <div className={CSS.mediaGrid}>{Shows}</div>
-    </>
+    </main>
   );
 }
 

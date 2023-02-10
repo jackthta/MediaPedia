@@ -8,6 +8,7 @@ import BaseLayout from "../../layouts/base-layout/BaseLayout";
 import ShowResults from "../../components/show-results/ShowResults";
 
 import CSS from "./SearchResults.module.scss";
+import NoSearchResults from "../../components/no-search-results/NoSearchResults";
 
 function SearchResults() {
   const dispatch = useDispatch();
@@ -20,9 +21,11 @@ function SearchResults() {
   const totalPages = useSelector((state) => state.search.totalPages);
   const action = searchShows({ query, page });
 
+  const hasFetched = totalPages !== Infinity;
+
   useEffect(() => {
-    // Fetch for results
-    if (shows.length === 0) {
+    // Results have not been fetched yet, do so.
+    if (!hasFetched) {
       var fetch = dispatch(action);
     }
 
@@ -34,7 +37,7 @@ function SearchResults() {
 
   return (
     <BaseLayout>
-      <main>
+      {hasFetched && shows.length > 0 && (
         <ShowResults
           type="search"
           shows={shows}
@@ -43,7 +46,11 @@ function SearchResults() {
           action={action}
           searchQuery={query}
         />
-      </main>
+      )}
+
+      {hasFetched && shows.length === 0 && (
+        <NoSearchResults searchQuery={query} />
+      )}
     </BaseLayout>
   );
 }

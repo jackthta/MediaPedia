@@ -25,3 +25,7 @@
 
   @include useAppContainerSidePadding;
 }
+
+.search-query {
+  color: var(--primary-color);
+}

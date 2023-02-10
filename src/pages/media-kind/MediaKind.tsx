@@ -36,17 +36,15 @@ function MediaKind({ mediaType }: Props) {
 
   return (
     <BaseLayout>
-      <main>
-        <ShowResults
-          type="media"
-          shows={shows}
-          page={page}
-          totalPages={totalPages}
-          action={action}
-          kind={kind}
-          mediaType={mediaType}
-        />
-      </main>
+      <ShowResults
+        type="media"
+        shows={shows}
+        page={page}
+        totalPages={totalPages}
+        action={action}
+        kind={kind}
+        mediaType={mediaType}
+      />
     </BaseLayout>
   );
 }
