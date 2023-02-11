@@ -272,14 +272,14 @@ export const fetchMediaSimilarShows = createAsyncThunk(
     { mediaType, mediaId }: { mediaType: MediaType; mediaId: number },
     { signal }
   ) => {
-    const { data: fetched } = await axios.get<
-      never,
-      AxiosResponse<MediaKindResponse>
-    >(`/${mediaType}/${mediaId}/similar`, {
-      signal,
-    });
-
-    const { results: fetchedSimilarShows } = fetched;
+    const {
+      data: { results: fetchedSimilarShows },
+    } = await axios.get<never, AxiosResponse<MediaKindResponse>>(
+      `/${mediaType}/${mediaId}/similar`,
+      {
+        signal,
+      }
+    );
 
     // Cherry pick data returned from API to be return type compliant.
     const similarShows = fetchedSimilarShows.map(
