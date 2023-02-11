@@ -10,6 +10,8 @@ function TvSVG() {
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
     >
       <path d="M0 0h24v24H0z" stroke="none" />
       <rect x="3" y="7" width="18" height="13" rx="2" />

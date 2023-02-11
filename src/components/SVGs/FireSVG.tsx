@@ -8,6 +8,8 @@ function FireSVG() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       color="currentColor"
+      aria-hidden="true"
+      focusable="false"
     >
       <path
         d="M8 18c0 2.415 1.79 3 4 3 3.759 0 5-2.5 2.5-7.5C11 18 10.5 11 11 9c-1.5 3-3 5.818-3 9z"

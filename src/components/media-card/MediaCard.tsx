@@ -79,6 +79,7 @@ function MediaCard({ show, loading, dataLast }: Props) {
       className={CSS.container}
       data-last={dataLast}
       onClick={navigateToShowDetails}
+      aria-label={`${show.name}`}
     >
       <CardImage
         className={CSS_backdrop}
@@ -91,10 +92,10 @@ function MediaCard({ show, loading, dataLast }: Props) {
         loading={loading}
       />
       <div className={CSS.info}>
-        <p className={CSS.mediaName}>{show.name}</p>
+        <p className={CSS.mediaName} aria-label="Name">{show.name}</p>
 
         <div className={CSS.supplementalInfo}>
-          <p className={CSS.debutYear}>{debutYear}</p>
+          <p className={CSS.debutYear} aria-label="Release year">{debutYear}</p>
           <MediaBadge mediaType={show.media_type} />
           <MediaRating rating={rating} />
         </div>

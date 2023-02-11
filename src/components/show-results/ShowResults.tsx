@@ -106,7 +106,9 @@ function ShowResults({
 
       <Separator className={EveryMediaKindCSS.separator} />
 
-      <div className={CSS.mediaGrid}>{Shows}</div>
+      <div className={CSS.mediaGrid} aria-live="assertive">
+        {Shows}
+      </div>
     </main>
   );
 }

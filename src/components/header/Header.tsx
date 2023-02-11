@@ -8,7 +8,7 @@ function Header() {
   return (
     <header className={CSS.header}>
       <nav className={CSS.navigation}>
-        <Link className={CSS.homeLink} to="/">
+        <Link className={CSS.homeLink} to="/" aria-label="Home">
           synopedia
         </Link>
 

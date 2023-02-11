@@ -8,6 +8,8 @@ function ChevronRightSVG() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       color="currentColor"
+      aria-hidden="true"
+      focusable="false"
     >
       <path
         d="m9 6 6 6-6 6"

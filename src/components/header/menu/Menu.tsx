@@ -55,7 +55,12 @@ function Menu() {
         />
 
         {/* Mobile | Tablet Menu Button */}
-        <button className={CSS.menuButton} onClick={onMenuOpen}>
+        <button
+          className={CSS.menuButton}
+          onClick={onMenuOpen}
+          aria-label="Menu"
+          aria-haspopup="dialog"
+        >
           <SandwichMenuSVG />
         </button>
       </>

@@ -61,7 +61,11 @@ function SupplementalMediaCard({ media, loading }: Props) {
 
   return (
     <>
-      <button className={CSS.card} onClick={openVideoPlayerDialog}>
+      <button
+        className={CSS.card}
+        onClick={openVideoPlayerDialog}
+        aria-haspopup="dialog"
+      >
         {/* Image Thumbnail */}
         <CardImage
           src={thumbnail.defaultSrc}
@@ -70,6 +74,7 @@ function SupplementalMediaCard({ media, loading }: Props) {
           loading={loading}
           width="320"
           height="180"
+          alt=""
         />
 
         {/* Title */}

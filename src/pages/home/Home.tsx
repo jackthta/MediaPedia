@@ -16,7 +16,7 @@ function Home() {
       </main>
 
       {/* TODO: Add light/dark theme switch */}
-      <footer className={CSS.footer}></footer>
+      {/* <footer className={CSS.footer}></footer> */}
     </BaseLayout>
   );
 }

@@ -28,47 +28,73 @@ function MediaInformation({ show }: Props) {
     (lang) => lang.iso_639_1 === show.original_language
   );
 
+  const genreString = show.genres.map((genre) => genre.name).join(", ");
+
+  const networkString = show.networks
+    ?.map((network) => network.name)
+    .join(", ");
+
   return (
     <>
-      <section className={CSS.section}>
+      <section className={CSS.section} aria-label="Information">
         <h2 className={CSS.heading}>Information</h2>
 
         <dl>
           <div className={CSS.content}>
-            <dt>Rating</dt>
-            <dd>{rating} / 10</dd>
+            <dt aria-label="Rating">
+              <span aria-hidden="true">Rating:</span>
+            </dt>
+            <dd aria-label={`${rating} out of 10`}>
+              <span aria-hidden="true">{rating} / 10</span>
+            </dd>
           </div>
 
           <div className={CSS.content}>
-            <dt>Genre</dt>
-            <dd>{show.genres.map((genre) => genre.name).join(", ")}</dd>
+            <dt aria-label="Genre">
+              <span aria-hidden="true">Genre:</span>
+            </dt>
+            <dd aria-label={genreString}>
+              <span aria-hidden="true">{genreString}</span>
+            </dd>
           </div>
 
           <div className={CSS.content}>
-            <dt>First episode date</dt>
-            <dd>{releaseDate}</dd>
+            <dt aria-label="First episode date">
+              <span aria-hidden="true">First episode date:</span>
+            </dt>
+            <dd aria-label={releaseDate}>
+              <span aria-hidden="true">{releaseDate}</span>
+            </dd>
           </div>
 
           <div className={CSS.content}>
-            <dt>Language</dt>
-            <dd>{language?.english_name}</dd>
+            <dt aria-label="Language">
+              <span aria-hidden="true">Language</span>
+            </dt>
+            <dd aria-label={language?.english_name}>
+              <span>{language?.english_name}</span>
+            </dd>
           </div>
 
           {show.networks && (
             <div className={CSS.content}>
-              <dt>Network</dt>
-              <dd>
-                {show.networks.map((network) => (
-                  <span key={network.id}>{network.name}</span>
-                ))}
+              <dt aria-label="Network">
+                <span aria-hidden="true">Network</span>
+              </dt>
+              <dd aria-label={networkString}>
+                <span aria-hidden="true">{networkString}</span>
               </dd>
             </div>
           )}
 
           {show.content_rating && (
             <div className={CSS.content}>
-              <dt>Rated</dt>
-              <dd>{show.content_rating.rating}</dd>
+              <dt aria-label="Rated">
+                <span aria-hidden="true">Rated</span>
+              </dt>
+              <dd aria-label={show.content_rating.rating}>
+                <span aria-hidden="true">{show.content_rating.rating}</span>
+              </dd>
             </div>
           )}
         </dl>

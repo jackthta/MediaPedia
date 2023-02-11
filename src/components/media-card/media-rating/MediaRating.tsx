@@ -14,7 +14,7 @@ function MediaRating({ rating: _rating }: Props) {
   return (
     <div className={CSS.rating}>
       <StarSVG />
-      <span>{rating}</span>
+      <span aria-label="Rating">{rating}</span>
     </div>
   );
 }

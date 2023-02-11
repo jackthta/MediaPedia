@@ -63,7 +63,7 @@ function MediaSupplementalContent({ show }: Props) {
       {/* Only show "Trailers" section if there are trailers to show */}
       {Trailers.length > 0 && (
         <>
-          <section className={CSS.section}>
+          <section className={CSS.section} aria-label="Trailers">
             <h4 className={CSS.heading}>Trailers</h4>
             <div className={CSS.list}>{Trailers}</div>
           </section>
@@ -75,7 +75,7 @@ function MediaSupplementalContent({ show }: Props) {
       {/* Only show "Other Content" section if there is other content to show */}
       {OtherContent.length > 0 && (
         <>
-          <section className={CSS.section}>
+          <section className={CSS.section} aria-label="Other Content">
             <h4 className={CSS.heading}>Other Content</h4>
             <div className={CSS.list}>{OtherContent}</div>
           </section>

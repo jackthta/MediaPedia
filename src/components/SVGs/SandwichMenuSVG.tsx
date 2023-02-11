@@ -10,6 +10,8 @@ function SandwichMenuSVG() {
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
     >
       <path d="M0 0h24v24H0z" stroke="none" />
       <path d="M4 8h16M4 16h16" />

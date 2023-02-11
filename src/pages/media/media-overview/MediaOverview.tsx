@@ -85,13 +85,13 @@ function MediaOverview({ show }: Props) {
         src={logoImage.defaultSrc}
         srcSet={logoImage.srcset}
         sizes={logoImageSizes}
-        alt=""
+        alt="The Last Of Us logo"
       />
 
       <div className={CSS.blur}>
         {/* Show Overview */}
         <div className={CSS.overviewContainer}>
-          <p className={CSS_overview} ref={overviewRef}>
+          <p className={CSS_overview} ref={overviewRef} aria-label="Synopsis">
             {show.overview}
           </p>
 

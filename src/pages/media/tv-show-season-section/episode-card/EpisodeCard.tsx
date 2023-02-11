@@ -35,9 +35,15 @@ function EpisodeCard({ episode, show, loading }: Props) {
   }).format(new Date(episode.air_date));
 
   return (
-    <div className={CSS.card} tabIndex={0}>
+    <div
+      className={CSS.card}
+      tabIndex={0}
+      aria-label={`Episode ${episode.episode_number}. ${episode.name}. ${airDate}.`}
+    >
       {/* Episode # */}
-      <p className={CSS.episodeNumber}>Episode {episode.episode_number}</p>
+      <p className={CSS.episodeNumber} aria-hidden="true">
+        Episode {episode.episode_number}
+      </p>
 
       {/* Still image */}
       <CardImage
@@ -50,7 +56,7 @@ function EpisodeCard({ episode, show, loading }: Props) {
         height="169"
       />
 
-      <div className={CSS.informationContainer}>
+      <div className={CSS.informationContainer} aria-hidden="true">
         {/* Episode title */}
         <h3 className={CSS.title}>{episode.name}</h3>
 

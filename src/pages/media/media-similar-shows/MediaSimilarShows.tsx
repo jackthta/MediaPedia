@@ -49,7 +49,7 @@ function MediaSimilarShows({ show }: Props) {
     <>
       {SimilarShows.length > 0 && (
         <>
-          <section className={CSS.section}>
+          <section className={CSS.section} aria-label="Similar Shows">
             <h4 className={CSS.heading}>Similar Shows</h4>
             <div className={CSS.list}>{SimilarShows}</div>
           </section>

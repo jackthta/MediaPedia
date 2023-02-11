@@ -85,9 +85,15 @@ function TvShowSeasonSection({ show }: Props) {
 
   return (
     <>
-      <section className={CSS.section} onChange={handleSeasonChange}>
+      <section
+        className={CSS.section}
+        onChange={handleSeasonChange}
+        aria-label="Season"
+      >
         {/* Seasons selector */}
-        <select className={CSS.seasonSelect}>{SeasonSelectOption}</select>
+        <select className={CSS.seasonSelect} aria-label="Season">
+          {SeasonSelectOption}
+        </select>
 
         {/* Episodes */}
         <div className={CSS.episodeList}>{Episodes}</div>

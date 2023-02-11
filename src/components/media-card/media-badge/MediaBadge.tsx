@@ -5,8 +5,12 @@ type Props = {
 };
 
 function MediaBadge({ mediaType }: Props) {
-  const text = mediaType === "tv" ? "TV" : "Movie";
-  return <p className={CSS.badge}>{text}</p>;
+  const text = mediaType === "tv" ? "Tv" : "Movie";
+  return (
+    <p className={CSS.badge} aria-label="Type">
+      {text}
+    </p>
+  );
 }
 
 export default MediaBadge;
