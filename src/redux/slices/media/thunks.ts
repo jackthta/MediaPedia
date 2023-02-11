@@ -110,12 +110,24 @@ export const fetchMediaById = createAsyncThunk(
     { signal }
   ): Promise<MediaSpecificInformation> => {
     // Fetch for (more) (tv show | movie) details
-    const { data: _mediaDetails } = await axios.get<
+    const mediaDetailsPromise = axios.get<
       never,
       AxiosResponse<TvDetailsResponse | MovieDetailsResponse>
     >(`/${mediaType}/${mediaId}`, {
       signal,
     });
+
+    // Fetch for (tv show | movie)'s images (e.g., logo(s))
+    const mediaImagesPromise = axios.get<never, AxiosResponse<ImagesResponse>>(
+      `/${mediaType}/${mediaId}/images`
+    );
+
+    const [
+      { data: _mediaDetails },
+      {
+        data: { logos },
+      },
+    ] = await Promise.all([mediaDetailsPromise, mediaImagesPromise]);
 
     // Cherry pick data returned from API to be return type compliant.
     const {
@@ -162,13 +174,11 @@ export const fetchMediaById = createAsyncThunk(
         mediaType === "tv" ? _mediaDetails.origin_country : undefined,
     };
 
-    // Fetch for (tv show | movie)'s images (e.g., logo(s))
-    const { data: mediaImages } = await axios.get<
-      never,
-      AxiosResponse<ImagesResponse>
-    >(`/${mediaType}/${mediaId}/images`);
-
-    const { logos } = mediaImages;
+    // const {
+    //   data: { logos },
+    // } = await axios.get<never, AxiosResponse<ImagesResponse>>(
+    //   `/${mediaType}/${mediaId}/images`
+    // );
 
     // Fetch for tv show's content rating
     // NOTE: TMDB API doesn't return the

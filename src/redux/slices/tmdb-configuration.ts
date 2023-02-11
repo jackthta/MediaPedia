@@ -54,7 +54,7 @@ export const tmdbConfigurationSlice = createSlice({
 export const fetchConfiguration = createAsyncThunk(
   "tmdb-configuration/configuration",
   async () => {
-    const { data: configuration } = await axios.get<
+    const tmdbImageConfigurationPromise = axios.get<
       never,
       AxiosResponse<ImageConfiguration>
     >("/configuration");
@@ -62,30 +62,38 @@ export const fetchConfiguration = createAsyncThunk(
     // Fetch configuration languages
     // I.e., list of languages (ISO 639_1 tags) used throughout TMDB API.
     // Source: https://developers.themoviedb.org/3/configuration/get-languages
-    const { data: languages } = await axios.get<
+    const tmdbLanguageConfigurationPromise = axios.get<
       never,
       AxiosResponse<LanguageConfiguration>
     >("/configuration/languages");
 
+    const [
+      {
+        data: { images },
+      },
+      { data: languages },
+    ] = await Promise.all([
+      tmdbImageConfigurationPromise,
+      tmdbLanguageConfigurationPromise,
+    ]);
+
     // Transform srcset incompliant format sizes (`w#` || "original") to `#w` for `srcset` consumption.
-    const backdropSizesSrcset = configuration.images.backdrop_sizes.map(
-      (size) => {
-        // "original" won't be a valid width value for `srcset`, so make it `1920w`.
-        if (size === "original") return "1920w";
-        else return size.split("w")[1].concat("w");
-      }
-    );
+    const backdropSizesSrcset = images.backdrop_sizes.map((size) => {
+      // "original" won't be a valid width value for `srcset`, so make it `1920w`.
+      if (size === "original") return "1920w";
+      else return size.split("w")[1].concat("w");
+    });
 
     // Cherry pick needed properties
     const data = {
       languages,
       images: {
-        secure_base_url: configuration.images.secure_base_url,
+        secure_base_url: images.secure_base_url,
         backdrop_sizes: {
           srcset: backdropSizesSrcset,
-          url: configuration.images.backdrop_sizes,
+          url: images.backdrop_sizes,
         },
-        still_sizes: configuration.images.still_sizes,
+        still_sizes: images.still_sizes,
       },
     } as ConfigurationState;
 
