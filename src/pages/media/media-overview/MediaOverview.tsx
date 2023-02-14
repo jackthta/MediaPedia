@@ -28,10 +28,11 @@ function MediaOverview({ show }: Props) {
     backdropSizes.url.slice(-1)[0]
   }${show.backdrop_path})`;
 
+  const logoFilePath = show.logos.filter((logo) => logo.file_path != null)[0];
   const logoImage = generateImgSrcsetDimensions(
     imgBaseUrl,
     backdropSizes,
-    show.logos[0].file_path
+    logoFilePath?.file_path
   );
   const logoImageSizes = `(min-width: ${BREAKPOINT.DESKTOP}) 40vw, 70vw `;
 
@@ -80,13 +81,17 @@ function MediaOverview({ show }: Props) {
       }}
     >
       {/* Show Logo */}
-      <img
-        className={CSS.logo}
-        src={logoImage.defaultSrc}
-        srcSet={logoImage.srcset}
-        sizes={logoImageSizes}
-        alt="The Last Of Us logo"
-      />
+      {logoFilePath != null ? (
+        <img
+          className={CSS.logo}
+          src={logoImage.defaultSrc}
+          srcSet={logoImage.srcset}
+          sizes={logoImageSizes}
+          alt="The Last Of Us logo"
+        />
+      ) : (
+        <p className={`${CSS.logo} ${CSS.placeholderLogo}`}>{show.name}</p>
+      )}
 
       <div className={CSS.blur}>
         {/* Show Overview */}
