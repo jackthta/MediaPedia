@@ -69,7 +69,7 @@ function MediaInformation({ show }: Props) {
 
           <div className={CSS.content}>
             <dt aria-label="Language">
-              <span aria-hidden="true">Language</span>
+              <span aria-hidden="true">Language:</span>
             </dt>
             <dd aria-label={language?.english_name}>
               <span>{language?.english_name}</span>
@@ -79,7 +79,7 @@ function MediaInformation({ show }: Props) {
           {show.networks && (
             <div className={CSS.content}>
               <dt aria-label="Network">
-                <span aria-hidden="true">Network</span>
+                <span aria-hidden="true">Network:</span>
               </dt>
               <dd aria-label={networkString}>
                 <span aria-hidden="true">{networkString}</span>
@@ -90,7 +90,7 @@ function MediaInformation({ show }: Props) {
           {show.content_rating && (
             <div className={CSS.content}>
               <dt aria-label="Rated">
-                <span aria-hidden="true">Rated</span>
+                <span aria-hidden="true">Rated:</span>
               </dt>
               <dd aria-label={show.content_rating.rating}>
                 <span aria-hidden="true">{show.content_rating.rating}</span>
