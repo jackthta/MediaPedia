@@ -13,4 +13,6 @@
 
 .separator {
   margin-bottom: clamped($container-padding-y-min, $container-padding-y-max);
+
+  border-color: #bbb;
 }
