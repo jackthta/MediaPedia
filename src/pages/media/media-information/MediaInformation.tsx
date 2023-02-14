@@ -59,8 +59,8 @@ function MediaInformation({ show }: Props) {
           </div>
 
           <div className={CSS.content}>
-            <dt aria-label="First episode date">
-              <span aria-hidden="true">First episode date:</span>
+            <dt aria-label="Release date">
+              <span aria-hidden="true">Release date:</span>
             </dt>
             <dd aria-label={releaseDate}>
               <span aria-hidden="true">{releaseDate}</span>
