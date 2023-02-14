@@ -87,7 +87,7 @@ function MediaOverview({ show }: Props) {
           src={logoImage.defaultSrc}
           srcSet={logoImage.srcset}
           sizes={logoImageSizes}
-          alt="The Last Of Us logo"
+          alt={`${show.name} logo`}
         />
       ) : (
         <p className={`${CSS.logo} ${CSS.placeholderLogo}`}>{show.name}</p>
