@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import TvSVG from "../../../SVGs/TvSVG";
 import MovieSVG from "../../../SVGs/MovieSVG";
@@ -23,20 +23,32 @@ const NavigationLinks: React.FC<Props> = ({ inMenuDialog, onMenuClose }) => {
   return (
     <menu className={CSS_navigationLinks}>
       <li>
-        <Link
-          className={CSS.navigationLink}
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${CSS.navigationLink} ${CSS.activeLink}`
+              : CSS.navigationLink
+          }
           to="/tv-shows"
           onClick={onMenuClose}
         >
           <TvSVG />
           <span>TV Shows</span>
-        </Link>
+        </NavLink>
       </li>
       <li>
-        <Link className={CSS.navigationLink} to="/movies" onClick={onMenuClose}>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${CSS.navigationLink} ${CSS.activeLink}`
+              : CSS.navigationLink
+          }
+          to="/movies"
+          onClick={onMenuClose}
+        >
           <MovieSVG />
           <span>Movies</span>
-        </Link>
+        </NavLink>
       </li>
     </menu>
   );
