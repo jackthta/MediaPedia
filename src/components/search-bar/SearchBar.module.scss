@@ -25,6 +25,15 @@
   svg {
     width: var(--font-size-lg);
   }
+
+  &:focus-within {
+    outline: 1px solid var(--primary-color);
+    border-color: var(--primary-color);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: outline, border var(--duration-short) var(--standard-easing);
+  }
 }
 
 .menu-dialog-search-bar {
@@ -47,6 +56,18 @@
   font-weight: 400;
 
   border-radius: inherit;
+
+  &:focus {
+    // Focused outline is handled in parent container
+    // via `focus-within`
+    outline: none;
+
+    color: var(--text-color);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color var(--duration-short) var(--standard-easing);
+  }
 }
 
 // Only shows on <Home>
@@ -57,4 +78,13 @@
   padding: 0.75rem;
 
   border-radius: inherit;
+
+  &:hover,
+  &:focus {
+    color: var(--primary-color);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color var(--duration-short) var(--standard-easing);
+  }
 }

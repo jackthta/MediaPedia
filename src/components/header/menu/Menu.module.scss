@@ -9,4 +9,13 @@
     /* Don't show Mobile | Tablet menu button on Desktop */
     display: none;
   }
+
+  &:hover,
+  &:focus {
+    color: var(--primary-color);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color var(--duration-short) var(--standard-easing);
+  }
 }

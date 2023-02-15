@@ -54,6 +54,7 @@ function EpisodeCard({ episode, show, loading }: Props) {
         alt=""
         width="300"
         height="169"
+        interactable={false}
       />
 
       <div className={CSS.informationContainer} aria-hidden="true">

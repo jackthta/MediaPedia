@@ -33,6 +33,14 @@
   display: grid;
   place-items: center;
   width: var(--font-size-lg);
-
   margin-bottom: clamped($container-padding-y-min, $container-padding-y-max);
+
+  &:hover,
+  &:focus {
+    color: var(--primary-color);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color var(--duration-short) var(--standard-easing);
+  }
 }

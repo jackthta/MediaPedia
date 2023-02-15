@@ -6,4 +6,19 @@
   // to be 16:9.
   aspect-ratio: 16 / 9;
   object-fit: cover;
+
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 50%);
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: box-shadow,
+      transform var(--duration-short) var(--standard-easing);
+  }
+}
+
+.interactable {
+  &:hover,
+  &:focus {
+    box-shadow: 4px 6px 8px rgba(0, 0, 0, 30%);
+    transform: scale(101%);
+  }
 }

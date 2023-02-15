@@ -17,6 +17,15 @@
       font-style: italic;
       font-weight: 600;
       letter-spacing: 2px;
+
+      &:hover,
+      &:focus {
+        color: var(--primary-color);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        transition: color var(--duration-short) var(--standard-easing);
+      }
     }
   }
 
