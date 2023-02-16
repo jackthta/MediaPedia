@@ -29,14 +29,18 @@ const SearchBar: React.FC<Props> = ({ inMenuDialog, closeDialog }) => {
     // navigating to search results page
     if (inMenuDialog) closeDialog?.();
 
-    const searchQuery = target.search.value;
-    navigate({
-      pathname: ROUTES.SEARCH_RESULTS.replace("?", ""),
-      search: `?q=${encodeURIComponent(searchQuery)}`,
-    });
+    // Only navigate to search results if there
+    // exists a search query.
+    const searchQuery = target.search.value.trim();
+    if (searchQuery.length > 0) {
+      navigate({
+        pathname: ROUTES.SEARCH_RESULTS.replace("?", ""),
+        search: `?q=${encodeURIComponent(searchQuery)}`,
+      });
 
-    // Clear search input
-    target.search.value = "";
+      // Clear search input
+      target.search.value = "";
+    }
   };
 
   const CSS_searchBar = inMenuDialog
