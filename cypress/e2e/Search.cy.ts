@@ -1,6 +1,5 @@
 import { ROUTES } from "../../src/utilities/enum";
-
-const sizes = ["iphone-x", [1280, 720]];
+import { sizes } from "../fixtures/sizes";
 
 describe("Search", () => {
   sizes.forEach((size: Cypress.ViewportPreset | number[]) => {
