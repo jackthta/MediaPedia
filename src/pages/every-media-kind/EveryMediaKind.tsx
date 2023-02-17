@@ -22,7 +22,7 @@ function EveryMediaKind({ mediaType }: Props) {
   return (
     <BaseLayout>
       <main>
-        <h1 className={CSS.heading}>{Heading}</h1>
+        <h1 className={CSS.heading} data-test="every-media-kind-heading">{Heading}</h1>
 
         <Separator className={CSS.separator} />
 

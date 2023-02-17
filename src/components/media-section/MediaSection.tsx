@@ -66,7 +66,7 @@ function MediaSection({ mediaType, kind }: Props) {
   });
 
   return (
-    <section>
+    <section data-test="media-section">
       <header className={CSS.header}>
         <h2 className={CSS.heading}>{Heading}</h2>
 
@@ -76,7 +76,7 @@ function MediaSection({ mediaType, kind }: Props) {
         </Link>
       </header>
 
-      <div className={CSS.shows}>{Shows}</div>
+      <div className={CSS.shows} data-test="media-section-shows">{Shows}</div>
     </section>
   );
 }
