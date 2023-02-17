@@ -28,3 +28,6 @@ brainstorm.*
 
 # Environment variable files
 .env.*
+
+# Cypress videos
+cypress/videos/*
