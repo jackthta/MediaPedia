@@ -10,7 +10,7 @@ function NoSearchResults({ searchQuery }: Props) {
   return (
     <main className={CSS.container}>
       <NotFound404SVG />
-      <p className={CSS.noResultsMessage}>
+      <p className={CSS.noResultsMessage} data-test="media-not-found-text">
         Sorry, we couldn't find any results for{" "}
         <span className={CSS.searchQuery}>{searchQuery}</span>
       </p>

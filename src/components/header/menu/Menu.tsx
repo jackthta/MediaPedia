@@ -48,11 +48,13 @@ function Menu() {
   return (
     <>
       <>
-        <MenuDialog
-          ref={dialogRef}
-          isOpen={dialogIsOpen}
-          onClose={onMenuClose}
-        />
+        {dialogIsOpen && (
+          <MenuDialog
+            ref={dialogRef}
+            isOpen={dialogIsOpen}
+            onClose={onMenuClose}
+          />
+        )}
 
         {/* Mobile | Tablet Menu Button */}
         <button
@@ -60,6 +62,7 @@ function Menu() {
           onClick={onMenuOpen}
           aria-label="Menu"
           aria-haspopup="dialog"
+          data-test="menu-button"
         >
           <SandwichMenuSVG />
         </button>

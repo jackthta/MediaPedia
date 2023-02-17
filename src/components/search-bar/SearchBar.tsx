@@ -59,10 +59,15 @@ const SearchBar: React.FC<Props> = ({ inMenuDialog, closeDialog }) => {
         placeholder="Search for film"
         name="search"
         aria-label="Search for film"
+        data-test="search-bar-input"
       />
 
       {!inMenuDialog && (
-        <button className={CSS.searchButton} aria-label="Search">
+        <button
+          className={CSS.searchButton}
+          aria-label="Search"
+          data-test="search-button"
+        >
           <SearchSVG />
         </button>
       )}

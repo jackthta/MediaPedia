@@ -102,11 +102,17 @@ function ShowResults({
 
   return (
     <main>
-      <h1 className={CSS.heading}>{Heading}</h1>
+      <h1 className={CSS.heading} data-test="results-heading">
+        {Heading}
+      </h1>
 
       <Separator className={EveryMediaKindCSS.separator} />
 
-      <div className={CSS.mediaGrid} aria-live="assertive">
+      <div
+        className={CSS.mediaGrid}
+        aria-live="assertive"
+        data-test="results-list"
+      >
         {Shows}
       </div>
     </main>
