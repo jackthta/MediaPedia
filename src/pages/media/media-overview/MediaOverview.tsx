@@ -88,6 +88,7 @@ function MediaOverview({ show }: Props) {
           srcSet={logoImage.srcset}
           sizes={logoImageSizes}
           alt={`${show.name} logo`}
+          data-test="media-logo"
         />
       ) : (
         <p className={`${CSS.logo} ${CSS.placeholderLogo}`}>{show.name}</p>
@@ -96,7 +97,12 @@ function MediaOverview({ show }: Props) {
       <div className={CSS.blur}>
         {/* Show Overview */}
         <div className={CSS.overviewContainer}>
-          <p className={CSS_overview} ref={overviewRef} aria-label="Synopsis">
+          <p
+            className={CSS_overview}
+            ref={overviewRef}
+            aria-label="Synopsis"
+            data-test="media-synopsis"
+          >
             {show.overview}
           </p>
 

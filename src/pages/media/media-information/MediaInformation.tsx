@@ -36,8 +36,8 @@ function MediaInformation({ show }: Props) {
 
   return (
     <>
-      <section className={CSS.section} aria-label="Information">
-        <h2 className={CSS.heading}>Information</h2>
+      <section className={CSS.section} aria-label="Information" data-test="media-information">
+        <h2 className={CSS.heading} >Information</h2>
 
         <dl>
           <div className={CSS.content}>
