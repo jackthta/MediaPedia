@@ -4,6 +4,10 @@
 
 .section {
   padding-top: clamped($container-padding-y-min, $container-padding-y-max);
+
+  @media (prefers-reduced-motion: no-preference) {
+    @include fadeInAnimation;
+  }
 }
 
 .season-select {

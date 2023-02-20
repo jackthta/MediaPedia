@@ -8,6 +8,10 @@
   font-size: var(--font-size-lg);
   font-weight: 600;
 
+  @media (prefers-reduced-motion: no-preference) {
+    @include fadeInAnimation;
+  }
+
   @include useAppContainerSidePadding;
 }
 

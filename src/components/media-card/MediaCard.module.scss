@@ -1,5 +1,6 @@
 @use "../../styles/utilities/variables" as *;
 @use "../../styles/utilities/functions" as *;
+@use "../../styles/utilities/mixins" as *;
 
 .container {
   container-type: inline-size;
@@ -15,6 +16,10 @@
   min-width: 0;
 
   gap: clamped($container-padding-y-min / 3, $container-padding-y-max / 3);
+
+  @media (prefers-reduced-motion: no-preference) {
+    @include fadeInAnimation;
+  }
 }
 
 .placeholder-backdrop {

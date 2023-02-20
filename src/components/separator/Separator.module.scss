@@ -1,5 +1,6 @@
 @use "../../styles/utilities/variables" as *;
 @use "../../styles/utilities/functions" as *;
+@use "../../styles/utilities/mixins" as *;
 
 :root {
   --separator-color: #eee;
@@ -11,6 +12,10 @@
   }
 
   margin: 0 auto;
+
+  @media (prefers-reduced-motion: no-preference) {
+    @include fadeInAnimation;
+  }
 }
 
 .separator {

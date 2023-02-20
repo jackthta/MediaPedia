@@ -1,9 +1,14 @@
 @use "./variables" as *;
 @use "./functions" as *;
+@use "./animations" as *;
 
 @mixin useAppContainerSidePadding {
   padding: {
     left: clamped($container-padding-x-min, $container-padding-x-max);
     right: clamped($container-padding-x-min, $container-padding-x-max);
   }
+}
+
+@mixin fadeInAnimation($duration: 1s) {
+  animation: fade-in $duration var(--standard-easing);
 }

@@ -16,6 +16,10 @@
   @media (min-width: $Desktop) {
     position: relative;
   }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @include fadeInAnimation;
+  }
 }
 
 .logo {
@@ -32,6 +36,10 @@
     height: auto;
     max-height: 100%;
     margin-top: unset;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @include fadeInAnimation(4s);
   }
 
   @include useAppContainerSidePadding();

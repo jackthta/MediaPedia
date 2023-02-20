@@ -1,5 +1,6 @@
 @use "/src/styles/utilities/variables" as *;
 @use "/src/styles/utilities/functions" as *;
+@use "/src/styles/utilities/mixins" as *;
 
 :root {
   --branded-light-mode-gray: #696e70;
@@ -33,6 +34,8 @@
 
   @media (prefers-reduced-motion: no-preference) {
     transition: outline, border var(--duration-short) var(--standard-easing);
+
+    @include fadeInAnimation;
   }
 }
 

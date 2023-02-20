@@ -29,5 +29,9 @@
     }
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    @include fadeInAnimation;
+  }
+
   @include useAppContainerSidePadding;
 }

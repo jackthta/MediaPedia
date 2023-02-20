@@ -13,6 +13,10 @@
     width: clamped(200px, 600px);
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    @include fadeInAnimation;
+  }
+
   @include useAppContainerSidePadding();
 }
 
