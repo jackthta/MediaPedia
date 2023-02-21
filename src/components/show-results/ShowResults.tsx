@@ -2,9 +2,11 @@ import { Fragment } from "react";
 
 import { KIND } from "../../utilities/enum";
 import { useInfiniteScrollShows } from "../../hooks/utility";
+import { useSelector } from "../../redux/store/hooks";
 
 import MediaCard from "../../components/media-card/MediaCard";
 import Separator from "../../components/separator/Separator";
+import LoadingSpinner from "../loading-spinner/LoadingSpinner";
 import TrendingSVG from "../../components/SVGs/TrendingSVG";
 import FireSVG from "../../components/SVGs/FireSVG";
 import TopRatedSVG from "../../components/SVGs/TopRatedSVG";
@@ -43,6 +45,8 @@ function ShowResults({
   mediaType,
   searchQuery,
 }: Props) {
+  const fetchStatus = useSelector((state) => state[type].status);
+
   useInfiniteScrollShows(shows, action, page, totalPages);
 
   let Heading;
@@ -115,6 +119,8 @@ function ShowResults({
       >
         {Shows}
       </div>
+
+      {fetchStatus === "loading" && <LoadingSpinner />}
     </main>
   );
 }

@@ -14,12 +14,18 @@ type SearchState = {
   shows: MediaGeneralInformation[];
   page: number;
   totalPages: number;
+
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
 };
 
 const initialState: SearchState = {
   shows: [],
   page: 1,
   totalPages: Infinity,
+
+  status: "idle",
+  error: null,
 };
 
 export const searchSlice = createSlice({
@@ -33,20 +39,28 @@ export const searchSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(
-      searchShows.fulfilled,
-      (state, { payload: { page, shows, totalPages } }) => {
-        // Remove any duplicate shows.
-        state.shows = [
-          ...new Map(
-            [...state.shows, ...shows].map((show) => [show.id, show])
-          ).values(),
-        ];
+    builder
+      // Set "loading" state for loading spinner
+      .addCase(searchShows.pending, (state, action) => {
+        state.status = "loading";
+      })
 
-        state.page = page + 1;
-        state.totalPages = totalPages;
-      }
-    );
+      .addCase(
+        searchShows.fulfilled,
+        (state, { payload: { page, shows, totalPages } }) => {
+          state.status = "succeeded";
+
+          // Remove any duplicate shows.
+          state.shows = [
+            ...new Map(
+              [...state.shows, ...shows].map((show) => [show.id, show])
+            ).values(),
+          ];
+
+          state.page = page + 1;
+          state.totalPages = totalPages;
+        }
+      );
   },
 });
 

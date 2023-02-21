@@ -58,6 +58,9 @@ const initialState: MediaState = {
 
     cache: {},
   },
+
+  status: "idle",
+  error: null,
 };
 
 export const mediaSlice = createSlice({
@@ -97,6 +100,21 @@ export const mediaSlice = createSlice({
         }
       );
 
+    // Set "loading" state for loading spinner
+    builder.addMatcher(
+      isAnyOf(
+        fetchMediaByKindAndType[KIND.TRENDING]("tv").pending,
+        fetchMediaByKindAndType[KIND.POPULAR]("tv").pending,
+        fetchMediaByKindAndType[KIND.TOP_RATED]("tv").pending,
+        fetchMediaByKindAndType[KIND.TRENDING]("movie").pending,
+        fetchMediaByKindAndType[KIND.POPULAR]("movie").pending,
+        fetchMediaByKindAndType[KIND.TOP_RATED]("movie").pending
+      ),
+      (state, action) => {
+        state.status = "loading";
+      }
+    );
+
     // TV Show Kind Page
     // Better pattern than having separate a `addCase` for every `KIND`
     // Source: https://github.com/reduxjs/redux-toolkit/issues/429#issuecomment-810031743
@@ -115,6 +133,8 @@ export const mediaSlice = createSlice({
       ) => {
         // RTK documentation doesn't seem to explain how to set `action.payload`
         // type in `extraReducers`. Manually cast for now.
+
+        state.status = "succeeded";
 
         // `action.type` format: `${tv | movie}/${KIND}/fulfilled`
         const kind: KIND = type.split("/")[1];

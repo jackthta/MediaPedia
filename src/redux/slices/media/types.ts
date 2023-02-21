@@ -11,6 +11,9 @@ export type MediaType = "tv" | "movie";
 export type MediaState = {
   tv: KindState;
   movie: KindState;
+
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
 };
 
 // Convenience types for `MediaState`
