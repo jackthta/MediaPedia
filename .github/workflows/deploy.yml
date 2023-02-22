@@ -9,8 +9,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    # Pulls defined environment secrets from GitHub environment `synopedia`
-    environment: synopedia
+    # Pulls defined environment secrets from GitHub environment `github-pages`
+    environment: github-pages
 
     steps:
       - name: Checkout repository
