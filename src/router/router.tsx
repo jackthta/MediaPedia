@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 
 import { ROUTES } from "../utilities/enum";
 
@@ -54,7 +54,7 @@ const SEARCH_RESULTS: RouteObject = {
   element: <SearchResults />,
 };
 
-export default createBrowserRouter([
+export default createHashRouter([
   HOME,
 
   TV_SHOW,
