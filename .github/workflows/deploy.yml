@@ -28,6 +28,7 @@ jobs:
         run: npm run build
         env:
           VITE_TMDB_BEARER_TOKEN: ${{ secrets.VITE_TMDB_BEARER_TOKEN }}
+          VITE_TMDB_BASE_URL: ${{ vars.VITE_TMDB_BASE_URL }}
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
