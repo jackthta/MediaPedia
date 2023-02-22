@@ -8,8 +8,10 @@ import type {
   ImagesResponse,
   MediaKindResponse,
   MovieDetailsResponse,
+  MovieResultObject,
   TvContentRatingsResponse,
   TvDetailsResponse,
+  TvResultObject,
   TvSeasonsResponse,
   VideosResponse,
 } from "../../../utilities/themoviedb/types";
@@ -79,9 +81,14 @@ const createFetchMediaByKindAndTypeThunk = (
           backdrop_path,
           vote_average,
           media_type: mediaType,
-          name: mediaType === "tv" ? _show.name : _show.title,
+          name:
+            mediaType === "tv"
+              ? (_show as TvResultObject).name
+              : (_show as MovieResultObject).title,
           release_date:
-            mediaType === "tv" ? _show.first_air_date : _show.release_date,
+            mediaType === "tv"
+              ? (_show as TvResultObject).first_air_date
+              : (_show as MovieResultObject).release_date,
         };
       });
 
@@ -142,14 +149,17 @@ export const fetchMediaById = createAsyncThunk(
     const mediaDetails = {
       id,
 
-      name: mediaType === "tv" ? _mediaDetails.name : _mediaDetails.title,
+      name:
+        mediaType === "tv"
+          ? (_mediaDetails as TvDetailsResponse).name
+          : (_mediaDetails as MovieDetailsResponse).title,
       backdrop_path,
       vote_average,
 
       release_date:
         mediaType === "tv"
-          ? _mediaDetails.first_air_date
-          : _mediaDetails.release_date,
+          ? (_mediaDetails as TvDetailsResponse).first_air_date
+          : (_mediaDetails as MovieDetailsResponse).release_date,
 
       overview,
       genres,
@@ -158,20 +168,29 @@ export const fetchMediaById = createAsyncThunk(
 
       run_time:
         mediaType === "tv"
-          ? _mediaDetails.episode_run_time
-          : [_mediaDetails.runtime],
+          ? (_mediaDetails as TvDetailsResponse).episode_run_time
+          : [(_mediaDetails as MovieDetailsResponse).runtime],
 
       // Properties for TV shows only
-      networks: mediaType === "tv" ? _mediaDetails.networks : undefined,
+      networks:
+        mediaType === "tv"
+          ? (_mediaDetails as TvDetailsResponse).networks
+          : undefined,
 
       number_of_seasons:
-        mediaType === "tv" ? _mediaDetails.number_of_seasons : undefined,
+        mediaType === "tv"
+          ? (_mediaDetails as TvDetailsResponse).number_of_seasons
+          : undefined,
 
       next_episode_to_air:
-        mediaType === "tv" ? _mediaDetails.next_episode_to_air : undefined,
+        mediaType === "tv"
+          ? (_mediaDetails as TvDetailsResponse).next_episode_to_air
+          : undefined,
 
       origin_country:
-        mediaType === "tv" ? _mediaDetails.origin_country : undefined,
+        mediaType === "tv"
+          ? (_mediaDetails as TvDetailsResponse).origin_country
+          : undefined,
     };
 
     // const {
@@ -301,9 +320,14 @@ export const fetchMediaSimilarShows = createAsyncThunk(
           backdrop_path,
           vote_average,
           media_type: mediaType,
-          name: mediaType === "tv" ? _show.name : _show.title,
+          name:
+            mediaType === "tv"
+              ? (_show as TvResultObject).name
+              : (_show as MovieResultObject).title,
           release_date:
-            mediaType === "tv" ? _show.first_air_date : _show.release_date,
+            mediaType === "tv"
+              ? (_show as TvResultObject).first_air_date
+              : (_show as MovieResultObject).release_date,
         };
       }
     );

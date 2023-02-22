@@ -79,7 +79,7 @@ export const searchShows = createAsyncThunk(
     });
 
     // Cherry pick data returned from API to be return type compliant.
-    const shows = fetched.results
+    const shows = (fetched.results as any[])
       // `/search/multi` endpoint returns tv, movie, _and_ person results.
       // Filter out person results.
       .filter(
