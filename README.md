@@ -103,9 +103,10 @@ Follow these steps to run the web application locally.
    npm i
    ```
 
-4. Set into the `.env` file your The Movie Database API Bearer Token
+4. Make a `.env` file containing The Movie Database API base URL and bearer token
 
    ```sh
+   VITE_TMDB_BASE_URL="https://api.themoviedb.org/3"
    VITE_TMDB_BEARER_TOKEN=
    ```
 
