@@ -16,8 +16,7 @@
 <br />
 
 ## **Live Demo** 
-- WIP
-<!-- [Synopedia live demo 🔗](https://jackthta.github.io/Image-Gallery/) -->
+[synopedia live demo 🔗](https://jackthta.github.io/synopedia/)
 
 <br />
 
