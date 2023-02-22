@@ -27,7 +27,7 @@ jobs:
       - name: Build project
         run: npm run build
         env:
-          VITE_UNSPLASH_ACCESS_KEY: ${{ secrets.VITE_TMDB_BEARER_TOKEN }}
+          VITE_TMDB_BEARER_TOKEN: ${{ secrets.VITE_TMDB_BEARER_TOKEN }}
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
