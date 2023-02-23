@@ -1,5 +1,6 @@
 @use "../../styles/utilities/mixins" as *;
 @use "../../styles/utilities/variables" as *;
+@use "../../styles/utilities/functions" as *;
 
 .main {
   position: relative;
@@ -53,5 +54,10 @@
 
   @media (min-width: $Desktop) {
     display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: clamped($container-padding-y-min, $container-padding-y-max) 0;
+
+    @include useAppContainerSidePadding;
   }
 }

@@ -1,4 +1,5 @@
 import SearchBar from "../../components/search-bar/SearchBar";
+import ThemeSwitch from "../../components/theme-switch/ThemeSwitch";
 
 import BaseLayout from "../../layouts/base-layout/BaseLayout";
 
@@ -15,8 +16,9 @@ function Home() {
         <SearchBar />
       </main>
 
-      {/* TODO: Add light/dark theme switch */}
-      {/* <footer className={CSS.footer}></footer> */}
+      <footer className={CSS.footer}>
+        <ThemeSwitch />
+      </footer>
     </BaseLayout>
   );
 }

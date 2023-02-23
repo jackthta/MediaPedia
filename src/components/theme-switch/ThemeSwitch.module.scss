@@ -1,0 +1,23 @@
+@use "../../styles/utilities/variables" as *;
+
+.theme-switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // Size for use in menu dialog
+  width: var(--font-size-lg);
+
+  @media (min-width: $Desktop) {
+    width: var(--font-size-md);
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--primary-color);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transition: color var(--duration-short) var(--standard-easing);
+    }
+  }
+}

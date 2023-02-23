@@ -4,6 +4,7 @@ import CloseSVG from "../../../SVGs/CloseSVG";
 import Separator from "../../../separator/Separator";
 import SearchBar from "../../../search-bar/SearchBar";
 import NavigationLinks from "../navigation-links/NavigationLinks";
+import ThemeSwitch from "../../../theme-switch/ThemeSwitch";
 
 import CSS from "./MenuDialog.module.scss";
 
@@ -47,7 +48,9 @@ const MenuDialog = forwardRef<HTMLDialogElement, Props>(function MenuDialog(
       {/* Body */}
       <NavigationLinks inMenuDialog onMenuClose={onClose} />
 
-      {/* <footer>TODO: Add light/dark mode switch</footer> */}
+      <footer className={CSS.footer}>
+        <ThemeSwitch />
+      </footer>
     </dialog>
   );
 });

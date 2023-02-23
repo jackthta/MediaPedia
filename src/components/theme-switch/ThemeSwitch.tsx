@@ -67,7 +67,11 @@ function ThemeSwitch() {
 
   const themeSVG = theme === "light" ? <SunSVG /> : <MoonSVG />;
 
-  return <button onClick={handleToggleTheme}>{themeSVG}</button>;
+  return (
+    <button className={CSS.themeSwitch} onClick={handleToggleTheme}>
+      {themeSVG}
+    </button>
+  );
 }
 
 function setHTMLThemeAttributes(theme: Themes) {

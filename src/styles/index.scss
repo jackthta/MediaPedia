@@ -11,10 +11,19 @@
 
 /* Global CSS variables */
 :root {
-  --primary-color: #1f589b;
+  &.light {
+    --primary-color: #1f589b;
 
-  --text-color: #192024;
-  --bg-color: white;
+    --text-color: #192024;
+    --bg-color: #fff;
+  }
+
+  &.dark {
+    --primary-color: #e9d6a9;
+
+    --text-color: #fff;
+    --bg-color: #223033;
+  }
 
   // Light-mode related
   --rating-star-fill: #fec828;
@@ -35,6 +44,7 @@
   --emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1);
 
   --duration-short: 200ms;
+  --duration-long: 600ms;
 }
 
 html {
@@ -72,6 +82,11 @@ body {
   /* Font anti-aliasing */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color,
+      background-color var(--duration-long) var(--standard-easing);
+  }
 }
 
 // NOTE: Be sure to include `height: auto` to ensure
@@ -148,18 +163,27 @@ li {
 }
 
 /* Background Image */
-body {
-  background: url("../assets/backgrounds/light/mobile–tablet.jpeg") no-repeat
-    center/cover;
-  background-color: rgba(255, 255, 255, 0.8);
-  background-blend-mode: overlay;
-}
-
-@media (min-width: $Desktop) {
+.light {
   body {
-    background: url("../assets/backgrounds/light/desktop.jpeg") no-repeat
+    background: url("../assets/backgrounds/light/mobile–tablet.jpeg") no-repeat
       center/cover;
     background-color: rgba(255, 255, 255, 0.8);
+    background-blend-mode: overlay;
+
+    @media (min-width: $Desktop) {
+      background: url("../assets/backgrounds/light/desktop.jpeg") no-repeat
+        center/cover;
+      background-color: rgba(255, 255, 255, 0.8);
+      background-blend-mode: overlay;
+    }
+  }
+}
+
+.dark {
+  body {
+    background: url("../assets/backgrounds/dark/background.jpeg") no-repeat
+      center/cover;
+    background-color: rgba(0, 0, 0, 0.5);
     background-blend-mode: overlay;
   }
 }
