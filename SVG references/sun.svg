@@ -1,3 +1,15 @@
-<svg width="24" height="24" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#000">
-  <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zm10-6h1M12 2V1m0 22v-1m8-2-1-1m1-15-1 1M4 20l1-1M4 4l1 1m-4 7h1" stroke="#000" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.75" width="24" height="24"
+  color="currentColor">
+  <defs>
+    <style>
+      .sun-svg {
+        fill: none;
+        stroke: currentColor;
+        stroke-miterlimit: 10
+      }
+    </style>
+  </defs>
+  <path class="sun-svg"
+    d="M12 .5v1.92m0 19.16v1.92M23.5 12h-1.92M2.42 12H.5M12 .5v1.92m0 19.16v1.92M23.5 12h-1.92M2.42 12H.5m19.63-8.13-1.35 1.35M5.22 18.78l-1.35 1.35m16.26 0-1.35-1.35M5.22 5.22 3.87 3.87m16.26 0-1.35 1.35M5.22 18.78l-1.35 1.35m16.26 0-1.35-1.35M5.22 5.22 3.87 3.87" />
+  <circle class="sun-svg" cx="12" cy="12" r="6.71" />
 </svg>
