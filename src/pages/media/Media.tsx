@@ -38,14 +38,6 @@ function Media({ mediaType }: Props) {
     return () => fetch && fetch.abort();
   }, [show]);
 
-  // For this page, don't show the background image
-  // b/c it looks strange looming behind the backdrop.
-  useEffect(() => {
-    document.body.classList.add(CSS.hideBackgroundImage);
-
-    return () => document.body.classList.remove(CSS.hideBackgroundImage);
-  }, []);
-
   if (!show) return null;
 
   return (
