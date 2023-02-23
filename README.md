@@ -65,8 +65,8 @@ This web application serves as a convenient source for searching movie and TV sh
 ### **Features**
 <ul>
   <li>Accessibility ♿️</li>
-  <li>Fluidly Responsive Web Design 📱 💻 🖥 </li>
-  <li>Light & Dark Mode ☀️ 🌑 (WIP) </li>
+  <li>Fluidly Responsive Web Design 📱 💻 🖥</li>
+  <li>Light & Dark Mode ☀️ 🌑</li>
 </ul>
 
 <br />
