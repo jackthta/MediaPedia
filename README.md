@@ -28,6 +28,7 @@
       <ul>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#features">Features</a></li>
+        <li><a href="#credits">Credits</a></li>
       </ul>
   </li>
   <li>
@@ -67,6 +68,17 @@ This web application serves as a convenient source for searching movie and TV sh
   <li>Accessibility ♿️</li>
   <li>Fluidly Responsive Web Design 📱 💻 🖥</li>
   <li>Light & Dark Mode ☀️ 🌑</li>
+</ul>
+
+<br />
+
+### **Credits**
+
+I would like to credit these photographers for being able to use their photos within this project.
+
+<ul>
+  <li><a href="https://unsplash.com/@dmjdenise">Denise Jans</a> — Light theme background image</li>
+  <li><a href="https://unsplash.com/@timothyeberly">Timothy Eberly</a> — Dark theme background image</li>
 </ul>
 
 <br />
