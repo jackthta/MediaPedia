@@ -12,18 +12,24 @@
       rel="stylesheet"
     />
 
-    <!-- Preload background images -->
+    <!-- Preload background images based on user theme preference -->
     <link
       rel="preload"
       href="./src/assets/backgrounds/light/mobile–tablet.jpeg"
       as="image"
-      media="(max-width: 1024px)"
+      media="(prefers-color-scheme: light) and (max-width: 1024px)"
     />
     <link
       rel="preload"
       href="./src/assets/backgrounds/light/desktop.jpeg"
       as="image"
-      media="(min-width: 1024px)"
+      media="(prefers-color-scheme: light) and (min-width: 1024px)"
+    />
+    <link
+      rel="preload"
+      href="./src/assets/backgrounds/dark/background.jpeg"
+      as="image"
+      media="(prefers-color-scheme: dark)"
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon/cinema.svg" />
