@@ -12,18 +12,24 @@
       rel="stylesheet"
     />
 
-    <!-- Preload background images -->
+    <!-- Preload background images based on user theme preference -->
     <link
       rel="preload"
       href="/synopedia/assets/mobile–tablet-9be7cd38.jpeg"
       as="image"
-      media="(max-width: 1024px)"
+      media="(prefers-color-scheme: light) and (max-width: 1024px)"
     />
     <link
       rel="preload"
       href="/synopedia/assets/desktop-3a961d8c.jpeg"
       as="image"
-      media="(min-width: 1024px)"
+      media="(prefers-color-scheme: light) and (min-width: 1024px)"
+    />
+    <link
+      rel="preload"
+      href="/synopedia/assets/background-8338f4aa.jpeg"
+      as="image"
+      media="(prefers-color-scheme: dark)"
     />
 
     <link rel="icon" type="image/svg+xml" href="/synopedia/favicon/cinema.svg" />
