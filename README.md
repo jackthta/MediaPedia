@@ -15,11 +15,6 @@
 
 <br />
 
-## **Live Demo** 
-[synopedia live demo 🔗](https://jackthta.github.io/synopedia/)
-
-<br />
-
 <!-- TABLE OF CONTENTS -->
 ## **Table of Contents**
 <ol>
