@@ -15,6 +15,11 @@ function Menu() {
 
   const onMenuOpen = () => {
     flushSync(() => setDialogIsOpen(true));
+
+    // Ensure that the dialog closes properly when pressing `Esc`
+    // in the dialog.
+    dialogRef.current?.addEventListener("cancel", onMenuClose, { once: true });
+
     dialogRef.current?.showModal();
   };
 
@@ -36,13 +41,6 @@ function Menu() {
         "change",
         onDesktopScreenSizes
       );
-  }, []);
-
-  // Sync `dialogIsOpen` state when
-  // ESC is pressed from dialog.
-  useEffect(() => {
-    dialogRef.current?.addEventListener("cancel", onMenuClose);
-    return () => dialogRef.current?.removeEventListener("cancel", onMenuClose);
   }, []);
 
   return (
